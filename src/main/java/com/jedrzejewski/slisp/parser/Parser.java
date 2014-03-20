@@ -14,26 +14,29 @@ public class Parser {
     }
 
     public Token parse() {
-        return parse(null);
+        Token token = lexer.getNextToken();
+        if (token == null) {
+            return null;
+        } else {
+            return parseToken(token);
+        }
     }
 
-    private Token parse(Expression expression) {
-        Token token = lexer.getNextToken();
+    private Token parseToken(Token token) {
         if (token instanceof OpenBracket) {
-            if (expression != null) {
-                expression.add(parse(new Expression()));
-                return expression;
-            } else {
-                return parse(new Expression());
+            Expression exp = new Expression();
+            while (true) {
+                token = lexer.getNextToken();
+                if (token instanceof CloseBracket) {
+                    return exp;
+                } else {
+                    exp.add(parseToken(token));
+                }
             }
-
         } else if (token instanceof CloseBracket) {
-            return parse(expression);
-        } else if (token == null) {
-            return expression;
+            return null; // blad
         } else {
-            expression.add(token);
-            return parse(expression);
+            return token;
         }
     }
 }

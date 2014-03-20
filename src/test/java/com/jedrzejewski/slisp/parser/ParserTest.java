@@ -19,9 +19,10 @@ public class ParserTest {
         org.junit.Assert.assertEquals(new Number(1), exp.get(1));
         Expression predExp = (Expression) exp.get(2);
         org.junit.Assert.assertEquals(new Symbol("pred"), predExp.get(0));
-        Expression addOneExp = (Expression) predExp.get(1);
+        org.junit.Assert.assertEquals(new Number(2), predExp.get(1));
+        Expression addOneExp = (Expression) predExp.get(2);
         org.junit.Assert.assertEquals(new Symbol("add-one"), addOneExp.get(0));
-        org.junit.Assert.assertEquals(new Number(3), addOneExp.get(0));
-        org.junit.Assert.assertEquals(new Number(4), exp.get(2));
+        org.junit.Assert.assertEquals(new Number(3), addOneExp.get(1));
+        org.junit.Assert.assertEquals(new Number(4), exp.get(3));
     }
 }
