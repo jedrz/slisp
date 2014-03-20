@@ -31,6 +31,6 @@ public class LexerTest {
                 new Number(3),
                 new CloseBracket(),
                 new CloseBracket());
-        org.junit.Assert.assertEquals(tokens, expected);
+        org.junit.Assert.assertEquals(expected, tokens);
     }
 }
