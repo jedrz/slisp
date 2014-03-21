@@ -4,6 +4,8 @@ import com.jedrzejewski.slisp.lexer.CloseBracket;
 import com.jedrzejewski.slisp.lexer.Lexer;
 import com.jedrzejewski.slisp.lexer.OpenBracket;
 import com.jedrzejewski.slisp.lexer.Token;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Parser {
 
@@ -13,7 +15,7 @@ public class Parser {
         this.lexer = lexer;
     }
 
-    public Token parse() {
+    public Object parse() {
         Token token = lexer.getNextToken();
         if (token == null) {
             return null;
@@ -22,9 +24,9 @@ public class Parser {
         }
     }
 
-    private Token parseToken(Token token) {
+    private Object parseToken(Token token) {
         if (token instanceof OpenBracket) {
-            Expression exp = new Expression();
+            List<Object> exp = createList();
             while (true) {
                 token = lexer.getNextToken();
                 if (token instanceof CloseBracket) {
@@ -38,5 +40,9 @@ public class Parser {
         } else {
             return token;
         }
+    }
+
+    private static List<Object> createList() {
+        return new LinkedList<>();
     }
 }
