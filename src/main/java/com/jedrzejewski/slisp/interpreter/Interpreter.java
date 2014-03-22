@@ -5,6 +5,8 @@ import com.jedrzejewski.slisp.interpreter.primitives.PrimitiveAdd;
 import com.jedrzejewski.slisp.interpreter.primitives.PrimitiveDivide;
 import com.jedrzejewski.slisp.interpreter.primitives.PrimitiveMinus;
 import com.jedrzejewski.slisp.interpreter.primitives.PrimitiveMultiply;
+import com.jedrzejewski.slisp.interpreter.specialforms.SetForm;
+import com.jedrzejewski.slisp.interpreter.specialforms.SpecialForm;
 import com.jedrzejewski.slisp.parser.Expression;
 import com.jedrzejewski.slisp.parser.LispObject;
 import com.jedrzejewski.slisp.parser.Number;
@@ -18,11 +20,17 @@ public class Interpreter {
 
     public Interpreter() {
         globalScope = new Scope();
+
+        // Prymitywy
         globalScope
                 .put("+", new PrimitiveAdd())
                 .put("-", new PrimitiveMinus())
                 .put("*", new PrimitiveMultiply())
                 .put("/", new PrimitiveDivide());
+
+        // Specjalne formy
+        globalScope
+                .put("set!", new SetForm());
     }
 
     public LispObject eval(LispObject code) {
@@ -38,10 +46,13 @@ public class Interpreter {
         } else if (code instanceof Expression) {
             Expression exp = (Expression) code;
             LispObject first = exp.get(0);
-            // TODO: obsługa specjalnych wyrażeń.
-            // Wywołanie funkcji
             LispObject fn = eval(first, scope);
-            if (fn instanceof Primitive) {
+            if (fn instanceof SpecialForm) {
+                SpecialForm specialForm = (SpecialForm) fn;
+                List<LispObject> args = exp.subList(1, exp.size());
+                return specialForm.call(args, this::eval, scope);
+            }
+            else if (fn instanceof Primitive) {
                 Primitive primitive = (Primitive) fn;
                 List<LispObject> args = new LinkedList<>();
                 for (LispObject object : exp.subList(1, exp.size())) {
