@@ -18,9 +18,9 @@ public class Lexer {
 
         switch (c) {
             case '(':
-                return new OpenBracket();
+                return Token.createOpenBracketToken();
             case ')':
-                return new CloseBracket();
+                return Token.createCloseBracketToken();
         }
 
         if (isNumberCh(c)) {
@@ -34,13 +34,13 @@ public class Lexer {
         return null;
     }
 
-    private Symbol getSymbol(int c) {
+    private Token getSymbol(int c) {
         String symbol = Character.toString((char) c);
         while ((c = getNextCh()) != -1 && isSymbolCh(c)) {
             symbol += Character.toString((char) c);
         }
         ungetCh(c);
-        return new Symbol(symbol);
+        return Token.createSymbolToken(symbol);
     }
 
     private boolean isSymbolCh(int c) {
@@ -49,13 +49,13 @@ public class Lexer {
                 || c == '+' || c == '-' || c == '*' || c == '/';
     }
 
-    private Number getNumber(int c) {
+    private Token getNumber(int c) {
         String number = Character.toString((char) c);
         while ((c = getNextCh()) != -1 && isNumberCh(c)) {
             number += Character.toString((char) c);
         }
         ungetCh(c);
-        return new Number(Integer.parseInt(number));
+        return Token.createNumberToken(number);
     }
 
     private boolean isNumberCh(int c) {
