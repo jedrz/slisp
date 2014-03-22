@@ -8,7 +8,6 @@ import java.util.List;
 public class PrimitiveAdd implements Primitive {
     @Override
     public LispObject call(List<LispObject> args) {
-        System.out.println(args.size());
         double sum = 0.0;
         for (LispObject arg : args) {
             // TODO: rzuć wyjątek gdy argumenty nie są liczbami
