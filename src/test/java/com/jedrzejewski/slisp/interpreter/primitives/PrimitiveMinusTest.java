@@ -15,7 +15,7 @@ public class PrimitiveMinusTest {
 
     @Test
     public void testCall() throws Exception {
-        PrimitiveMinus pm = new PrimitiveMinus();
+        MinusPrimitive pm = new MinusPrimitive();
 
         org.junit.Assert.assertEquals(
                 new Num(-5),

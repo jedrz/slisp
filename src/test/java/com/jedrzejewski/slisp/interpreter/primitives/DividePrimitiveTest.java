@@ -11,11 +11,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 @RunWith(JUnit4.class)
-public class PrimitiveDivideTest {
+public class DividePrimitiveTest {
 
     @Test
     public void testCall() throws Exception {
-        PrimitiveDivide pm = new PrimitiveDivide();
+        DividePrimitive pm = new DividePrimitive();
 
         org.junit.Assert.assertEquals(
                 new Num(5),

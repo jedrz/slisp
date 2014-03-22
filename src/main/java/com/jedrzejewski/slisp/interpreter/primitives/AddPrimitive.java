@@ -4,13 +4,11 @@ import com.jedrzejewski.slisp.parser.lispobjects.LispObject;
 import com.jedrzejewski.slisp.parser.lispobjects.Num;
 import java.util.List;
 
-public class PrimitiveDivide extends PrimitiveMathOperation {
+public class AddPrimitive extends MathOperationPrimitive {
 
     @Override
     public LispObject call(List<LispObject> args) {
-        double result = convertToDoubleStream(args)
-                .reduce((a, b) -> (a / b))
-                .getAsDouble();
+        double result = convertToDoubleStream(args).sum();
         return new Num(result);
     }
 }

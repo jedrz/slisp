@@ -15,7 +15,7 @@ public class PrimitiveMultiplyTest {
 
     @Test
     public void testCall() throws Exception {
-        PrimitiveMultiply pm = new PrimitiveMultiply();
+        MultiplyPrimitive pm = new MultiplyPrimitive();
 
         org.junit.Assert.assertEquals(
                 new Num(5),

@@ -1,10 +1,10 @@
 package com.jedrzejewski.slisp.interpreter;
 
+import com.jedrzejewski.slisp.interpreter.primitives.AddPrimitive;
+import com.jedrzejewski.slisp.interpreter.primitives.DividePrimitive;
+import com.jedrzejewski.slisp.interpreter.primitives.MinusPrimitive;
+import com.jedrzejewski.slisp.interpreter.primitives.MultiplyPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.Primitive;
-import com.jedrzejewski.slisp.interpreter.primitives.PrimitiveAdd;
-import com.jedrzejewski.slisp.interpreter.primitives.PrimitiveDivide;
-import com.jedrzejewski.slisp.interpreter.primitives.PrimitiveMinus;
-import com.jedrzejewski.slisp.interpreter.primitives.PrimitiveMultiply;
 import com.jedrzejewski.slisp.interpreter.specialforms.SetForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.SpecialForm;
 import com.jedrzejewski.slisp.parser.lispobjects.Expression;
@@ -23,10 +23,10 @@ public class Interpreter {
 
         // Prymitywy
         globalScope
-                .put("+", new PrimitiveAdd())
-                .put("-", new PrimitiveMinus())
-                .put("*", new PrimitiveMultiply())
-                .put("/", new PrimitiveDivide());
+                .put("+", new AddPrimitive())
+                .put("-", new MinusPrimitive())
+                .put("*", new MultiplyPrimitive())
+                .put("/", new DividePrimitive());
 
         // Specjalne formy
         globalScope

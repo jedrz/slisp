@@ -4,13 +4,18 @@ import com.jedrzejewski.slisp.parser.lispobjects.LispObject;
 import com.jedrzejewski.slisp.parser.lispobjects.Num;
 import java.util.List;
 
-public class PrimitiveMultiply extends PrimitiveMathOperation {
+public class MinusPrimitive extends MathOperationPrimitive {
 
     @Override
     public LispObject call(List<LispObject> args) {
-        double result = convertToDoubleStream(args)
-                    .reduce((a, b) -> (a * b))
+        double result;
+        if (args.size() == 1) {
+            result = -convertToDoubleStream(args).toArray()[0];
+        } else {
+            result = convertToDoubleStream(args)
+                    .reduce((a, b) -> (a - b))
                     .getAsDouble();
+        }
         return new Num(result);
     }
 }
