@@ -9,11 +9,11 @@ import java.util.List;
 public class SetForm implements SpecialForm {
 
     @Override
-    public LispObject call(List<LispObject> args, Interpreter.Evaluater evaluater) {
+    public LispObject call(List<LispObject> args, Interpreter.Evaluator evaluator) {
         Symbol symbol = (Symbol) args.get(0);
         LispObject form = args.get(1);
-        LispObject value = evaluater.eval(form);
-        Scope scope = evaluater.getScope();
+        LispObject value = evaluator.eval(form);
+        Scope scope = evaluator.getScope();
         scope.put(symbol, value);
         return symbol;
     }

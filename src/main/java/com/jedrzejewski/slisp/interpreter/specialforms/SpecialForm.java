@@ -5,5 +5,5 @@ import com.jedrzejewski.slisp.parser.lispobjects.LispObject;
 import java.util.List;
 
 public interface SpecialForm extends LispObject {
-    LispObject call(List<LispObject> args, Interpreter.Evaluater evaluater);
+    LispObject call(List<LispObject> args, Interpreter.Evaluator evaluator);
 }

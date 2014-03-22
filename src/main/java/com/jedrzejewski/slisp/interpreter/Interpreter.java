@@ -50,8 +50,8 @@ public class Interpreter {
             if (fn instanceof SpecialForm) {
                 SpecialForm specialForm = (SpecialForm) fn;
                 List<LispObject> args = exp.subList(1, exp.size());
-                Evaluater evaluater = this.new Evaluater(scope);
-                return specialForm.call(args, evaluater);
+                Evaluator evaluator = this.new Evaluator(scope);
+                return specialForm.call(args, evaluator);
             }
             else if (fn instanceof Primitive) {
                 Primitive primitive = (Primitive) fn;
@@ -68,11 +68,11 @@ public class Interpreter {
         return null;
     }
 
-    public class Evaluater {
+    public class Evaluator {
 
         private Scope scope;
 
-        public Evaluater(Scope scope) {
+        public Evaluator(Scope scope) {
             this.scope = scope;
         }
 
