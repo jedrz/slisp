@@ -2,6 +2,7 @@ package com.jedrzejewski.slisp.interpreter;
 
 import com.jedrzejewski.slisp.interpreter.primitives.PrimitiveAdd;
 import com.jedrzejewski.slisp.interpreter.primitives.PrimitiveMinus;
+import com.jedrzejewski.slisp.interpreter.primitives.PrimitiveMultiply;
 import com.jedrzejewski.slisp.parser.Expression;
 import com.jedrzejewski.slisp.parser.LispObject;
 import com.jedrzejewski.slisp.parser.Number;
@@ -17,7 +18,8 @@ public class Interpreter {
         globalScope = new Scope();
         globalScope
                 .put("+", new PrimitiveAdd())
-                .put("-", new PrimitiveMinus());
+                .put("-", new PrimitiveMinus())
+                .put("*", new PrimitiveMultiply());
     }
 
     public LispObject eval(LispObject code) {
