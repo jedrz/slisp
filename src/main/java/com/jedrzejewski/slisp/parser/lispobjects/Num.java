@@ -1,14 +1,14 @@
-package com.jedrzejewski.slisp.parser;
+package com.jedrzejewski.slisp.parser.lispobjects;
 
-public class Number implements LispObject {
+public class Num implements LispObject {
 
     private double value;
 
-    public Number(double value) {
+    public Num(double value) {
         this.value = value;
     }
 
-    public Number(String value) {
+    public Num(String value) {
         this(Double.valueOf(value));
     }
 
@@ -21,7 +21,7 @@ public class Number implements LispObject {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Number number = (Number) o;
+        Num number = (Num) o;
 
         if (Double.compare(number.value, value) != 0) return false;
 

@@ -2,6 +2,10 @@ package com.jedrzejewski.slisp.parser;
 
 import com.jedrzejewski.slisp.lexer.Lexer;
 import com.jedrzejewski.slisp.lexer.Token;
+import com.jedrzejewski.slisp.parser.lispobjects.Expression;
+import com.jedrzejewski.slisp.parser.lispobjects.LispObject;
+import com.jedrzejewski.slisp.parser.lispobjects.Num;
+import com.jedrzejewski.slisp.parser.lispobjects.Symbol;
 
 public class Parser {
 
@@ -36,7 +40,7 @@ public class Parser {
         } else if (token.getType() == Token.Type.SYMBOL) {
             return new Symbol(token.getString());
         } else if (token.getType() == Token.Type.NUMBER) {
-            return new Number(token.getString());
+            return new Num(token.getString());
         }
         return null;
     }

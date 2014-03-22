@@ -1,7 +1,7 @@
 package com.jedrzejewski.slisp.interpreter.primitives;
 
-import com.jedrzejewski.slisp.parser.LispObject;
-import com.jedrzejewski.slisp.parser.Number;
+import com.jedrzejewski.slisp.parser.lispobjects.LispObject;
+import com.jedrzejewski.slisp.parser.lispobjects.Num;
 import java.util.List;
 
 public class PrimitiveMultiply extends PrimitiveMathOperation {
@@ -11,6 +11,6 @@ public class PrimitiveMultiply extends PrimitiveMathOperation {
         double result = convertToDoubleStream(args)
                     .reduce((a, b) -> (a * b))
                     .getAsDouble();
-        return new Number(result);
+        return new Num(result);
     }
 }

@@ -2,9 +2,9 @@ package com.jedrzejewski.slisp.interpreter.specialforms;
 
 import com.jedrzejewski.slisp.interpreter.Interpreter;
 import com.jedrzejewski.slisp.lexer.Lexer;
-import com.jedrzejewski.slisp.parser.Number;
 import com.jedrzejewski.slisp.parser.Parser;
-import com.jedrzejewski.slisp.parser.Symbol;
+import com.jedrzejewski.slisp.parser.lispobjects.Num;
+import com.jedrzejewski.slisp.parser.lispobjects.Symbol;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -26,7 +26,7 @@ public class SetFormTest {
         lexer = new Lexer("var");
         parser = new Parser(lexer);
         org.junit.Assert.assertEquals(
-                new Number(3),
+                new Num(3),
                 interpreter.eval(parser.parse())
         );
     }

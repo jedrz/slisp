@@ -7,10 +7,10 @@ import com.jedrzejewski.slisp.interpreter.primitives.PrimitiveMinus;
 import com.jedrzejewski.slisp.interpreter.primitives.PrimitiveMultiply;
 import com.jedrzejewski.slisp.interpreter.specialforms.SetForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.SpecialForm;
-import com.jedrzejewski.slisp.parser.Expression;
-import com.jedrzejewski.slisp.parser.LispObject;
-import com.jedrzejewski.slisp.parser.Number;
-import com.jedrzejewski.slisp.parser.Symbol;
+import com.jedrzejewski.slisp.parser.lispobjects.Expression;
+import com.jedrzejewski.slisp.parser.lispobjects.LispObject;
+import com.jedrzejewski.slisp.parser.lispobjects.Num;
+import com.jedrzejewski.slisp.parser.lispobjects.Symbol;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -38,7 +38,7 @@ public class Interpreter {
     }
 
     private LispObject eval(LispObject code, Scope scope) {
-        if (code instanceof Number) {
+        if (code instanceof Num) {
             return code;
         } else if (code instanceof Symbol) {
             Symbol symbol = (Symbol) code;

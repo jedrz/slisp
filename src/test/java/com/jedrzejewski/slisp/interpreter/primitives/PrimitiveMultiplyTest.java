@@ -1,7 +1,7 @@
 package com.jedrzejewski.slisp.interpreter.primitives;
 
-import com.jedrzejewski.slisp.parser.LispObject;
-import com.jedrzejewski.slisp.parser.Number;
+import com.jedrzejewski.slisp.parser.lispobjects.LispObject;
+import com.jedrzejewski.slisp.parser.lispobjects.Num;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,14 +18,14 @@ public class PrimitiveMultiplyTest {
         PrimitiveMultiply pm = new PrimitiveMultiply();
 
         org.junit.Assert.assertEquals(
-                new Number(5),
-                pm.call(Arrays.asList(new Number(5)))
+                new Num(5),
+                pm.call(Arrays.asList(new Num(5)))
         );
 
         List<LispObject> numbers = Stream
                 .of(10, 3, -1)
-                .map(Number::new)
+                .map(Num::new)
                 .collect(Collectors.toList());
-        org.junit.Assert.assertEquals(new Number(-30), pm.call(numbers));
+        org.junit.Assert.assertEquals(new Num(-30), pm.call(numbers));
     }
 }

@@ -1,7 +1,7 @@
 package com.jedrzejewski.slisp.interpreter;
 
-import com.jedrzejewski.slisp.parser.LispObject;
-import com.jedrzejewski.slisp.parser.Symbol;
+import com.jedrzejewski.slisp.parser.lispobjects.LispObject;
+import com.jedrzejewski.slisp.parser.lispobjects.Symbol;
 import java.util.HashMap;
 import java.util.Map;
 

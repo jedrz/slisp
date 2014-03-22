@@ -1,4 +1,4 @@
-package com.jedrzejewski.slisp.parser;
+package com.jedrzejewski.slisp.parser.lispobjects;
 
 import java.util.LinkedList;
 
