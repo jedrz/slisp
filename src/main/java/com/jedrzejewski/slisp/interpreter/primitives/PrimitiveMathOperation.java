@@ -1,6 +1,5 @@
 package com.jedrzejewski.slisp.interpreter.primitives;
 
-import com.jedrzejewski.slisp.interpreter.Primitive;
 import com.jedrzejewski.slisp.parser.LispObject;
 import com.jedrzejewski.slisp.parser.Number;
 import java.util.List;

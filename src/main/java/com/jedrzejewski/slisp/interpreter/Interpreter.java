@@ -1,5 +1,6 @@
 package com.jedrzejewski.slisp.interpreter;
 
+import com.jedrzejewski.slisp.interpreter.primitives.Primitive;
 import com.jedrzejewski.slisp.interpreter.primitives.PrimitiveAdd;
 import com.jedrzejewski.slisp.interpreter.primitives.PrimitiveDivide;
 import com.jedrzejewski.slisp.interpreter.primitives.PrimitiveMinus;

@@ -1,4 +1,4 @@
-package com.jedrzejewski.slisp.interpreter;
+package com.jedrzejewski.slisp.interpreter.primitives;
 
 import com.jedrzejewski.slisp.parser.LispObject;
 import java.util.List;
