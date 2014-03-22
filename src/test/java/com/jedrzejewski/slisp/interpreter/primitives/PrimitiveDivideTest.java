@@ -22,7 +22,8 @@ public class PrimitiveDivideTest {
                 pm.call(Arrays.asList(new Number(5)))
         );
 
-        List<LispObject> numbers = Stream.of(10, 2, -1)
+        List<LispObject> numbers = Stream
+                .of(10, 2, -1)
                 .map(Number::new)
                 .collect(Collectors.toList());
         org.junit.Assert.assertEquals(new Number(-5), pm.call(numbers));

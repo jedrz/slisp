@@ -22,7 +22,8 @@ public class PrimitiveMinusTest {
                 pm.call(Arrays.asList(new Number(5)))
         );
 
-        List<LispObject> numbers = Stream.of(10, 3, -1)
+        List<LispObject> numbers = Stream
+                .of(10, 3, -1)
                 .map(Number::new)
                 .collect(Collectors.toList());
         org.junit.Assert.assertEquals(new Number(8), pm.call(numbers));

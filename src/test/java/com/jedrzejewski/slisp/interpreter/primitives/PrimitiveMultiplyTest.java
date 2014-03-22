@@ -22,7 +22,8 @@ public class PrimitiveMultiplyTest {
                 pm.call(Arrays.asList(new Number(5)))
         );
 
-        List<LispObject> numbers = Stream.of(10, 3, -1)
+        List<LispObject> numbers = Stream
+                .of(10, 3, -1)
                 .map(Number::new)
                 .collect(Collectors.toList());
         org.junit.Assert.assertEquals(new Number(-30), pm.call(numbers));
