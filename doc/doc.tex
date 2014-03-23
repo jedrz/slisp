@@ -35,7 +35,54 @@ dialektów LISP-a~w~języku Java 8.
 
 \section{Konstrukcje języka}
 
+\subsection{Ewaluacja form}
 
+Obliczenie wyrażenia listowego polega na:
+\begin{enumerate}
+\item obliczenie pierwszego elementu, którego wartość powinna być funkcją lub
+  specjalną formą,
+\item obliczenie argumentów czyli reszty elementów wyrażenia w~przypadku
+  funkcji, lub nie w~przypadku specjalnej formy,
+\item wywołanie funkcji z~tak przygotowanymi wartościami.
+\end{enumerate}
+
+Na~przykład \verb|(+ 1 (- a))|:
+\begin{enumerate}
+\item obliczenie \verb|+|, czyli zwrócenie globalnej funkcji \verb|+|
+\item obliczenie 1, czyli wynikiem będzie 1,
+\item obliczenie \verb+(- a)+:
+  \begin{enumerate}
+  \item obliczenie -,
+  \item obliczenie \verb+a+, czyli wartość symbolu, np. 5,
+  \item wywołanie funkcji - z~argumentem 5, wynik -5
+  \end{enumerate}
+\item wywołanie funkcji \verb|+| z~argumentami: 1 oraz -5, wynik -4.
+\end{enumerate}
+
+Warto zaznaczyć, że~każde wywołanie zawsze coś zwraca, np. wywołanie \verb+if+
+zwraca wynik drugiego lub ostatniego wyrażenia.
+
+Dodatkowo żadna funkcja za~wyjątkiem \verb+set!+, nie modyfikuje wartości
+przekazywanych argumentów.
+
+\subsection{Typy}
+
+\begin{description}
+\item[symbol] czyli zmienna z~pewną wartościa,
+\item[liczba] liczba zmiennoprzecinkowa,
+\item[napis]
+\item[lista] np., \verb+(list a 1 "napis")+ zwróci listę zawierającą wartość
+  symbolu \verb+a+, liczbę 1 oraz napis. Dodatkowo listę można utworzyć
+  poprzez wykorzystanie funkcji \verb+quote+, która zapobiega obliczeniu
+  podanej listy w~argumencie, np. \verb+(quote (a 1 "napis"))+ zwróci
+  \verb+(a 1 "napis")+, symbol \verb+a+ nie zostanie obliczony. Równoważne
+  wywołaniu \verb+quote+ jest użycie apostrofu w~następujący sposób:
+  \verb+'(a 1 "napis")+.
+\end{description}
+
+Dodatkowo symbol \verb+t+ jest zastrzeżony i~traktowany jako prawda, a~symbol
+\verb+nil+ jako fałsz. Jedynie symbol \verb+nil+ będzie miał wartość logiczną
+fałsz, czyli 0, pusta lista, pusty napis nie będą fałszywe w~sensie logicznym.
 
 \subsection{Specjalne formy}
 
