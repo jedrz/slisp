@@ -20,3 +20,4 @@
 *.out
 *.pdf
 *.pyg
+/doc/auto
