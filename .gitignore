@@ -11,3 +11,12 @@
 *.iml
 *.ipr
 *.iws
+
+# latex
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.pdf
+*.pyg

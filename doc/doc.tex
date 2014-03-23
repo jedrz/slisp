@@ -1,0 +1,148 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[MeX]{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{indentfirst}
+\usepackage[pdftex]{graphicx}
+\usepackage{hyperref}
+% \hypersetup{colorlinks=true}
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage[usenames]{xcolor}
+\frenchspacing
+% Wstawki tak jak w pliku źródłowym.
+% \usepackage[section]{placeins} (niekoniecznie)
+\usepackage[]{float}
+\restylefloat{figure}
+\usepackage{longtable}
+\usepackage{minted}
+
+
+\newcommand{\clj}[1]{\inputminted[fontsize=\footnotesize]{clojure}{code/#1.clj}}
+
+
+\author{Łukasz Jędrzejewski}
+\title{Techniki kompilacji -- projekt wstępny}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Wstęp}
+
+Projekt dotyczy napisania interpretera prostego języka podobnego do~wielu
+dialektów LISP-a~w~języku Java 8.
+
+\section{Konstrukcje języka}
+
+
+
+\subsection{Specjalne formy}
+
+Czyli ,,funkcje'', których wywołanie nie powoduje obliczania argumentów.
+
+\begin{description}
+\item[quote] nie oblicza wyrażenia.
+  \clj{quote}
+
+\item[set!] przypisanie.
+  \clj{set!}
+
+\item[def] definicja zmiennej.
+  \clj{def}
+
+\item[defn] definicja funkcji.
+  \clj{defn}
+
+\item[fn] funkcja anonimowa.
+
+\item[do] wykonuje kolejno podane wyrażenia i~zwraca wynik ostatniego.
+
+\item[if] zwraca wynik wykonania drugiego wyrażenia, jeśli pierwsze wyrażenie
+  oblicza się do~prawdy, lub ostatniego, wykonując kolejno wyrażenia od~3
+  do~ostatniego.
+  \clj{if}
+
+\item[while] wykonuje wyrażenia od~drugiego do~ostatniego o~ile zachodzi
+  warunek podany jako pierwszy argument.
+  \clj{while}
+
+\item[let] deklaracja zmiennych lokalnych.
+  \clj{let}
+\end{description}
+
+\subsection{Prymitywy}
+
+\begin{description}
+\item[+ - * /] podstawowe funkcje matematyczne przyjmujące dowolną ilość
+  argumentów.
+
+\item[and, or] zwraca odpowiednio iloczyn oraz sumę logiczną podanych
+  argumentów.
+
+\item[help] zwraca dokumentację symbolu.
+\end{description}
+
+\subsubsection{Funkcje wyższego rzędu}
+
+Czyli funkcje przyjmujące funkcje jako argumenty.
+
+\begin{description}
+\item[map] dla każdego elementu listy wywołuje podaną funkcję i~zwraca listę
+  zmapowanych elementów.
+  \clj{map}
+
+\item[filter] zwraca listę zawierającą elementy spełniający podany predykat.
+  \clj{filter}
+
+\item[reduce] wywołuje funkcję z~akumulatorem i~elementem listy, której wynik
+  jest staje się nowym akumulatorem. Jeśli trzeci argument jest dany, wtedy
+  w~pierwszym kroku akumulator jest równy temu argumentowi. W przeciwnym
+  wypadku akumulatorem staje się pierwszy element listy, a przekazywanym
+  elementem drugi.
+  \clj{reduce}
+
+\item[apply] wywołuje podaną funkcję z~argumentami zawarty w~podanej liście.
+  \clj{apply}
+
+\end{description}
+
+\subsubsection{Operacje na~listach}
+
+\begin{description}
+\item[list] zwraca listę złożoną z~podanych argumentów.
+
+\item[cons] zwraca listę z~dodanym pierwszym argumentem na~początek listy.
+
+\item[conj] zwraca listę z~dodanym drugim argumentem na~koniec listy.
+
+\item[nth] zwraca element o~podanym indeksie.
+
+\end{description}
+
+\subsubsection{Operacje na~napisach}
+
+\begin{description}
+\item[length] zwraca długość napisu.
+
+\item[concat] zwraca napis będący konkatenacją podanych.
+
+\item[subs] zwraca podciąg o~podanym zakresie.
+  \clj{subs}
+\end{description}
+
+\subsubsection{Wejście-wyjście}
+
+\begin{description}
+\item[print] drukuje napis.
+\item[read] wczytuje linię i~ją~zwraca.
+\end{description}
+
+\section{Analizator leksykalny}
+
+\section{Analizator składniowy}
+
+\section{Interpreter}
+
+
+\end{document}
