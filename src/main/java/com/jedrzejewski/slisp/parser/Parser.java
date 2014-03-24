@@ -36,7 +36,11 @@ public class Parser {
     private LispObject parseToken(Token token) {
         Function<Token, LispObject> method
                 = tokenTypeMethodMap.get(token.getType());
-        return method.apply(token);
+        if (method != null) {
+            return method.apply(token);
+        } else {
+            throw new RuntimeException("Unhandled token!");
+        }
     }
 
     private LispObject parseOpenParen(Token token) {
