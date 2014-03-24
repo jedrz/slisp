@@ -3,6 +3,7 @@ package com.jedrzejewski.slisp.lexer;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -31,6 +32,6 @@ public class LexerTest {
                 Token.createNumberToken("3"),
                 Token.createCloseBracketToken(),
                 Token.createCloseBracketToken());
-        org.junit.Assert.assertEquals(expected, tokens);
+        Assert.assertEquals(expected, tokens);
     }
 }

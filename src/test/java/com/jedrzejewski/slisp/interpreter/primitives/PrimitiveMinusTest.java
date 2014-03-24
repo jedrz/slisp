@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class PrimitiveMinusTest {
@@ -14,7 +15,7 @@ public class PrimitiveMinusTest {
     public void testCall() throws Exception {
         MinusPrimitive pm = new MinusPrimitive();
 
-        org.junit.Assert.assertEquals(
+        Assert.assertEquals(
                 new Num(-5),
                 pm.call(Arrays.asList(new Num(5)))
         );
@@ -23,6 +24,6 @@ public class PrimitiveMinusTest {
                 .of(10, 3, -1)
                 .map(Num::new)
                 .collect(Collectors.toList());
-        org.junit.Assert.assertEquals(new Num(8), pm.call(numbers));
+        Assert.assertEquals(new Num(8), pm.call(numbers));
     }
 }
