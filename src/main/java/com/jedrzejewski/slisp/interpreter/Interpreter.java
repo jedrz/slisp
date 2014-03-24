@@ -7,8 +7,8 @@ import com.jedrzejewski.slisp.interpreter.primitives.MultiplyPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.Primitive;
 import com.jedrzejewski.slisp.interpreter.specialforms.SetForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.SpecialForm;
-import com.jedrzejewski.slisp.parser.lispobjects.Expression;
 import com.jedrzejewski.slisp.parser.lispobjects.LispObject;
+import com.jedrzejewski.slisp.parser.lispobjects.Lst;
 import com.jedrzejewski.slisp.parser.lispobjects.Num;
 import com.jedrzejewski.slisp.parser.lispobjects.Sym;
 import java.util.LinkedList;
@@ -43,20 +43,20 @@ public class Interpreter {
         } else if (code instanceof Sym) {
             Sym sym = (Sym) code;
             return scope.find(sym);
-        } else if (code instanceof Expression) {
-            Expression exp = (Expression) code;
-            LispObject first = exp.get(0);
+        } else if (code instanceof Lst) {
+            Lst lst = (Lst) code;
+            LispObject first = lst.get(0);
             LispObject fn = eval(first, scope);
             if (fn instanceof SpecialForm) {
                 SpecialForm specialForm = (SpecialForm) fn;
-                List<LispObject> args = exp.subList(1, exp.size());
+                List<LispObject> args = lst.subList(1, lst.size());
                 Evaluator evaluator = this.new Evaluator(scope);
                 return specialForm.call(args, evaluator);
             }
             else if (fn instanceof Primitive) {
                 Primitive primitive = (Primitive) fn;
                 List<LispObject> args = new LinkedList<>();
-                for (LispObject object : exp.subList(1, exp.size())) {
+                for (LispObject object : lst.subList(1, lst.size())) {
                     args.add(eval(object, scope));
                 }
                 // TODO: obsługa liczby argumentów

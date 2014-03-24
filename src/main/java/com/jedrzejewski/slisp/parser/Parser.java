@@ -2,8 +2,8 @@ package com.jedrzejewski.slisp.parser;
 
 import com.jedrzejewski.slisp.lexer.Lexer;
 import com.jedrzejewski.slisp.lexer.Token;
-import com.jedrzejewski.slisp.parser.lispobjects.Expression;
 import com.jedrzejewski.slisp.parser.lispobjects.LispObject;
+import com.jedrzejewski.slisp.parser.lispobjects.Lst;
 import com.jedrzejewski.slisp.parser.lispobjects.Num;
 import com.jedrzejewski.slisp.parser.lispobjects.Sym;
 
@@ -26,13 +26,13 @@ public class Parser {
 
     private LispObject parseToken(Token token) {
         if (token.getType() == Token.Type.OPEN_BRRACKET) {
-            Expression exp = new Expression();
+            Lst lst = new Lst();
             while (true) {
                 token = lexer.getNextToken();
                 if (token.getType() == Token.Type.CLOSE_BRACKET) {
-                    return exp;
+                    return lst;
                 } else {
-                    exp.add(parseToken(token));
+                    lst.add(parseToken(token));
                 }
             }
         } else if (token.getType() == Token.Type.CLOSE_BRACKET) {
