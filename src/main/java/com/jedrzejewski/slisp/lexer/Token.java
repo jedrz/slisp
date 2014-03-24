@@ -3,8 +3,8 @@ package com.jedrzejewski.slisp.lexer;
 public class Token {
 
     public enum Type {
-        OPEN_BRRACKET,
-        CLOSE_BRACKET,
+        OPEN_PAREN,
+        CLOSE_PAREN,
         SYMBOL,
         NUMBER,
     }
@@ -26,11 +26,11 @@ public class Token {
     }
 
     public static Token createOpenBracketToken() {
-        return new Token(Type.OPEN_BRRACKET, "(");
+        return new Token(Type.OPEN_PAREN, "(");
     }
 
     public static Token createCloseBracketToken() {
-        return new Token(Type.CLOSE_BRACKET, ")");
+        return new Token(Type.CLOSE_PAREN, ")");
     }
 
     public static Token createSymbolToken(String name) {

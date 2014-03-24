@@ -25,17 +25,17 @@ public class Parser {
     }
 
     private LispObject parseToken(Token token) {
-        if (token.getType() == Token.Type.OPEN_BRRACKET) {
+        if (token.getType() == Token.Type.OPEN_PAREN) {
             Lst lst = new Lst();
             while (true) {
                 token = lexer.getNextToken();
-                if (token.getType() == Token.Type.CLOSE_BRACKET) {
+                if (token.getType() == Token.Type.CLOSE_PAREN) {
                     return lst;
                 } else {
                     lst.add(parseToken(token));
                 }
             }
-        } else if (token.getType() == Token.Type.CLOSE_BRACKET) {
+        } else if (token.getType() == Token.Type.CLOSE_PAREN) {
             return null; // blad
         } else if (token.getType() == Token.Type.SYMBOL) {
             return new Sym(token.getString());
