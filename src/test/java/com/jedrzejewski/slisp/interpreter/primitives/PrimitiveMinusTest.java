@@ -11,15 +11,18 @@ import org.junit.Test;
 
 public class PrimitiveMinusTest {
 
-    @Test
-    public void testCall() throws Exception {
-        MinusPrimitive pm = new MinusPrimitive();
+    private MinusPrimitive pm = new MinusPrimitive();
 
+    @Test
+    public void testOneArg() throws Exception {
         Assert.assertEquals(
                 new Num(-5),
                 pm.call(Arrays.asList(new Num(5)))
         );
+    }
 
+    @Test
+    public void testMultipleArgs() throws Exception {
         List<LispObject> numbers = Stream
                 .of(10, 3, -1)
                 .map(Num::new)

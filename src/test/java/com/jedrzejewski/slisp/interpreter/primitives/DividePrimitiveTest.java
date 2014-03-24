@@ -11,15 +11,18 @@ import org.junit.Test;
 
 public class DividePrimitiveTest {
 
-    @Test
-    public void testCall() throws Exception {
-        DividePrimitive pm = new DividePrimitive();
+    private DividePrimitive pm = new DividePrimitive();
 
+    @Test
+    public void testOneArg() throws Exception {
         Assert.assertEquals(
                 new Num(5),
                 pm.call(Arrays.asList(new Num(5)))
         );
+    }
 
+    @Test
+    public void testMultipleArgs() throws Exception {
         List<LispObject> numbers = Stream
                 .of(10, 2, -1)
                 .map(Num::new)
