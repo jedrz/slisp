@@ -21,6 +21,14 @@ public class Lexer {
                 return Token.createOpenParenToken();
             case ')':
                 return Token.createCloseParenToken();
+            case '[':
+                return Token.createOpenBracketToken();
+            case ']':
+                return Token.createCloseBracketToken();
+            case '\"':
+                return Token.createStringDelimeterToken();
+            case '\'':
+                return Token.createQuoteToken();
         }
 
         if (isNumberCh(c)) {

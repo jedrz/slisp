@@ -5,6 +5,10 @@ public class Token {
     public enum Type {
         OPEN_PAREN,
         CLOSE_PAREN,
+        OPEN_BRACKET,
+        CLOSE_BRACKET,
+        STRING_DELIMETER,
+        QUOTE,
         SYMBOL,
         NUMBER,
     }
@@ -31,6 +35,22 @@ public class Token {
 
     public static Token createCloseParenToken() {
         return new Token(Type.CLOSE_PAREN, ")");
+    }
+
+    public static Token createOpenBracketToken() {
+        return new Token(Type.OPEN_BRACKET, "[");
+    }
+
+    public static Token createCloseBracketToken() {
+        return new Token(Type.CLOSE_BRACKET, "]");
+    }
+
+    public static Token createStringDelimeterToken() {
+        return new Token(Type.STRING_DELIMETER, "\"");
+    }
+
+    public static Token createQuoteToken() {
+        return new Token(Type.QUOTE, "'");
     }
 
     public static Token createSymbolToken(String name) {
