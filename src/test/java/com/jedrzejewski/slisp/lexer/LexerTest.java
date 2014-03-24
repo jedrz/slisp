@@ -17,18 +17,18 @@ public class LexerTest {
             tokens.add(token);
         }
         List<Token> expected = Arrays.asList(
-                Token.createOpenBracketToken(),
+                Token.createOpenParenToken(),
                 Token.createSymbolToken("fn"),
-                Token.createOpenBracketToken(),
+                Token.createOpenParenToken(),
                 Token.createSymbolToken("zero?"),
                 Token.createNumberToken("0"),
-                Token.createCloseBracketToken(),
-                Token.createOpenBracketToken(),
+                Token.createCloseParenToken(),
+                Token.createOpenParenToken(),
                 Token.createSymbolToken("+"),
                 Token.createNumberToken("2"),
                 Token.createNumberToken("3"),
-                Token.createCloseBracketToken(),
-                Token.createCloseBracketToken());
+                Token.createCloseParenToken(),
+                Token.createCloseParenToken());
         Assert.assertEquals(expected, tokens);
     }
 }

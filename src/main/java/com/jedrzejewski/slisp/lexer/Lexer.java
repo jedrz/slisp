@@ -18,9 +18,9 @@ public class Lexer {
 
         switch (c) {
             case '(':
-                return Token.createOpenBracketToken();
+                return Token.createOpenParenToken();
             case ')':
-                return Token.createCloseBracketToken();
+                return Token.createCloseParenToken();
         }
 
         if (isNumberCh(c)) {

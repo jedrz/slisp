@@ -25,11 +25,11 @@ public class Token {
         return string;
     }
 
-    public static Token createOpenBracketToken() {
+    public static Token createOpenParenToken() {
         return new Token(Type.OPEN_PAREN, "(");
     }
 
-    public static Token createCloseBracketToken() {
+    public static Token createCloseParenToken() {
         return new Token(Type.CLOSE_PAREN, ")");
     }
 
