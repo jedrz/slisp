@@ -5,7 +5,7 @@ import com.jedrzejewski.slisp.lexer.Lexer;
 import com.jedrzejewski.slisp.parser.Parser;
 import com.jedrzejewski.slisp.parser.lispobjects.LispObject;
 import com.jedrzejewski.slisp.parser.lispobjects.Num;
-import com.jedrzejewski.slisp.parser.lispobjects.Symbol;
+import com.jedrzejewski.slisp.parser.lispobjects.Sym;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,7 +20,7 @@ public class REPL {
     public REPL() {
         interpreter = new Interpreter();
         map = new HashMap<>();
-        map.put(Symbol.class, new SymbolPrinter());
+        map.put(Sym.class, new SymPrinter());
         map.put(Num.class, new NumPrinter());
     }
 
@@ -48,12 +48,12 @@ public class REPL {
         String print(LispObject object);
     }
 
-    private class SymbolPrinter implements Printer {
+    private class SymPrinter implements Printer {
 
         @Override
         public String print(LispObject object) {
-            Symbol symbol = (Symbol) object;
-            return symbol.getName();
+            Sym sym = (Sym) object;
+            return sym.getName();
         }
     }
 

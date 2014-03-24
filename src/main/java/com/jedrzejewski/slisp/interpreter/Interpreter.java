@@ -10,7 +10,7 @@ import com.jedrzejewski.slisp.interpreter.specialforms.SpecialForm;
 import com.jedrzejewski.slisp.parser.lispobjects.Expression;
 import com.jedrzejewski.slisp.parser.lispobjects.LispObject;
 import com.jedrzejewski.slisp.parser.lispobjects.Num;
-import com.jedrzejewski.slisp.parser.lispobjects.Symbol;
+import com.jedrzejewski.slisp.parser.lispobjects.Sym;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -40,9 +40,9 @@ public class Interpreter {
     private LispObject eval(LispObject code, Scope scope) {
         if (code instanceof Num) {
             return code;
-        } else if (code instanceof Symbol) {
-            Symbol symbol = (Symbol) code;
-            return scope.find(symbol);
+        } else if (code instanceof Sym) {
+            Sym sym = (Sym) code;
+            return scope.find(sym);
         } else if (code instanceof Expression) {
             Expression exp = (Expression) code;
             LispObject first = exp.get(0);

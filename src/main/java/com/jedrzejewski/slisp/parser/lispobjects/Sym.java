@@ -1,10 +1,10 @@
 package com.jedrzejewski.slisp.parser.lispobjects;
 
-public class Symbol implements LispObject {
+public class Sym implements LispObject {
 
     private String name;
 
-    public Symbol(String name) {
+    public Sym(String name) {
         this.name = name;
     }
 
@@ -17,9 +17,9 @@ public class Symbol implements LispObject {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Symbol symbol = (Symbol) o;
+        Sym sym = (Sym) o;
 
-        if (!name.equals(symbol.name)) return false;
+        if (!name.equals(sym.name)) return false;
 
         return true;
     }

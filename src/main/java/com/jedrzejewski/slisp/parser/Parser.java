@@ -5,7 +5,7 @@ import com.jedrzejewski.slisp.lexer.Token;
 import com.jedrzejewski.slisp.parser.lispobjects.Expression;
 import com.jedrzejewski.slisp.parser.lispobjects.LispObject;
 import com.jedrzejewski.slisp.parser.lispobjects.Num;
-import com.jedrzejewski.slisp.parser.lispobjects.Symbol;
+import com.jedrzejewski.slisp.parser.lispobjects.Sym;
 
 public class Parser {
 
@@ -38,7 +38,7 @@ public class Parser {
         } else if (token.getType() == Token.Type.CLOSE_BRACKET) {
             return null; // blad
         } else if (token.getType() == Token.Type.SYMBOL) {
-            return new Symbol(token.getString());
+            return new Sym(token.getString());
         } else if (token.getType() == Token.Type.NUMBER) {
             return new Num(token.getString());
         }

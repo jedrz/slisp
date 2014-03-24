@@ -1,13 +1,13 @@
 package com.jedrzejewski.slisp.interpreter;
 
 import com.jedrzejewski.slisp.parser.lispobjects.LispObject;
-import com.jedrzejewski.slisp.parser.lispobjects.Symbol;
+import com.jedrzejewski.slisp.parser.lispobjects.Sym;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Scope {
 
-    private Map<Symbol, LispObject> symbolTable;
+    private Map<Sym, LispObject> symbolTable;
     private Scope outerScope;
 
     public Scope(Scope outerScope) {
@@ -19,25 +19,25 @@ public class Scope {
         this(null);
     }
 
-    public LispObject find(Symbol symbol) {
-        if (symbolTable.containsKey(symbol)) {
-            return symbolTable.get(symbol);
+    public LispObject find(Sym sym) {
+        if (symbolTable.containsKey(sym)) {
+            return symbolTable.get(sym);
         } else {
-            // TODO: throw exception if there is no symbol in table
-            return outerScope.find(symbol);
+            // TODO: throw exception if there is no sym in table
+            return outerScope.find(sym);
         }
     }
 
     public LispObject find(String name) {
-        return find(new Symbol(name));
+        return find(new Sym(name));
     }
 
-    public Scope put(Symbol symbol, LispObject object) {
-        symbolTable.put(symbol, object);
+    public Scope put(Sym sym, LispObject object) {
+        symbolTable.put(sym, object);
         return this;
     }
 
     public Scope put(String name, LispObject object) {
-        return put(new Symbol(name), object);
+        return put(new Sym(name), object);
     }
 }

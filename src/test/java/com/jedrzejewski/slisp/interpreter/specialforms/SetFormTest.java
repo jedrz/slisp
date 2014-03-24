@@ -4,7 +4,7 @@ import com.jedrzejewski.slisp.interpreter.Interpreter;
 import com.jedrzejewski.slisp.lexer.Lexer;
 import com.jedrzejewski.slisp.parser.Parser;
 import com.jedrzejewski.slisp.parser.lispobjects.Num;
-import com.jedrzejewski.slisp.parser.lispobjects.Symbol;
+import com.jedrzejewski.slisp.parser.lispobjects.Sym;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -19,7 +19,7 @@ public class SetFormTest {
         Lexer lexer = new Lexer("(set! var (+ 1 2))");
         Parser parser = new Parser(lexer);
         org.junit.Assert.assertEquals(
-                new Symbol("var"),
+                new Sym("var"),
                 interpreter.eval(parser.parse())
         );
 
