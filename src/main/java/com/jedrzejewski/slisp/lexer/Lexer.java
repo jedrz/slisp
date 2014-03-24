@@ -26,7 +26,7 @@ public class Lexer {
             case ']':
                 return Token.createCloseBracketToken();
             case '\"':
-                return Token.createStringDelimeterToken();
+                return Token.createStringDelimiterToken();
             case '\'':
                 return Token.createQuoteToken();
         }

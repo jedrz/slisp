@@ -45,7 +45,7 @@ public class Token {
         return new Token(Type.CLOSE_BRACKET, "]");
     }
 
-    public static Token createStringDelimeterToken() {
+    public static Token createStringDelimiterToken() {
         return new Token(Type.STRING_DELIMETER, "\"");
     }
 
