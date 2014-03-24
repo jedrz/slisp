@@ -6,13 +6,22 @@ import com.jedrzejewski.slisp.parser.lispobjects.LispObject;
 import com.jedrzejewski.slisp.parser.lispobjects.Lst;
 import com.jedrzejewski.slisp.parser.lispobjects.Num;
 import com.jedrzejewski.slisp.parser.lispobjects.Sym;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
 
 public class Parser {
 
     private Lexer lexer;
+    private Map<Token.Type, Function<Token, LispObject>> tokenTypeMethodMap;
 
     public Parser(Lexer lexer) {
         this.lexer = lexer;
+        tokenTypeMethodMap = new HashMap<>();
+        tokenTypeMethodMap.put(Token.Type.OPEN_PAREN, this::parseOpenParen);
+        tokenTypeMethodMap.put(Token.Type.CLOSE_PAREN, this::parseCloseParen);
+        tokenTypeMethodMap.put(Token.Type.SYMBOL, this::parseSymbol);
+        tokenTypeMethodMap.put(Token.Type.NUMBER, this::parseNumber);
     }
 
     public LispObject parse() {
@@ -25,23 +34,32 @@ public class Parser {
     }
 
     private LispObject parseToken(Token token) {
-        if (token.getType() == Token.Type.OPEN_PAREN) {
-            Lst lst = new Lst();
-            while (true) {
-                token = lexer.getNextToken();
-                if (token.getType() == Token.Type.CLOSE_PAREN) {
-                    return lst;
-                } else {
-                    lst.add(parseToken(token));
-                }
+        Function<Token, LispObject> method
+                = tokenTypeMethodMap.get(token.getType());
+        return method.apply(token);
+    }
+
+    private LispObject parseOpenParen(Token token) {
+        Lst lst = new Lst();
+        while (true) {
+            token = lexer.getNextToken();
+            if (token.getType() == Token.Type.CLOSE_PAREN) {
+                return lst;
+            } else {
+                lst.add(parseToken(token));
             }
-        } else if (token.getType() == Token.Type.CLOSE_PAREN) {
-            return null; // blad
-        } else if (token.getType() == Token.Type.SYMBOL) {
-            return new Sym(token.getString());
-        } else if (token.getType() == Token.Type.NUMBER) {
-            return new Num(token.getString());
         }
-        return null;
+    }
+
+    private LispObject parseCloseParen(Token token) {
+        return null; // TODO: rzuć wyjątek
+    }
+
+    private LispObject parseSymbol(Token token) {
+        return new Sym(token.getString());
+    }
+
+    private LispObject parseNumber(Token token) {
+        return new Num(token.getString());
     }
 }
