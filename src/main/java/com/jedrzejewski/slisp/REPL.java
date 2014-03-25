@@ -1,5 +1,6 @@
 package com.jedrzejewski.slisp;
 
+import com.jedrzejewski.slisp.interpreter.Function;
 import com.jedrzejewski.slisp.interpreter.Interpreter;
 import com.jedrzejewski.slisp.lexer.Lexer;
 import com.jedrzejewski.slisp.parser.Parser;
@@ -22,6 +23,7 @@ public class REPL {
         map = new HashMap<>();
         map.put(Sym.class, new SymPrinter());
         map.put(Num.class, new NumPrinter());
+        map.put(Function.class, new FunctionPrinter());
     }
 
     public void run() {
@@ -63,6 +65,14 @@ public class REPL {
         public String print(LispObject object) {
             Num num = (Num) object;
             return num.getValue().toString();
+        }
+    }
+
+    private class FunctionPrinter implements Printer {
+
+        @Override
+        public String print(LispObject object) {
+            return "fn form";
         }
     }
 }

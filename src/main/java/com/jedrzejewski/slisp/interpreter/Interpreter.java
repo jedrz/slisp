@@ -5,6 +5,8 @@ import com.jedrzejewski.slisp.interpreter.primitives.DividePrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.MinusPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.MultiplyPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.Primitive;
+import com.jedrzejewski.slisp.interpreter.specialforms.DoForm;
+import com.jedrzejewski.slisp.interpreter.specialforms.FnForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.SetForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.SpecialForm;
 import com.jedrzejewski.slisp.parser.lispobjects.LispObject;
@@ -33,7 +35,9 @@ public class Interpreter {
 
         // Specjalne formy
         globalScope
-                .put("set!", new SetForm());
+                .put("set!", new SetForm())
+                .put("do", new DoForm())
+                .put("fn", new FnForm());
 
         classEvalFunctionMap = new HashMap<>();
         classEvalFunctionMap.put(Num.class, this::evalNum);
@@ -80,8 +84,19 @@ public class Interpreter {
             }
             // TODO: obsługa liczby argumentów
             return primitive.call(args);
+        } else if (fn instanceof Function) {
+            Function function = (Function) fn;
+            List<LispObject> args = new LinkedList<>();
+            for (LispObject object : lst.subList(1, lst.size())) {
+                args.add(eval(object, scope));
+            }
+            Scope wrapperScope = new Scope(function.getScope());
+            List<Sym> argNames = function.getArgs();
+            for (int i = 0; i < args.size(); ++i) {
+                wrapperScope.put(argNames.get(i), args.get(i));
+            }
+            return eval(function.getBody(), wrapperScope);
         }
-        // TODO: obsługa lambd
         // TODO: jeśli fn nie jest funkcją
         return null;
     }
