@@ -121,12 +121,6 @@ Czyli ,,funkcje'', których wywołanie nie powoduje obliczania argumentów.
 \subsection{Prymitywy}
 
 \begin{description}
-\item[+ - * /] podstawowe funkcje matematyczne przyjmujące dowolną ilość
-  argumentów.
-
-\item[$> \ >= \ = \ <= \ <$] predykaty porównujące podane liczby (możliwie
-  więcej niż 2).
-
 \item[equals] porównuje podane argumenty.
 
 \item[and, or] zwraca odpowiednio iloczyn oraz sumę logiczną podanych
@@ -159,6 +153,18 @@ Czyli funkcje przyjmujące funkcje jako argumenty.
 \item[apply] wywołuje podaną funkcję z~argumentami zawarty w~podanej liście.
   \clj{apply}
 
+\end{description}
+
+\subsubsection{Operacje na~liczbach}
+
+\begin{description}
+\item[+ - * /] podstawowe funkcje matematyczne przyjmujące dowolną ilość
+  argumentów.
+
+\item[$> \ >= \ = \ <= \ <$] predykaty porównujące podane liczby (możliwie
+  więcej niż 2).
+
+\item[zero?] czy liczba jest równa 0.
 \end{description}
 
 \subsubsection{Operacje na~listach i~napisach}
