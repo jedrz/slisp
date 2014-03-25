@@ -4,6 +4,7 @@ import com.jedrzejewski.slisp.TestUtils;
 import com.jedrzejewski.slisp.parser.lispobjects.Lst;
 import com.jedrzejewski.slisp.parser.lispobjects.Num;
 import com.jedrzejewski.slisp.parser.lispobjects.Sym;
+import com.jedrzejewski.slisp.parser.lispobjects.Vec;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -21,5 +22,14 @@ public class ParserTest {
         Assert.assertEquals(new Sym("add-one"), addOneLst.get(0));
         Assert.assertEquals(new Num(3), addOneLst.get(1));
         Assert.assertEquals(new Num(4), lst.get(3));
+    }
+
+    @Test
+    public void testBrackets() {
+        Vec vec = (Vec) TestUtils.parseString("[1 [a 2]]");
+        Assert.assertEquals(new Num(1), vec.get(0));
+        Vec innerVec = (Vec) vec.get(1);
+        Assert.assertEquals(new Sym("a"), innerVec.get(0));
+        Assert.assertEquals(new Num(2), innerVec.get(1));
     }
 }

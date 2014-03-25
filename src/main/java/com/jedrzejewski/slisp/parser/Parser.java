@@ -6,6 +6,7 @@ import com.jedrzejewski.slisp.parser.lispobjects.LispObject;
 import com.jedrzejewski.slisp.parser.lispobjects.Lst;
 import com.jedrzejewski.slisp.parser.lispobjects.Num;
 import com.jedrzejewski.slisp.parser.lispobjects.Sym;
+import com.jedrzejewski.slisp.parser.lispobjects.Vec;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
@@ -20,6 +21,8 @@ public class Parser {
         tokenTypeMethodMap = new HashMap<>();
         tokenTypeMethodMap.put(Token.Type.OPEN_PAREN, this::parseOpenParen);
         tokenTypeMethodMap.put(Token.Type.CLOSE_PAREN, this::parseCloseParen);
+        tokenTypeMethodMap.put(Token.Type.OPEN_BRACKET, this::parseOpenBracket);
+        tokenTypeMethodMap.put(Token.Type.CLOSE_BRACKET, this::parseCloseBracket);
         tokenTypeMethodMap.put(Token.Type.SYMBOL, this::parseSymbol);
         tokenTypeMethodMap.put(Token.Type.NUMBER, this::parseNumber);
     }
@@ -56,6 +59,22 @@ public class Parser {
     }
 
     private LispObject parseCloseParen(Token token) {
+        return null; // TODO: rzuć wyjątek
+    }
+
+    private LispObject parseOpenBracket(Token token) {
+        Vec vec = new Vec();
+        while (true) {
+            token = lexer.getNextToken();
+            if (token.getType() == Token.Type.CLOSE_BRACKET) {
+                return vec;
+            } else {
+                vec.add(parseToken(token));
+            }
+        }
+    }
+
+    private LispObject parseCloseBracket(Token token) {
         return null; // TODO: rzuć wyjątek
     }
 
