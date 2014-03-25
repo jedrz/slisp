@@ -210,6 +210,27 @@ Czyli funkcje przyjmujące funkcje jako argumenty.
 
 \section{Analizator leksykalny}
 
+Zadaniem analizatora leksykalnego jest rozpoznawanie następujących tokenów
+w~strumieniu wejściowym:
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|p{6cm} p{6cm}|} \hline
+    symbol & \\
+    symbol prawda & \verb+t+ \\
+    symbol null & \verb+nil+ \\
+    napis & tekst zawarty w~podwójnych cudzysłowach \\ 
+    liczba & \\ \hline
+    nawias otwierający & \verb+(+ \\
+    nawias zamykający & \verb+)+ \\ \hline
+    nawias kwadratowy otwierający & \verb+[+ \\
+    nawias kwadratowy zamykający & \verb+]+ \\ \hline
+    apostrof & \verb+'+ \\
+    przecinek & \verb+,+ \\
+    małpa & \verb+@+ \\ \hline
+  \end{tabular}
+\end{table}
+
 \section{Analizator składniowy}
 
 \section{Interpreter}
