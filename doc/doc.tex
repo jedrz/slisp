@@ -80,17 +80,28 @@ przekazywanych argumentów.
   \verb+'(a 1 "napis")+.
 \end{description}
 
-Dodatkowo symbol \verb+t+ jest zastrzeżony i~traktowany jako prawda, a~symbol
-\verb+nil+ jako fałsz. Jedynie symbol \verb+nil+ będzie miał wartość logiczną
-fałsz, czyli 0, pusta lista, pusty napis nie będą fałszywe w~sensie logicznym.
+Dodatkowo symbol \verb+true+ jest zastrzeżony i~traktowany jako prawda,
+a~symbol \verb+false+ jako fałsz. Jedynie symbol \verb+false+ będzie miał
+wartość logiczną fałsz, czyli 0, pusta lista, pusty napis nie będą fałszywe
+w~sensie logicznym.
 
 \subsection{Specjalne formy}
 
 Czyli ,,funkcje'', których wywołanie nie powoduje obliczania argumentów.
 
 \begin{description}
-\item[quote] nie oblicza wyrażenia.
+\item[apostrof '] nie oblicza wyrażenia.
   \clj{quote}
+
+\item[inny-apostrof `] nie oblicza wyrażenia, ale pozwala na~obliczanie
+  oznaczonych wyrażeń.
+
+\item[tylda \textasciitilde] oblicza wyrażenie w~ramach wyrażenia poprzedzonego
+  \verb+`+.
+  \clj{unquote}
+
+\item[tylda+małpa \textasciitilde@] dodaje listę do~zacytowanej
+  \clj{unquote-splicing}
 
 \item[set!] przypisanie.
   \clj{set!}
@@ -98,7 +109,8 @@ Czyli ,,funkcje'', których wywołanie nie powoduje obliczania argumentów.
 \item[def] definicja zmiennej.
   \clj{def}
 
-\item[defn] definicja funkcji.
+\item[defn] definicja funkcji. Użycie \verb+&+ oznacza, że~pozostałe argumenty
+  zostaną przekazane jako lista.
   \clj{defn}
 
 \item[fn] funkcja anonimowa.
@@ -170,7 +182,7 @@ Czyli funkcje przyjmujące funkcje jako argumenty.
 \subsubsection{Operacje na~listach i~napisach}
 
 \begin{description}
-\item[length] zwraca długość napisu lub listy.
+\item[count] zwraca długość napisu lub listy.
 \end{description}
 
 \subsubsection{Operacje na~listach}
@@ -208,6 +220,31 @@ Czyli funkcje przyjmujące funkcje jako argumenty.
 \item[read] wczytuje linię i~ją~zwraca.
 \end{description}
 
+\section{Wymagania}
+
+\subsection{Funkcjonalne}
+
+\begin{enumerate}
+\item Interpreter powinien pozwolić na~ewaluację form korzystających
+  z~powyższych funkcji umieszczonych w~pliku lub podawanych przez użytkownika
+  w~trybie konwersacyjnym.
+\item W~trybie konwersacyjnym wynik obliczenia formy powinien być wypisany
+  w~następnej linii.
+\item Podczas wywołania funkcji, wszystkie funkcje, które są~używane
+  w~wywoływanej funkcji powinny być zdefiniowane. Jeśli nie są, użytkownik
+  zostanie powiadomiony o~niezdefiniowanym symbolu.
+\item Dopuszczalne jest użycie niezdefiniowanych funkcji w~definicji funkcji.
+\item Wszystkie symbole mogą być nadpisane oprócz \verb+true+ i~\verb+false+.
+\item Nadmiarowe nawiasy są~dopuszczalne, jednak użytkownik zostanie
+  poinformowany o~tym zajściu.
+\item Brakujące nawiasy spowodują wystąpienie błędu.
+\item W~przypadku błędu w~ciele funkcji, błąd zostanie zgłoszony dopiero
+  podczas jej użycia.
+\item Niepoprawne użycie funkcji powinno zostać zasygnalizowane.
+\end{enumerate}
+
+\subsection{Niefunkcjonalne}
+
 \section{Analizator leksykalny}
 
 Zadaniem analizatora leksykalnego jest rozpoznawanie następujących tokenów
@@ -217,8 +254,6 @@ w~strumieniu wejściowym:
   \centering
   \begin{tabular}{|p{6cm} p{6cm}|} \hline
     symbol & \\
-    symbol prawda & \verb+t+ \\
-    symbol null & \verb+nil+ \\
     napis & tekst zawarty w~podwójnych cudzysłowach \\ 
     liczba & \\ \hline
     nawias otwierający & \verb+(+ \\
@@ -226,14 +261,79 @@ w~strumieniu wejściowym:
     nawias kwadratowy otwierający & \verb+[+ \\
     nawias kwadratowy zamykający & \verb+]+ \\ \hline
     apostrof & \verb+'+ \\
-    przecinek & \verb+,+ \\
-    małpa & \verb+@+ \\ \hline
+    tylda & \verb+~+ \\
+    małpa & \verb+@+ \\
+    tylda+małpa & \verb+~@+ \\
+    ampersand & \verb+&+ \\ \hline
   \end{tabular}
 \end{table}
 
 \section{Analizator składniowy}
 
+Tworzy drzewo odpowiadające podanemu wyrażeniu przetwarzając kolejno tokeny.
+
+Kiedy napotka token oznaczający:
+\begin{description}
+\item[symbol] zwraca obiekt opisujący symbol,
+\item[liczbę] zamienia napis na~liczbę zmiennoprzecinkową i~ją~zwraca,
+\item[napis] zwraca obiekt opisujący napis,
+\item[nawias otwierający] tworzy nową listę, do~której dodaje sparsowane tokeny
+  do~momentu napotkania nawiasu zamykającego, zwraca tak zbudowaną listę. Jeśli
+  nie napotka nawiasu zamykającego, sygnalizowany jest błąd składni,
+\item[nawias zamykający] powinien być przetworzony przy obsłudze nawiasu
+  otwierającego, oznacza niepotrzebny nawias zamykający,
+\item[nawiasy kwadratowe] postępuje analogicznie jak w~przypadku nawiasów
+  okrągłych.
+\end{description}
+
 \section{Interpreter}
 
+Interpreter powinien przyjmować wyrażenie do~ewaluacji w~postaci drzewa
+będącego wynikiem działania analizator składniowego. Najważniejszym jego
+elementem będzie metoda \verb+eval+, która zwraca wynik ewaluacji formy.
+
+\subsection{Zakres}
+
+Zakres, czyli mapa symboli i~wartości im~przypisanym. Na~początku interpreter
+ma~zdefiniowany globalny zakres, w~którym są~umieszczone wbudowane prymitywy
+oraz specjalne formy. Oprócz tego dodane zostają funkcje napisane
+w~implementowanym języku.
+
+Każdy zakres lokalny, utworzony np. podczas deklaracji zmiennych lokalnych
+przechowuje odnośnik do~nadrzędnego zakresu.
+
+Wyszukiwanie podanego symbolu polega na~odszukaniu go~w~zakresie. Jeśli symbol
+nie zostaje znaleziony, wtedy należy spróbować znaleźć go~w~nadrzędnym
+zakresie. Jeśli poszukiwanie się nie powiodło, oznacza to, że~symbol jest
+niezdefiniowany.
+
+\subsection{Metoda eval}
+
+Metoda eval działa rekurencyjnie i~zwraca wynik ewaluacji podanego wyrażenia.
+Kiedy otrzyma:
+\begin{description}
+\item[liczbę] zwraca liczbę,
+\item[napis] zwraca napis,
+\item[symbol] odszukuje w~bieżącym zakresie symbol i~zwraca jego wartość,
+\item[lista] wtedy należy obliczyć pierwszy element (rekurencyjnie wywołać
+  \verb+eval+ dla pierwszego elementu). Jeśli obliczony element jest funkcją
+  lub prymitywem wtedy należy obliczyć argumenty i~wywołać funkcję. Jeśli zaś
+  ten element jest specjalną formą, należy ją~wywołać z~nieobliczonymi
+  argumentami.
+\end{description}
+
+\subsection{Funkcja}
+
+Funkcja zdefiniowana za~pomocą \verb+fn+ lub \verb+defn+ jest reprezentowana
+jako obiekt zawierający listę nazw argumentów (symboli), ciało funkcji
+w~postaci jednego wyrażenia oraz zakres, w~którym funkcja została zdefiniowana.
+
+\subsubsection{Wywołanie funkcji}
+
+Wywołanie zdefiniowanej przez użytkownika funkcji wymaga stworzenia nowego
+zakresu, którego zakresem nadrzędnym będzie zakres funkcji rozszerzony
+o~symbole, czyli nazwy argumentów w~definicji funkcji oraz odpowiadające
+im~wartości przekazane w~wywołaniu. Następnie jest wywoływana funkcja
+\verb+eval+ w~celu obliczenia ciała funkcji w~otoczeniu podanego zakresu.
 
 \end{document}
