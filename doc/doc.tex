@@ -286,6 +286,17 @@ Kiedy napotka token oznaczający:
   okrągłych.
 \end{description}
 
+\subsection{Gramatyka}
+
+\begin{minted}{antlr}
+program: {form}
+form: atom | list | vector | prec_form
+prec_form: ('\'' | '`' | '~' | '@' | '~@' | '&') form
+list: '(' {form} ')'
+vector: '[' {form} ']'
+atom: symbol | string | number
+\end{minted}
+
 \section{Interpreter}
 
 Interpreter powinien przyjmować wyrażenie do~ewaluacji w~postaci drzewa
