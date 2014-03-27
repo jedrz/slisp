@@ -2,3 +2,5 @@ slisp [![Build Status](https://travis-ci.org/jedrz/slisp.png?branch=master)](htt
 =====
 
 Simple, Clojure like Lisp written in Java 8.
+
+Work in progress.
