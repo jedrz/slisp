@@ -1,7 +1,7 @@
 package com.jedrzejewski.slisp.interpreter;
 
 import com.jedrzejewski.slisp.TestUtils;
-import com.jedrzejewski.slisp.parser.lispobjects.Num;
+import com.jedrzejewski.slisp.lispobjects.Num;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 

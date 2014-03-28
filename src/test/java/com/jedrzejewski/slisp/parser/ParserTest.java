@@ -1,10 +1,10 @@
 package com.jedrzejewski.slisp.parser;
 
 import com.jedrzejewski.slisp.TestUtils;
-import com.jedrzejewski.slisp.parser.lispobjects.Lst;
-import com.jedrzejewski.slisp.parser.lispobjects.Num;
-import com.jedrzejewski.slisp.parser.lispobjects.Sym;
-import com.jedrzejewski.slisp.parser.lispobjects.Vec;
+import com.jedrzejewski.slisp.lispobjects.Lst;
+import com.jedrzejewski.slisp.lispobjects.Num;
+import com.jedrzejewski.slisp.lispobjects.Sym;
+import com.jedrzejewski.slisp.lispobjects.Vec;
 import org.junit.Assert;
 import org.junit.Test;
 

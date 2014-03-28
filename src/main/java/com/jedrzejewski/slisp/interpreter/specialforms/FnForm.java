@@ -1,10 +1,10 @@
 package com.jedrzejewski.slisp.interpreter.specialforms;
 
-import com.jedrzejewski.slisp.interpreter.Function;
 import com.jedrzejewski.slisp.interpreter.Interpreter;
-import com.jedrzejewski.slisp.parser.lispobjects.LispObject;
-import com.jedrzejewski.slisp.parser.lispobjects.Sym;
-import com.jedrzejewski.slisp.parser.lispobjects.Vec;
+import com.jedrzejewski.slisp.lispobjects.Function;
+import com.jedrzejewski.slisp.lispobjects.LispObject;
+import com.jedrzejewski.slisp.lispobjects.Sym;
+import com.jedrzejewski.slisp.lispobjects.Vec;
 import java.util.LinkedList;
 import java.util.List;
 

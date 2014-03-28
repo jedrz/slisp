@@ -2,8 +2,8 @@ package com.jedrzejewski.slisp.interpreter.specialforms;
 
 import com.jedrzejewski.slisp.TestUtils;
 import com.jedrzejewski.slisp.interpreter.Interpreter;
-import com.jedrzejewski.slisp.parser.lispobjects.Num;
-import com.jedrzejewski.slisp.parser.lispobjects.Sym;
+import com.jedrzejewski.slisp.lispobjects.Num;
+import com.jedrzejewski.slisp.lispobjects.Sym;
 import org.junit.Assert;
 import org.junit.Test;
 

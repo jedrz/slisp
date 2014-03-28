@@ -2,11 +2,11 @@ package com.jedrzejewski.slisp.parser;
 
 import com.jedrzejewski.slisp.lexer.Lexer;
 import com.jedrzejewski.slisp.lexer.Token;
-import com.jedrzejewski.slisp.parser.lispobjects.LispObject;
-import com.jedrzejewski.slisp.parser.lispobjects.Lst;
-import com.jedrzejewski.slisp.parser.lispobjects.Num;
-import com.jedrzejewski.slisp.parser.lispobjects.Sym;
-import com.jedrzejewski.slisp.parser.lispobjects.Vec;
+import com.jedrzejewski.slisp.lispobjects.LispObject;
+import com.jedrzejewski.slisp.lispobjects.Lst;
+import com.jedrzejewski.slisp.lispobjects.Num;
+import com.jedrzejewski.slisp.lispobjects.Sym;
+import com.jedrzejewski.slisp.lispobjects.Vec;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;

@@ -2,8 +2,8 @@ package com.jedrzejewski.slisp.interpreter.specialforms;
 
 import com.jedrzejewski.slisp.interpreter.Interpreter;
 import com.jedrzejewski.slisp.interpreter.Scope;
-import com.jedrzejewski.slisp.parser.lispobjects.LispObject;
-import com.jedrzejewski.slisp.parser.lispobjects.Sym;
+import com.jedrzejewski.slisp.lispobjects.LispObject;
+import com.jedrzejewski.slisp.lispobjects.Sym;
 import java.util.List;
 
 public class SetForm implements SpecialForm {

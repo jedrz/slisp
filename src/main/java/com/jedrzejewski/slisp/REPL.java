@@ -1,12 +1,12 @@
 package com.jedrzejewski.slisp;
 
-import com.jedrzejewski.slisp.interpreter.Function;
 import com.jedrzejewski.slisp.interpreter.Interpreter;
 import com.jedrzejewski.slisp.lexer.Lexer;
+import com.jedrzejewski.slisp.lispobjects.Function;
+import com.jedrzejewski.slisp.lispobjects.LispObject;
+import com.jedrzejewski.slisp.lispobjects.Num;
+import com.jedrzejewski.slisp.lispobjects.Sym;
 import com.jedrzejewski.slisp.parser.Parser;
-import com.jedrzejewski.slisp.parser.lispobjects.LispObject;
-import com.jedrzejewski.slisp.parser.lispobjects.Num;
-import com.jedrzejewski.slisp.parser.lispobjects.Sym;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

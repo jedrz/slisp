@@ -1,8 +1,6 @@
-package com.jedrzejewski.slisp.interpreter;
+package com.jedrzejewski.slisp.lispobjects;
 
-import com.jedrzejewski.slisp.parser.lispobjects.LispObject;
-import com.jedrzejewski.slisp.parser.lispobjects.Lst;
-import com.jedrzejewski.slisp.parser.lispobjects.Sym;
+import com.jedrzejewski.slisp.interpreter.Scope;
 import java.util.List;
 
 public class Function implements LispObject {

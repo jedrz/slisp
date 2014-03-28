@@ -2,8 +2,8 @@ package com.jedrzejewski.slisp;
 
 import com.jedrzejewski.slisp.interpreter.Interpreter;
 import com.jedrzejewski.slisp.lexer.Lexer;
+import com.jedrzejewski.slisp.lispobjects.LispObject;
 import com.jedrzejewski.slisp.parser.Parser;
-import com.jedrzejewski.slisp.parser.lispobjects.LispObject;
 
 public class TestUtils {
 
