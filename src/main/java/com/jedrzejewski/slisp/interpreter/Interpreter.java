@@ -16,6 +16,7 @@ import com.jedrzejewski.slisp.interpreter.specialforms.FnForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.IfForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.SetForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.SpecialForm;
+import com.jedrzejewski.slisp.lispobjects.Bool;
 import com.jedrzejewski.slisp.lispobjects.Function;
 import com.jedrzejewski.slisp.lispobjects.LispObject;
 import com.jedrzejewski.slisp.lispobjects.Lst;
@@ -55,6 +56,11 @@ public class Interpreter {
                 .put("if", new IfForm())
                 .put("defn", new DefnForm())
         ;
+
+        // True, false
+        globalScope
+                .put("true", new Bool(true))
+                .put("false", new Bool(false));
 
         classEvalFunctionMap = new HashMap<>();
         classEvalFunctionMap.put(Num.class, this::evalNum);
