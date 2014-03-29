@@ -18,6 +18,7 @@ import com.jedrzejewski.slisp.interpreter.specialforms.DefnForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.DoForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.FnForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.IfForm;
+import com.jedrzejewski.slisp.interpreter.specialforms.LetForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.SetForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.SpecialForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.WhileForm;
@@ -78,6 +79,7 @@ public class Interpreter {
                 .put("do", new DoForm())
                 .put("if", new IfForm())
                 .put("while", new WhileForm())
+                .put("let", new LetForm())
 
                 // nil, true, false
                 .put("nil", new Nil())
@@ -169,6 +171,10 @@ public class Interpreter {
         }
 
         public LispObject eval(LispObject code) {
+            return Interpreter.this.eval(code, scope);
+        }
+
+        public LispObject eval(LispObject code, Scope scope) {
             return Interpreter.this.eval(code, scope);
         }
 
