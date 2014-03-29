@@ -6,15 +6,15 @@ import java.util.Arrays;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class LessEqualsPrimitveTest {
+public class LessEqualPrimitiveTest {
 
-    private LessEqualsPrimitive lessEqualsPrimitive = new LessEqualsPrimitive();
+    private LessEqualPrimitive lessEqualPrimitive = new LessEqualPrimitive();
 
     @Test
     public void testArgsLesserEquals() {
         Assert.assertEquals(
                 new Bool(true),
-                lessEqualsPrimitive.call(
+                lessEqualPrimitive.call(
                         Arrays.asList(new Num(1), new Num(1), new Num(2))
                 )
         );
