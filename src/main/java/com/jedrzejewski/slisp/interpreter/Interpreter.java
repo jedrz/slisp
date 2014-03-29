@@ -5,6 +5,7 @@ import com.jedrzejewski.slisp.interpreter.primitives.DividePrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.EqualPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.GreaterEqualPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.GreaterPrimitive;
+import com.jedrzejewski.slisp.interpreter.primitives.LengthPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.LessEqualPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.LessPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.ListPrimitive;
@@ -51,6 +52,9 @@ public class Interpreter {
 
                 // List primitves
                 .put("list", new ListPrimitive())
+
+                // Primitives for multiple types
+                .put("length", new LengthPrimitive())
 
                 // Special forms
                 .put("set!", new SetForm())
