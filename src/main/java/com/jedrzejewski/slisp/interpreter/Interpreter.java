@@ -21,6 +21,7 @@ import com.jedrzejewski.slisp.interpreter.specialforms.IfForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.SetForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.SpecialForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.WhileForm;
+import com.jedrzejewski.slisp.lexer.Lexer;
 import com.jedrzejewski.slisp.lispobjects.Bool;
 import com.jedrzejewski.slisp.lispobjects.Function;
 import com.jedrzejewski.slisp.lispobjects.LispObject;
@@ -28,6 +29,9 @@ import com.jedrzejewski.slisp.lispobjects.Lst;
 import com.jedrzejewski.slisp.lispobjects.Nil;
 import com.jedrzejewski.slisp.lispobjects.Num;
 import com.jedrzejewski.slisp.lispobjects.Sym;
+import com.jedrzejewski.slisp.parser.Parser;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -78,6 +82,20 @@ public class Interpreter {
         classEvalFunctionMap.put(Num.class, this::evalNum);
         classEvalFunctionMap.put(Sym.class, this::evalSym);
         classEvalFunctionMap.put(Lst.class, this::evalLst);
+
+        loadBuiltins();
+    }
+
+    private void loadBuiltins() {
+        Reader builtinsReader = new InputStreamReader(
+                getClass().getResourceAsStream("/builtins.clj")
+        );
+        Lexer lexer = new Lexer(builtinsReader);
+        Parser parser = new Parser(lexer);
+        LispObject code;
+        while ((code = parser.parse()) != null) {
+            eval(code);
+        }
     }
 
     public LispObject eval(LispObject code) {
