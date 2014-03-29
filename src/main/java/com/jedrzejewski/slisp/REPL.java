@@ -30,7 +30,7 @@ public class REPL {
         BufferedReader bufferedReader = new BufferedReader(
                 new InputStreamReader(System.in));
         while (true) {
-            System.out.println(">>> ");
+            System.out.print("> ");
             String input = "";
             try {
                 input = bufferedReader.readLine();
