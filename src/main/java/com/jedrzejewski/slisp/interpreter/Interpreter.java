@@ -17,6 +17,7 @@ import com.jedrzejewski.slisp.interpreter.specialforms.FnForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.IfForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.SetForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.SpecialForm;
+import com.jedrzejewski.slisp.interpreter.specialforms.WhileForm;
 import com.jedrzejewski.slisp.lispobjects.Bool;
 import com.jedrzejewski.slisp.lispobjects.Function;
 import com.jedrzejewski.slisp.lispobjects.LispObject;
@@ -53,10 +54,11 @@ public class Interpreter {
 
                 // Special forms
                 .put("set!", new SetForm())
-                .put("do", new DoForm())
                 .put("fn", new FnForm())
-                .put("if", new IfForm())
                 .put("defn", new DefnForm())
+                .put("do", new DoForm())
+                .put("if", new IfForm())
+                .put("while", new WhileForm())
 
                 // True, false
                 .put("true", new Bool(true))
