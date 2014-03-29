@@ -2,8 +2,10 @@ package com.jedrzejewski.slisp;
 
 import com.jedrzejewski.slisp.interpreter.Interpreter;
 import com.jedrzejewski.slisp.lexer.Lexer;
+import com.jedrzejewski.slisp.lispobjects.Bool;
 import com.jedrzejewski.slisp.lispobjects.Function;
 import com.jedrzejewski.slisp.lispobjects.LispObject;
+import com.jedrzejewski.slisp.lispobjects.Nil;
 import com.jedrzejewski.slisp.lispobjects.Num;
 import com.jedrzejewski.slisp.lispobjects.Sym;
 import com.jedrzejewski.slisp.parser.Parser;
@@ -22,6 +24,8 @@ public class REPL {
         interpreter = new Interpreter();
         map = new HashMap<>();
         map.put(Sym.class, new SymPrinter());
+        map.put(Bool.class, new BoolPrinter());
+        map.put(Nil.class, new NilPrinter());
         map.put(Num.class, new NumPrinter());
         map.put(Function.class, new FunctionPrinter());
     }
@@ -42,7 +46,13 @@ public class REPL {
             LispObject lispObject = parser.parse();
             LispObject result = interpreter.eval(lispObject);
             Printer printer = map.get(result.getClass());
-            System.out.println(printer.print(result));
+            if (printer != null) {
+                System.out.println(printer.print(result));
+            } else {
+                System.out.println(
+                        "No printer for: " + result.getClass().getName()+  "!"
+                );
+            }
         }
     }
 
@@ -73,6 +83,22 @@ public class REPL {
         @Override
         public String print(LispObject object) {
             return "fn form";
+        }
+    }
+
+    private class BoolPrinter implements Printer {
+
+        @Override
+        public String print(LispObject object) {
+            return object.toString();
+        }
+    }
+
+    private class NilPrinter implements Printer {
+
+        @Override
+        public String print(LispObject object) {
+            return object.toString();
         }
     }
 }
