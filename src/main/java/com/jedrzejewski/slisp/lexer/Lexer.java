@@ -1,14 +1,21 @@
 package com.jedrzejewski.slisp.lexer;
 
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
+
 public class Lexer {
 
-    private String in;
-    private int index;
+    private Reader reader;
     private boolean isPreviousCh = false;
     private int previousCh = -1;
 
+    public Lexer(Reader reader) {
+        this.reader = reader;
+    }
+
     public Lexer(String in) {
-        this.in = in;
+        this(new StringReader(in));
     }
 
     public Token getNextToken() {
@@ -76,8 +83,15 @@ public class Lexer {
             isPreviousCh = false;
             return previousCh;
         }
-        if (index < in.length()) {
-            return in.charAt(index++);
+        try {
+            int c;
+            if ((c = reader.read()) != -1) {
+                return c;
+            } else {
+                reader.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return -1;
     }
