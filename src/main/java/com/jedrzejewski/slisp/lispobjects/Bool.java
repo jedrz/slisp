@@ -8,6 +8,15 @@ public class Bool implements LispObject {
         this.value = value;
     }
 
+    public Bool(LispObject object) {
+        // Only false is false.
+        if (object instanceof Bool && ((Bool) object).isFalse()) {
+            value = false;
+        } else {
+            value = true;
+        }
+    }
+
     public boolean getValue() {
         return value;
     }

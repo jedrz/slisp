@@ -12,6 +12,7 @@ import com.jedrzejewski.slisp.interpreter.primitives.MultiplyPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.Primitive;
 import com.jedrzejewski.slisp.interpreter.specialforms.DoForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.FnForm;
+import com.jedrzejewski.slisp.interpreter.specialforms.IfForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.SetForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.SpecialForm;
 import com.jedrzejewski.slisp.lispobjects.Function;
@@ -49,7 +50,9 @@ public class Interpreter {
         globalScope
                 .put("set!", new SetForm())
                 .put("do", new DoForm())
-                .put("fn", new FnForm());
+                .put("fn", new FnForm())
+                .put("if", new IfForm())
+        ;
 
         classEvalFunctionMap = new HashMap<>();
         classEvalFunctionMap.put(Num.class, this::evalNum);
