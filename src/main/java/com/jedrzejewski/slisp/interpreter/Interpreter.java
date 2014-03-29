@@ -43,6 +43,12 @@ public class Interpreter {
     private Map<Class<? extends LispObject>, EvalFunction> classEvalFunctionMap;
 
     public Interpreter() {
+        setUpGlobalScope();
+        setUpClassEvalFunctionMap();
+        loadBuiltins();
+    }
+
+    private void setUpGlobalScope() {
         globalScope = new Scope();
 
         globalScope
@@ -77,13 +83,13 @@ public class Interpreter {
                 .put("nil", new Nil())
                 .put("true", new Bool(true))
                 .put("false", new Bool(false));
+    }
 
+    private void setUpClassEvalFunctionMap() {
         classEvalFunctionMap = new HashMap<>();
         classEvalFunctionMap.put(Num.class, this::evalNum);
         classEvalFunctionMap.put(Sym.class, this::evalSym);
         classEvalFunctionMap.put(Lst.class, this::evalLst);
-
-        loadBuiltins();
     }
 
     private void loadBuiltins() {
