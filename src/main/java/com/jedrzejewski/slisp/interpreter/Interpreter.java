@@ -3,6 +3,7 @@ package com.jedrzejewski.slisp.interpreter;
 import com.jedrzejewski.slisp.interpreter.primitives.AddPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.DividePrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.EqualPrimitive;
+import com.jedrzejewski.slisp.interpreter.primitives.LessPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.MinusPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.MultiplyPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.Primitive;
@@ -35,6 +36,7 @@ public class Interpreter {
                 .put("*", new MultiplyPrimitive())
                 .put("/", new DividePrimitive())
                 .put("=", new EqualPrimitive())
+                .put("<", new LessPrimitive())
         ;
 
         // Specjalne formy
