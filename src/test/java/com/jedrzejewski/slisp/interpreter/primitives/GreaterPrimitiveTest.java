@@ -1,0 +1,32 @@
+package com.jedrzejewski.slisp.interpreter.primitives;
+
+import com.jedrzejewski.slisp.lispobjects.Bool;
+import com.jedrzejewski.slisp.lispobjects.Num;
+import java.util.Arrays;
+import org.junit.Assert;
+import org.junit.Test;
+
+public class GreaterPrimitiveTest {
+
+    private GreaterPrimitive greaterPrimitive = new GreaterPrimitive();
+
+    @Test
+    public void testArgsGreater() {
+        Assert.assertEquals(
+                new Bool(true),
+                greaterPrimitive.call(Arrays.asList(
+                        new Num(3), new Num(2), new Num(1))
+                )
+        );
+    }
+
+    @Test
+    public void testArgsNotGreater() {
+        Assert.assertEquals(
+                new Bool(false),
+                greaterPrimitive.call(
+                        Arrays.asList(new Num(1), new Num(1))
+                )
+        );
+    }
+}
