@@ -38,5 +38,27 @@ public class DefnFormTest {
         );
     }
 
+    @Test
+    public void testLexicalBinding() {
+        Interpreter interpreter = new Interpreter();
+        TestUtils.evalString(
+                "(defn make-adder [init]\n" +
+                "(fn [n]\n" +
+                "(+ n init)))\n",
+                interpreter
+        );
+        TestUtils.evalString(
+                "(set! one-adder (make-adder 1))",
+                interpreter
+        );
+        Assert.assertEquals(
+                new Num(2),
+                TestUtils.evalString(
+                        "(one-adder 1)",
+                        interpreter
+                )
+        );
+    }
+
     // TODO: test defn with docstring
 }

@@ -25,6 +25,4 @@ public class FnFormTest {
                 TestUtils.evalString("((fn [a b] (* a b)) 3 2)")
         );
     }
-
-    // TODO: add lexical binding test
 }
