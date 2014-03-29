@@ -3,6 +3,7 @@ package com.jedrzejewski.slisp.interpreter;
 import com.jedrzejewski.slisp.interpreter.primitives.AddPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.DividePrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.EqualPrimitive;
+import com.jedrzejewski.slisp.interpreter.primitives.FirstPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.GreaterEqualPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.GreaterPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.LengthPrimitive;
@@ -12,6 +13,7 @@ import com.jedrzejewski.slisp.interpreter.primitives.ListPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.MinusPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.MultiplyPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.Primitive;
+import com.jedrzejewski.slisp.interpreter.primitives.RestPrimitive;
 import com.jedrzejewski.slisp.interpreter.specialforms.DefnForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.DoForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.FnForm;
@@ -23,6 +25,7 @@ import com.jedrzejewski.slisp.lispobjects.Bool;
 import com.jedrzejewski.slisp.lispobjects.Function;
 import com.jedrzejewski.slisp.lispobjects.LispObject;
 import com.jedrzejewski.slisp.lispobjects.Lst;
+import com.jedrzejewski.slisp.lispobjects.Nil;
 import com.jedrzejewski.slisp.lispobjects.Num;
 import com.jedrzejewski.slisp.lispobjects.Sym;
 import java.util.HashMap;
@@ -52,6 +55,8 @@ public class Interpreter {
 
                 // List primitves
                 .put("list", new ListPrimitive())
+                .put("first", new FirstPrimitive())
+                .put("rest", new RestPrimitive())
 
                 // Primitives for multiple types
                 .put("length", new LengthPrimitive())
@@ -64,7 +69,8 @@ public class Interpreter {
                 .put("if", new IfForm())
                 .put("while", new WhileForm())
 
-                // True, false
+                // nil, true, false
+                .put("nil", new Nil())
                 .put("true", new Bool(true))
                 .put("false", new Bool(false));
 

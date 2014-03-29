@@ -9,7 +9,7 @@ public class Bool implements LispObject {
     }
 
     public Bool(LispObject object) {
-        // Only false is false.
+        // Only false and nil are false.
         if (object instanceof Bool && ((Bool) object).isFalse()) {
             value = false;
         } else {
