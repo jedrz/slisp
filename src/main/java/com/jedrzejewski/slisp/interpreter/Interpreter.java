@@ -36,8 +36,8 @@ public class Interpreter {
     public Interpreter() {
         globalScope = new Scope();
 
-        // Prymitywy
         globalScope
+                // Math primitives
                 .put("+", new AddPrimitive())
                 .put("-", new MinusPrimitive())
                 .put("*", new MultiplyPrimitive())
@@ -47,20 +47,18 @@ public class Interpreter {
                 .put("<=", new LessEqualPrimitive())
                 .put(">", new GreaterPrimitive())
                 .put(">=", new GreaterEqualPrimitive())
-                .put("list", new ListPrimitive())
-        ;
 
-        // Specjalne formy
-        globalScope
+                // List primitves
+                .put("list", new ListPrimitive())
+
+                // Special forms
                 .put("set!", new SetForm())
                 .put("do", new DoForm())
                 .put("fn", new FnForm())
                 .put("if", new IfForm())
                 .put("defn", new DefnForm())
-        ;
 
-        // True, false
-        globalScope
+                // True, false
                 .put("true", new Bool(true))
                 .put("false", new Bool(false));
 
