@@ -7,6 +7,7 @@ import com.jedrzejewski.slisp.interpreter.primitives.GreaterEqualPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.GreaterPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.LessEqualPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.LessPrimitive;
+import com.jedrzejewski.slisp.interpreter.primitives.ListPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.MinusPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.MultiplyPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.Primitive;
@@ -46,6 +47,7 @@ public class Interpreter {
                 .put("<=", new LessEqualPrimitive())
                 .put(">", new GreaterPrimitive())
                 .put(">=", new GreaterEqualPrimitive())
+                .put("list", new ListPrimitive())
         ;
 
         // Specjalne formy
