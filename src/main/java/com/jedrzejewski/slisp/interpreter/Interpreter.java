@@ -2,6 +2,7 @@ package com.jedrzejewski.slisp.interpreter;
 
 import com.jedrzejewski.slisp.interpreter.primitives.AddPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.DividePrimitive;
+import com.jedrzejewski.slisp.interpreter.primitives.EqualPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.MinusPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.MultiplyPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.Primitive;
@@ -32,7 +33,9 @@ public class Interpreter {
                 .put("+", new AddPrimitive())
                 .put("-", new MinusPrimitive())
                 .put("*", new MultiplyPrimitive())
-                .put("/", new DividePrimitive());
+                .put("/", new DividePrimitive())
+                .put("=", new EqualPrimitive())
+        ;
 
         // Specjalne formy
         globalScope
