@@ -93,15 +93,15 @@ Czyli ,,funkcje'', których wywołanie nie powoduje obliczania argumentów.
 \item[apostrof '] nie oblicza wyrażenia.
   \clj{quote}
 
-\item[inny-apostrof `] nie oblicza wyrażenia, ale pozwala na~obliczanie
-  oznaczonych wyrażeń.
-
-\item[tylda \textasciitilde] oblicza wyrażenie w~ramach wyrażenia poprzedzonego
-  \verb+`+.
-  \clj{unquote}
-
-\item[tylda+małpa \textasciitilde@] dodaje listę do~zacytowanej
-  \clj{unquote-splicing}
+%\item[inny-apostrof `] nie oblicza wyrażenia, ale pozwala na~obliczanie
+%  oznaczonych wyrażeń.
+%
+%\item[tylda \textasciitilde] oblicza wyrażenie w~ramach wyrażenia poprzedzonego
+%  \verb+`+.
+%  \clj{unquote}
+%
+%\item[tylda+małpa \textasciitilde@] dodaje listę do~zacytowanej
+%  \clj{unquote-splicing}
 
 \item[set!] przypisanie.
   \clj{set!}
@@ -262,11 +262,11 @@ w~strumieniu wejściowym:
     nawias zamykający & \verb+)+ \\ \hline
     nawias kwadratowy otwierający & \verb+[+ \\
     nawias kwadratowy zamykający & \verb+]+ \\ \hline
-    apostrof & \verb+'+ \\
-    inny apostrof & \verb+`+ \\
-    tylda & \verb+~+ \\
-    małpa & \verb+@+ \\
-    tylda+małpa & \verb+~@+ \\
+    apostrof & \verb+'+ \\ \hline
+    %inny apostrof & \verb+`+ \\
+    %tylda & \verb+~+ \\
+    %małpa & \verb+@+ \\
+    %tylda+małpa & \verb+~@+ \\
   \end{tabular}
 \end{table}
 
@@ -293,11 +293,12 @@ Kiedy napotka token oznaczający:
 \begin{minted}{antlr}
 program: {form}
 form: atom | list | vector | prec_form
-prec_form: ('\'' | '`' | '~' | '@' | '~@') form
+prec_form: '\'' form
 list: '(' {form} ')'
 vector: '[' {form} ']'
 atom: symbol | string | number
 \end{minted}
+%prec_form: ('\'' | '`' | '~' | '@' | '~@') form
 
 \section{Interpreter}
 
