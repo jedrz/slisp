@@ -1,12 +1,12 @@
 package com.jedrzejewski.slisp.interpreter;
 
 import com.jedrzejewski.slisp.interpreter.primitives.AddPrimitive;
+import com.jedrzejewski.slisp.interpreter.primitives.CountPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.DividePrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.EqualPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.FirstPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.GreaterEqualPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.GreaterPrimitive;
-import com.jedrzejewski.slisp.interpreter.primitives.LengthPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.LessEqualPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.LessPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.ListPrimitive;
@@ -71,7 +71,7 @@ public class Interpreter {
                 .put("rest", new RestPrimitive())
 
                 // Primitives for multiple types
-                .put("length", new LengthPrimitive())
+                .put("count", new CountPrimitive())
 
                 // Special forms
                 .put("set!", new SetForm())

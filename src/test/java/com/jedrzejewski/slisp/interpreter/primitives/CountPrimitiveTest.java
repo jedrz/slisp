@@ -5,13 +5,13 @@ import com.jedrzejewski.slisp.lispobjects.Num;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class LengthPrimitiveTest {
+public class CountPrimitiveTest {
 
     @Test
     public void testNonEmptyListLength() {
         Assert.assertEquals(
                 new Num(2),
-                TestUtils.evalString("(length (list 1 2))")
+                TestUtils.evalString("(count (list 1 2))")
         );
     }
 
@@ -19,7 +19,7 @@ public class LengthPrimitiveTest {
     public void testEmptyListLength() {
         Assert.assertEquals(
                 new Num(0),
-                TestUtils.evalString("(length (list))")
+                TestUtils.evalString("(count (list))")
         );
     }
 
