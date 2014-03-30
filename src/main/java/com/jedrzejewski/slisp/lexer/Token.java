@@ -9,6 +9,9 @@ public class Token {
         CLOSE_BRACKET,
         STRING_DELIMETER,
         QUOTE,
+        QUASIQUOTE,
+        UNQUOTE,
+        UNQUOTE_SPLICING,
         SYMBOL,
         NUMBER,
     }
@@ -51,6 +54,18 @@ public class Token {
 
     public static Token createQuoteToken() {
         return new Token(Type.QUOTE, "'");
+    }
+
+    public static Token createQuasiquoteToken() {
+        return new Token(Type.QUASIQUOTE, "`");
+    }
+
+    public static Token createUnquoteToken() {
+        return new Token(Type.UNQUOTE, "~");
+    }
+
+    public static Token createUnquoteSplicingToken() {
+        return new Token(Type.UNQUOTE_SPLICING, "~@");
     }
 
     public static Token createSymbolToken(String name) {

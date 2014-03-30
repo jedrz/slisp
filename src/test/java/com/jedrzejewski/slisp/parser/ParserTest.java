@@ -32,4 +32,36 @@ public class ParserTest {
         Assert.assertEquals(new Sym("a"), innerVec.get(0));
         Assert.assertEquals(new Num(2), innerVec.get(1));
     }
+
+    @Test
+    public void testQuote() {
+        Assert.assertEquals(
+                TestUtils.parseString("(quote (1 2))"),
+                TestUtils.parseString("'(1 2)")
+        );
+    }
+
+    @Test
+    public void testQuasiquote() {
+        Assert.assertEquals(
+                TestUtils.parseString("(quasiquote (1 2))"),
+                TestUtils.parseString("`(1 2)")
+        );
+    }
+
+    @Test
+    public void testUnquote() {
+        Assert.assertEquals(
+                TestUtils.parseString("(quasiquote (1 (unquote (+ 1 1))))"),
+                TestUtils.parseString("`(1 ~(+ 1 1))")
+        );
+    }
+
+    @Test
+    public void testUnquoteSplicing() {
+        Assert.assertEquals(
+                TestUtils.parseString("(quasiquote (1 (unquote-splicing (list 1 2))))"),
+                TestUtils.parseString("`(1 ~@(list 1 2))")
+        );
+    }
 }

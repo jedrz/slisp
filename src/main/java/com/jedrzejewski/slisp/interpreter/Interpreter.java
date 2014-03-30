@@ -19,6 +19,7 @@ import com.jedrzejewski.slisp.interpreter.specialforms.DoForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.FnForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.IfForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.LetForm;
+import com.jedrzejewski.slisp.interpreter.specialforms.QuoteForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.SetForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.SpecialForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.WhileForm;
@@ -80,6 +81,9 @@ public class Interpreter {
                 .put("if", new IfForm())
                 .put("while", new WhileForm())
                 .put("let", new LetForm())
+
+                // Quotations
+                .put("quote", new QuoteForm())
 
                 // nil, true, false
                 .put("nil", new Nil())

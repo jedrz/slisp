@@ -39,4 +39,41 @@ public class LexerTest {
                 Token.createCloseParenToken());
         Assert.assertEquals(expected, tokens);
     }
+
+    @Test
+    public void testQuote() {
+        Assert.assertEquals(
+                Token.createQuoteToken(),
+                getFirstToken("'")
+        );
+    }
+
+    @Test
+    public void testQuasiQuote() {
+        Assert.assertEquals(
+                Token.createQuasiquoteToken(),
+                getFirstToken("`")
+        );
+    }
+
+    @Test
+    public void testUnquote() {
+        Assert.assertEquals(
+                Token.createUnquoteToken(),
+                getFirstToken("~")
+        );
+    }
+
+    @Test
+    public void testUnquoteSplicing() {
+        Assert.assertEquals(
+                Token.createUnquoteSplicingToken(),
+                getFirstToken("~@")
+        );
+    }
+
+    private Token getFirstToken(String in) {
+        Lexer lexer = new Lexer(in);
+        return lexer.getNextToken();
+    }
 }
