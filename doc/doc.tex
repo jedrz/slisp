@@ -256,7 +256,7 @@ w~strumieniu wejściowym:
 \begin{table}[H]
   \centering
   \begin{tabular}{|p{6cm} p{6cm}|} \hline
-    symbol & \\
+    symbol & prawie wszystko \\
     napis & tekst zawarty w~podwójnych cudzysłowach \\ 
     liczba & \\ \hline
     nawias otwierający & \verb+(+ \\
@@ -270,6 +270,9 @@ w~strumieniu wejściowym:
     %tylda+małpa & \verb+~@+ \\
   \end{tabular}
 \end{table}
+
+Ponadto analizator leksykalny powinien zgłosić niepoprawne tokeny, np.
+\verb+0.0.0+.
 
 \section{Analizator składniowy}
 
@@ -287,6 +290,7 @@ Kiedy napotka token oznaczający:
   otwierającego, oznacza niepotrzebny nawias zamykający,
 \item[nawiasy kwadratowe] postępuje analogicznie jak w~przypadku nawiasów
   okrągłych.
+\item[apostrof] rozwija w~\verb+(quote ...)+.
 \end{description}
 
 \subsection{Gramatyka}
@@ -298,6 +302,9 @@ prec_form: '\'' form
 list: '(' {form} ')'
 vector: '[' {form} ']'
 atom: symbol | string | number
+symbol: ...
+string: ...
+number: ...
 \end{minted}
 %prec_form: ('\'' | '`' | '~' | '@' | '~@') form
 
