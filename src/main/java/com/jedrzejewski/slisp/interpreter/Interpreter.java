@@ -1,6 +1,7 @@
 package com.jedrzejewski.slisp.interpreter;
 
 import com.jedrzejewski.slisp.interpreter.primitives.AddPrimitive;
+import com.jedrzejewski.slisp.interpreter.primitives.ConcatPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.CountPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.DividePrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.EqualPrimitive;
@@ -67,6 +68,7 @@ public class Interpreter {
 
                 // List primitves
                 .put("list", new ListPrimitive())
+                .put("concat", new ConcatPrimitive())
                 .put("first", new FirstPrimitive())
                 .put("rest", new RestPrimitive())
 
