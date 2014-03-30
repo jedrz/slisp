@@ -15,6 +15,7 @@
 \restylefloat{figure}
 \usepackage{longtable}
 \usepackage{minted}
+\usepackage{forest}
 
 
 \newcommand{\clj}[1]{\inputminted[fontsize=\footnotesize]{clojure}{code/#1.clj}}
@@ -130,7 +131,7 @@ Czyli ,,funkcje'', których wywołanie nie powoduje obliczania argumentów.
   \clj{let}
 
 \item[eval] oblicza podane wyrażenie.
-  \clj[eval]
+  \clj{eval}
 \end{description}
 
 \subsection{Prymitywy}
@@ -311,6 +312,45 @@ number: ...
 \end{minted}
 %prec_form: ('\'' | '`' | '~' | '@' | '~@') form
 
+
+\subsection{Przykładowe drzewo rozbioru}
+
+Dla wyrażenia:
+\clj{fact}
+
+powstanie drzewo:
+
+% \Tree[.LIST \textit{defn}
+%             [.VEC  !\qsetw{-5cm} \textit{n} ]
+%             [.LIST \textit{if}
+%                    [.LIST \textit{$<=$}
+%                           \textit{n}
+%                           \textit{1} ]
+%                    \textit{1}
+%                    [.LIST \textit{*}
+%                           [.LIST \textit{fact}
+%                                  [.LIST \textit{-}
+%                                         \textit{n}
+%                                         \textit{1} ] ]
+%                           \textit{n} ] ] ]
+
+\resizebox{\linewidth}{!}{
+\begin{forest}
+[LIST [defn]
+      [VEC [n]]
+      [LIST [if]
+            [LIST [{$<=$}]
+                  [n]
+                  [1]]
+            [1]
+            [LIST [*]
+                  [n]
+                  [LIST [fact]
+                        [LIST [-]
+                              [n]
+                              [1]]]]]]
+\end{forest}
+}
 \section{Interpreter}
 
 Interpreter powinien przyjmować wyrażenie do~ewaluacji w~postaci drzewa
