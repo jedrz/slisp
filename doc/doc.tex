@@ -259,8 +259,8 @@ w~strumieniu wejściowym:
 \begin{table}[H]
   \centering
   \begin{tabular}{|p{6cm} p{6cm}|} \hline
-    symbol & prawie wszystko \\
-    napis & tekst zawarty w~podwójnych cudzysłowach \\ 
+    symbol & \\
+    napis & \\
     liczba & \\ \hline
     nawias otwierający & \verb+(+ \\
     nawias zamykający & \verb+)+ \\ \hline
@@ -314,9 +314,9 @@ quote_form: '\'' form
 list: '(' {form} ')'
 vector: '[' {form} ']'
 atom: symbol | string | number
-symbol: ...
-string: ...
-number: ...
+symbol: [a-zA-z0-9+-*/<>=]+
+string: "?*"
+number: [-+]?[0-9]*\.?[0-9]+
 \end{minted}
 %prec_form: ('\'' | '`' | '~' | '@' | '~@') form|
 
