@@ -19,6 +19,7 @@
 
 
 \newcommand{\clj}[1]{\inputminted[fontsize=\footnotesize]{clojure}{code/#1.clj}}
+\newcommand{\impl}[1]{\inputminted[fontsize=\footnotesize]{java}{impl/#1.java}}
 
 
 \author{Łukasz Jędrzejewski}
@@ -240,7 +241,7 @@ Czyli funkcje przyjmujące funkcje jako argumenty.
   w~wywoływanej funkcji powinny być zdefiniowane. Jeśli nie są, użytkownik
   zostanie powiadomiony o~niezdefiniowanym symbolu.
 \item Dopuszczalne jest użycie niezdefiniowanych funkcji w~definicji funkcji.
-\item Wszystkie symbole mogą być nadpisane.
+\item Nie można nadpisać wbudowanych symboli.
 \item Nadmiarowe nawiasy są~dopuszczalne, jednak użytkownik zostanie
   poinformowany o~tym zajściu.
 \item Brakujące nawiasy spowodują wystąpienie błędu.
@@ -249,8 +250,6 @@ Czyli funkcje przyjmujące funkcje jako argumenty.
 \item Niepoprawne użycie funkcji (zła liczba argumentów, niepoprawne typy,
   itd.) powinno zostać zasygnalizowane.
 \end{enumerate}
-
-\subsection{Niefunkcjonalne}
 
 \section{Analizator leksykalny}
 
@@ -280,6 +279,12 @@ Ponadto analizator leksykalny powinien zgłosić niepoprawne tokeny, np.
 
 Napotkanie znaku \verb+;+ oznacza początek komentarza, więc znaki po~nim
 występujące są~ignorowane do~końca linii.
+
+Interfejs analizatora leksykalnego:
+\impl{Lexer}
+
+oraz klasa \verb+Token+:
+\impl{Token}
 
 \section{Analizator składniowy}
 
@@ -313,8 +318,7 @@ symbol: ...
 string: ...
 number: ...
 \end{minted}
-%prec_form: ('\'' | '`' | '~' | '@' | '~@') form
-
+%prec_form: ('\'' | '`' | '~' | '@' | '~@') form|
 
 \subsection{Przykładowe drzewo rozbioru}
 
@@ -355,6 +359,10 @@ powstanie drzewo:
                               [1]]]]]]
 \end{forest}
 }
+
+Interfejs analizatora składniowego:
+\impl{Parser}
+
 \section{Interpreter}
 
 Interpreter powinien przyjmować wyrażenie do~ewaluacji w~postaci drzewa
@@ -376,6 +384,9 @@ nie zostaje znaleziony, wtedy należy spróbować znaleźć go~w~nadrzędnym
 zakresie. Jeśli poszukiwanie się nie powiodło, oznacza to, że~symbol jest
 niezdefiniowany.
 
+Interfejs:
+\impl{Scope}
+
 \subsection{Metoda eval}
 
 Metoda eval działa rekurencyjnie i~zwraca wynik ewaluacji podanego wyrażenia.
@@ -391,18 +402,51 @@ Kiedy otrzyma:
   argumentami.
 \end{description}
 
-\subsection{Funkcja}
+Szkielet interpretera:
+\impl{Interpreter}
+
+\subsubsection{Wywołanie prymitywu}
+
+Interfejs prymitywu (wbudowanej funkcji):
+\impl{Primitive}
+
+Wywołanie prymitywu:
+\impl{evalPrimitive}
+
+Przykładowa implementacja:
+\impl{MultiplyPrimitive}
+
+\subsubsection{Wywołanie specjalnej formy}
+
+Interfejs specjalnej formy (wbudowanej funkcji, do~której przekazywane
+argumenty nie są~obliczane):
+\impl{SpecialForm}
+Jako, że~argumenty nie są~obliczane przed wywołaniem metody \verb+call+, należy
+dać możliwość ich ewentualnego obliczenia, stąd interpreter oraz bieżący zakres
+obliczania formy są~przekazywane jako argumenty.
+
+Wywołanie:
+\impl{evalSpecialForm}
+
+Przykładowa implementacja:
+\impl{IfForm}
+
+\subsubsection{Wywołanie funkcji}
 
 Funkcja zdefiniowana za~pomocą \verb+fn+ lub \verb+defn+ jest reprezentowana
 jako obiekt zawierający listę nazw argumentów (symboli), ciało funkcji
 w~postaci jednego wyrażenia oraz zakres, w~którym funkcja została zdefiniowana.
 
-\subsubsection{Wywołanie funkcji}
+Szkielet klasy \verb+Function+:
+\impl{Function}
 
 Wywołanie zdefiniowanej przez użytkownika funkcji wymaga stworzenia nowego
 zakresu, którego zakresem nadrzędnym będzie zakres funkcji rozszerzony
 o~symbole, czyli nazwy argumentów w~definicji funkcji oraz odpowiadające
 im~wartości przekazane w~wywołaniu. Następnie jest wywoływana funkcja
 \verb+eval+ w~celu obliczenia ciała funkcji w~otoczeniu podanego zakresu.
+
+Wywołanie funkcji:
+\impl{evalFunction}
 
 \end{document}
