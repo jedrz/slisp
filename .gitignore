@@ -22,4 +22,6 @@
 *.out
 *.pdf
 *.pyg
+*.mp
+*.mps
 /doc/auto
