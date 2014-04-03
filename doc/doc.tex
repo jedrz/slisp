@@ -185,7 +185,7 @@ Czyli funkcje przyjmujące funkcje jako argumenty.
   elementem drugi.
   \clj{reduce}
 
-\item[apply] wywołuje podaną funkcję z~argumentami zawarty w~podanej liście.
+\item[apply] wywołuje podaną funkcję z~argumentami zawartymi w~podanej liście.
   \clj{apply}
 
 \end{description}
@@ -280,23 +280,16 @@ Czyli funkcje przyjmujące funkcje jako argumenty.
 Zadaniem analizatora leksykalnego jest rozpoznawanie następujących tokenów
 w~strumieniu wejściowym:
 
-\begin{table}[H]
-  \centering
-  \begin{tabular}{|p{6cm} p{6cm}|} \hline
-    symbol & \\
-    napis & \\
-    liczba & \\ \hline
-    nawias otwierający & \verb+(+ \\
-    nawias zamykający & \verb+)+ \\ \hline
-    nawias kwadratowy otwierający & \verb+[+ \\
-    nawias kwadratowy zamykający & \verb+]+ \\ \hline
-    apostrof & \verb+'+ \\ \hline
-    %inny apostrof & \verb+`+ \\
-    %tylda & \verb+~+ \\
-    %małpa & \verb+@+ \\
-    %tylda+małpa & \verb+~@+ \\
-  \end{tabular}
-\end{table}
+\begin{itemize}
+\item symbol,
+\item napis,
+\item liczba,
+\item nawias otwierający,
+\item nawias zamykający,
+\item nawias kwadratowy otwierający,
+\item nawias kwadratowy zamykający,
+\item apostrof.
+\end{itemize}
 
 Ponadto analizator leksykalny powinien zgłosić niepoprawne tokeny, np.
 \verb+0.0.0+.
