@@ -36,6 +36,21 @@ dialektów LISP-a~w~języku Java 8.
 
 \section{Konstrukcje języka}
 
+\subsection{Gramatyka języka}
+
+\begin{minted}{antlr}
+program: {form}
+form: atom | list | vector | quote_form
+quote_form: '\'' form
+list: '(' {form} ')'
+vector: '[' {form} ']'
+atom: symbol | string | number
+symbol: [a-zA-z0-9+-*/<>=]+
+string: "?.*"
+number: [-+]?[0-9]*\.?[0-9]+
+\end{minted}
+%prec_form: ('\'' | '`' | '~' | '@' | '~@') form|
+
 \subsection{Ewaluacja form}
 
 Obliczenie wyrażenia listowego polega na:
@@ -254,6 +269,12 @@ Czyli funkcje przyjmujące funkcje jako argumenty.
   itd.) powinno zostać zasygnalizowane.
 \end{enumerate}
 
+\subsection{Niefunkcjonalne}
+
+\begin{enumerate}
+\item Testy zostaną stworzone z~wykorzystaniem biblioteki \verb+JUnit+.
+\end{enumerate}
+
 \section{Analizator leksykalny}
 
 Zadaniem analizatora leksykalnego jest rozpoznawanie następujących tokenów
@@ -307,21 +328,6 @@ Kiedy napotka token oznaczający:
   okrągłych.
 \item[apostrof] rozwija w~\verb+(quote ...)+.
 \end{description}
-
-\subsection{Gramatyka}
-
-\begin{minted}{antlr}
-program: {form}
-form: atom | list | vector | quote_form
-quote_form: '\'' form
-list: '(' {form} ')'
-vector: '[' {form} ']'
-atom: symbol | string | number
-symbol: [a-zA-z0-9+-*/<>=]+
-string: "?.*"
-number: [-+]?[0-9]*\.?[0-9]+
-\end{minted}
-%prec_form: ('\'' | '`' | '~' | '@' | '~@') form|
 
 \subsection{Przykładowe drzewo rozbioru}
 
@@ -431,8 +437,11 @@ obliczania formy są~przekazywane jako argumenty.
 Wywołanie:
 \impl{evalSpecialForm}
 
-Przykładowa implementacja:
+Przykładowa implementacja formy \verb+if+:
 \impl{IfForm}
+oraz formy \verb+fn+, zwracającej funkcję anonimową zdefiniowaną przez
+użytkownika:
+\impl{FnForm}
 
 \subsubsection{Wywołanie funkcji}
 
