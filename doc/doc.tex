@@ -44,15 +44,25 @@ dialektów LISP-a~w~języku Java 8.
 \subsection{Gramatyka języka}
 
 \begin{minted}{antlr}
-program: {form}
+program: form*
 form: atom | list | vector | quote_form
 quote_form: '\'' form
-list: '(' {form} ')'
-vector: '[' {form} ']'
+list: '(' form* ')'
+vector: '[' form* ']'
 atom: symbol | string | number
 symbol: [a-zA-z0-9+-*/<>=]+
 string: "?.*"
 number: [-+]?[0-9]*\.?[0-9]+
+
+symbol_form: symbol form
+set!: '(' 'set!' symbol_form+ ')'
+fn: '(' 'fn' '[' symbol* ']' form+ ')'
+defn: '(' 'defn' symbol '[' symbol* ']' form+ ')'
+def: '(' 'def' symbol form ')'
+if: '(' 'if' form form form* ')'
+while: '(' 'while' form form* ')'
+do: '(' 'do' form+ ')'
+let: '(' 'let' '[' symbol_form+ ']' form+ ')'
 \end{minted}
 %prec_form: ('\'' | '`' | '~' | '@' | '~@') form|
 
@@ -393,6 +403,11 @@ niezdefiniowany.
 
 Interfejs:
 \impl{Scope}
+
+\subsection{Sprawdzenie poprawności użycia funkcji}
+
+Drzewo uzyskane w~wyniku działania analizatora składniowego jest przeglądane pod
+kątem poprawności użytych funkcji przed obliczaniem wyrażenia.
 
 \subsection{Metoda eval}
 
