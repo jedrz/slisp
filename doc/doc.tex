@@ -18,8 +18,13 @@
 \usepackage{forest}
 \usepackage[shellescape,latex]{gmp}
 
-\newcommand{\clj}[1]{\inputminted[fontsize=\footnotesize]{clojure}{code/#1.clj}}
-\newcommand{\impl}[1]{\inputminted[fontsize=\footnotesize]{java}{impl/#1.java}}
+\newcommand{\clj}[1]{
+\inputminted[fontsize=\footnotesize,frame=single,samepage=true]{clojure}{code/#1.clj}
+}
+
+\newcommand{\impl}[1]{
+\inputminted[fontsize=\footnotesize,frame=single,samepage=true]{java}{impl/#1.java}
+}
 
 \author{Łukasz Jędrzejewski}
 \title{Techniki kompilacji -- projekt wstępny}
