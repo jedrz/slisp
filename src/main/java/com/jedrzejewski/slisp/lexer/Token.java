@@ -7,7 +7,6 @@ public class Token {
         CLOSE_PAREN,
         OPEN_BRACKET,
         CLOSE_BRACKET,
-        STRING_DELIMETER,
         QUOTE,
         SYMBOL,
         NUMBER,
@@ -43,10 +42,6 @@ public class Token {
 
     public static Token createCloseBracketToken() {
         return new Token(Type.CLOSE_BRACKET, "]");
-    }
-
-    public static Token createStringDelimiterToken() {
-        return new Token(Type.STRING_DELIMETER, "\"");
     }
 
     public static Token createQuoteToken() {

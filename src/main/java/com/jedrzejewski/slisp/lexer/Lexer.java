@@ -34,8 +34,6 @@ public class Lexer {
                 return Token.createCloseBracketToken();
             case '\'':
                 return Token.createQuoteToken();
-            case '\"':
-                return Token.createStringDelimiterToken();
         }
 
         if (isNumberCh(c)) {

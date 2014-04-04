@@ -10,7 +10,7 @@ public class LexerTest {
 
     @Test
     public void testNextToken() {
-        Lexer lexer = new Lexer("(fn (zero? 0) (+ 2 3)) [\"str\"] '()");
+        Lexer lexer = new Lexer("(fn (zero? 0) (+ 2 3)) [sym] '()");
         List<Token> tokens = new LinkedList<>();
         Token token;
         while ((token = lexer.getNextToken()) != null) {
@@ -30,9 +30,7 @@ public class LexerTest {
                 Token.createCloseParenToken(),
                 Token.createCloseParenToken(),
                 Token.createOpenBracketToken(),
-                Token.createStringDelimiterToken(),
-                Token.createSymbolToken("str"),
-                Token.createStringDelimiterToken(),
+                Token.createSymbolToken("sym"),
                 Token.createCloseBracketToken(),
                 Token.createQuoteToken(),
                 Token.createOpenParenToken(),
