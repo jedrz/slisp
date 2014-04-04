@@ -34,4 +34,9 @@ public class Function implements LispObject {
     public Scope getScope() {
         return scope;
     }
+
+    @Override
+    public String toString() {
+        return "fn";
+    }
 }
