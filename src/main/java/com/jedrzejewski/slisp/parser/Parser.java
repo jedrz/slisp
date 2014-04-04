@@ -1,5 +1,6 @@
 package com.jedrzejewski.slisp.parser;
 
+import com.jedrzejewski.slisp.BaseException;
 import com.jedrzejewski.slisp.lexer.Lexer;
 import com.jedrzejewski.slisp.lexer.Token;
 import com.jedrzejewski.slisp.lispobjects.LispObject;
@@ -7,14 +8,18 @@ import com.jedrzejewski.slisp.lispobjects.Lst;
 import com.jedrzejewski.slisp.lispobjects.Num;
 import com.jedrzejewski.slisp.lispobjects.Sym;
 import com.jedrzejewski.slisp.lispobjects.Vec;
+import com.jedrzejewski.slisp.parser.exceptions.MissingCloseBracketException;
+import com.jedrzejewski.slisp.parser.exceptions.MissingCloseParenException;
+import com.jedrzejewski.slisp.parser.exceptions.UnexpectedCloseBracketException;
+import com.jedrzejewski.slisp.parser.exceptions.UnexpectedCloseParenException;
+import com.jedrzejewski.slisp.parser.exceptions.UnexpectedEOFException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Function;
 
 public class Parser {
 
     private Lexer lexer;
-    private Map<Token.Type, Function<Token, LispObject>> tokenTypeMethodMap;
+    private Map<Token.Type, TokenParser> tokenTypeMethodMap;
 
     public Parser(Lexer lexer) {
         this.lexer = lexer;
@@ -28,7 +33,7 @@ public class Parser {
         tokenTypeMethodMap.put(Token.Type.QUOTE, this::parseQuote);
     }
 
-    public LispObject parse() {
+    public LispObject parse() throws BaseException {
         Token token = lexer.getNextToken();
         if (token == null) {
             return null;
@@ -37,28 +42,32 @@ public class Parser {
         }
     }
 
-    private LispObject parseToken(Token token) {
-        Function<Token, LispObject> method
-                = tokenTypeMethodMap.get(token.getType());
-        if (method != null) {
-            return method.apply(token);
+    private LispObject parseToken(Token token) throws BaseException {
+        if (token == null) {
+            throw new UnexpectedEOFException();
+        }
+        TokenParser tokenParser = tokenTypeMethodMap.get(token.getType());
+        if (tokenParser != null) {
+            return tokenParser.parse(token);
         } else {
             throw new RuntimeException("Unhandled token!");
         }
     }
 
-    private LispObject parseQuote(Token token) {
+    private LispObject parseQuote(Token token) throws BaseException {
         Lst quote = new Lst();
         quote.add(new Sym("quote"));
         quote.add(parseToken(lexer.getNextToken()));
         return quote;
     }
 
-    private LispObject parseOpenParen(Token token) {
+    private LispObject parseOpenParen(Token token) throws BaseException {
         Lst lst = new Lst();
         while (true) {
             token = lexer.getNextToken();
-            if (token.getType() == Token.Type.CLOSE_PAREN) {
+            if (token == null) {
+                throw new MissingCloseParenException();
+            } else if (token.getType() == Token.Type.CLOSE_PAREN) {
                 return lst;
             } else {
                 lst.add(parseToken(token));
@@ -66,15 +75,17 @@ public class Parser {
         }
     }
 
-    private LispObject parseCloseParen(Token token) {
-        return null; // TODO: rzuć wyjątek
+    private LispObject parseCloseParen(Token token) throws BaseException {
+        throw new UnexpectedCloseParenException();
     }
 
-    private LispObject parseOpenBracket(Token token) {
+    private LispObject parseOpenBracket(Token token) throws BaseException {
         Vec vec = new Vec();
         while (true) {
             token = lexer.getNextToken();
-            if (token.getType() == Token.Type.CLOSE_BRACKET) {
+            if (token == null) {
+                throw new MissingCloseBracketException();
+            } else if (token.getType() == Token.Type.CLOSE_BRACKET) {
                 return vec;
             } else {
                 vec.add(parseToken(token));
@@ -82,8 +93,8 @@ public class Parser {
         }
     }
 
-    private LispObject parseCloseBracket(Token token) {
-        return null; // TODO: rzuć wyjątek
+    private LispObject parseCloseBracket(Token token) throws BaseException {
+        throw new UnexpectedCloseBracketException();
     }
 
     private LispObject parseSymbol(Token token) {
@@ -92,5 +103,9 @@ public class Parser {
 
     private LispObject parseNumber(Token token) {
         return new Num(token.getString());
+    }
+
+    private interface TokenParser {
+        LispObject parse(Token token) throws BaseException;
     }
 }

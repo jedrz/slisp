@@ -1,10 +1,17 @@
 package com.jedrzejewski.slisp.parser;
 
+import com.jedrzejewski.slisp.BaseException;
 import com.jedrzejewski.slisp.TestUtils;
+import com.jedrzejewski.slisp.lexer.Lexer;
 import com.jedrzejewski.slisp.lispobjects.Lst;
 import com.jedrzejewski.slisp.lispobjects.Num;
 import com.jedrzejewski.slisp.lispobjects.Sym;
 import com.jedrzejewski.slisp.lispobjects.Vec;
+import com.jedrzejewski.slisp.parser.exceptions.MissingCloseBracketException;
+import com.jedrzejewski.slisp.parser.exceptions.MissingCloseParenException;
+import com.jedrzejewski.slisp.parser.exceptions.UnexpectedCloseBracketException;
+import com.jedrzejewski.slisp.parser.exceptions.UnexpectedCloseParenException;
+import com.jedrzejewski.slisp.parser.exceptions.UnexpectedEOFException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -39,5 +46,36 @@ public class ParserTest {
                 TestUtils.parseString("(quote (1 2))"),
                 TestUtils.parseString("'(1 2)")
         );
+    }
+
+    @Test(expected = MissingCloseParenException.class)
+    public void testMissingCloseParen() throws Exception {
+        parseWithException("(");
+    }
+
+    @Test(expected = MissingCloseBracketException.class)
+    public void testMissingCloseBracket() throws Exception {
+        parseWithException("[");
+    }
+
+    @Test(expected = UnexpectedCloseParenException.class)
+    public void testUnexpectedCloseParen() throws Exception {
+        parseWithException("())");
+    }
+
+    @Test(expected = UnexpectedCloseBracketException.class)
+    public void testUnexpectedCloseBracket() throws Exception {
+        parseWithException("[]]");
+    }
+
+    @Test(expected = UnexpectedEOFException.class)
+    public void testUnexpectedEOF() throws Exception {
+        parseWithException("'");
+    }
+
+    private static void parseWithException(String in) throws BaseException {
+        Parser parser = new Parser(new Lexer(in));
+        while (parser.parse() != null) {
+        }
     }
 }

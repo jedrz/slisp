@@ -10,7 +10,11 @@ public class TestUtils {
     public static LispObject parseString(String input) {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
-        return parser.parse();
+        try {
+            return parser.parse();
+        } catch (BaseException e) {
+            throw new RuntimeException("Tests are broken!");
+        }
     }
 
     public static LispObject evalString(String input, Interpreter interpreter) {

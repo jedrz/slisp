@@ -1,5 +1,6 @@
 package com.jedrzejewski.slisp.interpreter;
 
+import com.jedrzejewski.slisp.BaseException;
 import com.jedrzejewski.slisp.interpreter.primitives.AddPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.ConcatPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.CountPrimitive;
@@ -109,8 +110,12 @@ public class Interpreter {
         Lexer lexer = new Lexer(builtinsReader);
         Parser parser = new Parser(lexer);
         LispObject code;
-        while ((code = parser.parse()) != null) {
-            eval(code);
+        try {
+            while ((code = parser.parse()) != null) {
+                eval(code);
+            }
+        } catch (BaseException e) {
+            throw new RuntimeException("Built-in functions are broken!");
         }
     }
 
