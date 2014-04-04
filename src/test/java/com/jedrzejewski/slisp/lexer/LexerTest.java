@@ -48,30 +48,6 @@ public class LexerTest {
         );
     }
 
-    @Test
-    public void testQuasiQuote() {
-        Assert.assertEquals(
-                Token.createQuasiquoteToken(),
-                getFirstToken("`")
-        );
-    }
-
-    @Test
-    public void testUnquote() {
-        Assert.assertEquals(
-                Token.createUnquoteToken(),
-                getFirstToken("~")
-        );
-    }
-
-    @Test
-    public void testUnquoteSplicing() {
-        Assert.assertEquals(
-                Token.createUnquoteSplicingToken(),
-                getFirstToken("~@")
-        );
-    }
-
     private Token getFirstToken(String in) {
         Lexer lexer = new Lexer(in);
         return lexer.getNextToken();

@@ -40,28 +40,4 @@ public class ParserTest {
                 TestUtils.parseString("'(1 2)")
         );
     }
-
-    @Test
-    public void testQuasiquote() {
-        Assert.assertEquals(
-                TestUtils.parseString("(quasiquote (1 2))"),
-                TestUtils.parseString("`(1 2)")
-        );
-    }
-
-    @Test
-    public void testUnquote() {
-        Assert.assertEquals(
-                TestUtils.parseString("(quasiquote (1 (unquote (+ 1 1))))"),
-                TestUtils.parseString("`(1 ~(+ 1 1))")
-        );
-    }
-
-    @Test
-    public void testUnquoteSplicing() {
-        Assert.assertEquals(
-                TestUtils.parseString("(quasiquote (1 (unquote-splicing (list 1 2))))"),
-                TestUtils.parseString("`(1 ~@(list 1 2))")
-        );
-    }
 }

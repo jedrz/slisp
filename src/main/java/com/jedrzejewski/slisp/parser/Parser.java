@@ -15,7 +15,6 @@ public class Parser {
 
     private Lexer lexer;
     private Map<Token.Type, Function<Token, LispObject>> tokenTypeMethodMap;
-    boolean shouldUnquote = false;
 
     public Parser(Lexer lexer) {
         this.lexer = lexer;
@@ -27,9 +26,6 @@ public class Parser {
         tokenTypeMethodMap.put(Token.Type.SYMBOL, this::parseSymbol);
         tokenTypeMethodMap.put(Token.Type.NUMBER, this::parseNumber);
         tokenTypeMethodMap.put(Token.Type.QUOTE, this::parseQuote);
-        tokenTypeMethodMap.put(Token.Type.QUASIQUOTE, this::parseQuasiquote);
-        tokenTypeMethodMap.put(Token.Type.UNQUOTE, this::parseUnquote);
-        tokenTypeMethodMap.put(Token.Type.UNQUOTE_SPLICING, this::parseUnquoteSplicing);
     }
 
     public LispObject parse() {
@@ -56,39 +52,6 @@ public class Parser {
         quote.add(new Sym("quote"));
         quote.add(parseToken(lexer.getNextToken()));
         return quote;
-    }
-
-    private LispObject parseQuasiquote(Token token) {
-        Lst quasiQuote = new Lst();
-        quasiQuote.add(new Sym("quasiquote"));
-        shouldUnquote = true;
-        quasiQuote.add(parseToken(lexer.getNextToken()));
-        shouldUnquote = false;
-        return quasiQuote;
-    }
-
-    private LispObject parseUnquote(Token token) {
-        if (shouldUnquote) {
-            Lst unqoute = new Lst();
-            unqoute.add(new Sym("unquote"));
-            unqoute.add(parseToken(lexer.getNextToken()));
-            return unqoute;
-        } else {
-            // TODO: syntax error
-            return null;
-        }
-    }
-
-    private LispObject parseUnquoteSplicing(Token token) {
-        if (shouldUnquote) {
-            Lst unqouteSplicing = new Lst();
-            unqouteSplicing.add(new Sym("unquote-splicing"));
-            unqouteSplicing.add(parseToken(lexer.getNextToken()));
-            return unqouteSplicing;
-        } else {
-            // TODO: syntax error
-            return null;
-        }
     }
 
     private LispObject parseOpenParen(Token token) {

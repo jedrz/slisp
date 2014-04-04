@@ -32,13 +32,12 @@ public class Lexer {
                 return Token.createOpenBracketToken();
             case ']':
                 return Token.createCloseBracketToken();
+            case '\'':
+                return Token.createQuoteToken();
             case '\"':
                 return Token.createStringDelimiterToken();
         }
 
-        if (isQuotation(c)) {
-            return getQuotation(c);
-        }
         if (isNumberCh(c)) {
             return getNumber(c);
         }
@@ -48,28 +47,6 @@ public class Lexer {
         }
 
         return null;
-    }
-
-    private Token getQuotation(int c) {
-        // Handle ~@ at first.
-        int maybeAt = getNextCh();
-        if (c == '~' && maybeAt == '@') {
-            return Token.createUnquoteSplicingToken();
-        }
-        ungetCh(maybeAt);
-        switch (c) {
-            case '\'':
-                return Token.createQuoteToken();
-            case '`':
-                return Token.createQuasiquoteToken();
-            case '~':
-                return Token.createUnquoteToken();
-        }
-        return null;
-    }
-
-    private boolean isQuotation(int c) {
-        return c == '\'' || c == '`' || c == '~' || c == '@';
     }
 
     private Token getSymbol(int c) {
