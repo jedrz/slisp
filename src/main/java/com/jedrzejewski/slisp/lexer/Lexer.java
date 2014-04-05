@@ -1,5 +1,7 @@
 package com.jedrzejewski.slisp.lexer;
 
+import com.jedrzejewski.slisp.lexer.exceptions.LexerException;
+import com.jedrzejewski.slisp.lexer.exceptions.UnknownTokenException;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
@@ -18,7 +20,7 @@ public class Lexer {
         this(new StringReader(in));
     }
 
-    public Token getNextToken() {
+    public Token getNextToken() throws LexerException {
         skipWhitespace();
 
         int c = getNextCh();
@@ -44,6 +46,9 @@ public class Lexer {
             return getSymbol(c);
         }
 
+        if (c != -1) {
+            throw new UnknownTokenException();
+        }
         return null;
     }
 

@@ -1,5 +1,7 @@
 package com.jedrzejewski.slisp.lexer;
 
+import com.jedrzejewski.slisp.lexer.exceptions.LexerException;
+import com.jedrzejewski.slisp.lexer.exceptions.UnknownTokenException;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,7 +11,7 @@ import org.junit.Test;
 public class LexerTest {
 
     @Test
-    public void testNextToken() {
+    public void testNextToken() throws LexerException {
         Lexer lexer = new Lexer("(fn (zero? 0) (+ 2 3)) [sym] '()");
         List<Token> tokens = new LinkedList<>();
         Token token;
@@ -39,14 +41,19 @@ public class LexerTest {
     }
 
     @Test
-    public void testQuote() {
+    public void testQuote() throws LexerException {
         Assert.assertEquals(
                 Token.createQuoteToken(),
                 getFirstToken("'")
         );
     }
 
-    private Token getFirstToken(String in) {
+    @Test(expected = UnknownTokenException.class)
+    public void unknownToken() throws LexerException {
+        getFirstToken("`");
+    }
+
+    private Token getFirstToken(String in) throws LexerException {
         Lexer lexer = new Lexer(in);
         return lexer.getNextToken();
     }
