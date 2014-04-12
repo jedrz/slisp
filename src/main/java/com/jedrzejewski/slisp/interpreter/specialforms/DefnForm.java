@@ -1,15 +1,15 @@
 package com.jedrzejewski.slisp.interpreter.specialforms;
 
-import com.jedrzejewski.slisp.interpreter.Interpreter;
+import com.jedrzejewski.slisp.interpreter.Scope;
 import com.jedrzejewski.slisp.lispobjects.LispObject;
 import com.jedrzejewski.slisp.lispobjects.Lst;
 import com.jedrzejewski.slisp.lispobjects.Sym;
 import java.util.List;
 
-public class DefnForm implements SpecialForm {
+public class DefnForm extends SpecialForm {
 
     @Override
-    public LispObject call(List<LispObject> args, Interpreter.Evaluator evaluator) {
+    public LispObject call(List<LispObject> args, Scope scope) {
         // TODO: don't use set!
         Lst setFnForm = new Lst();
         setFnForm.add(new Sym("set!"));
@@ -18,6 +18,6 @@ public class DefnForm implements SpecialForm {
         fnForm.add(new Sym("fn"));
         fnForm.addAll(args.subList(1, args.size()));
         setFnForm.add(fnForm);
-        return evaluator.eval(setFnForm);
+        return setFnForm.eval(scope);
     }
 }

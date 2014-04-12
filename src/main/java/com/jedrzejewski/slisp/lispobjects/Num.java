@@ -1,5 +1,7 @@
 package com.jedrzejewski.slisp.lispobjects;
 
+import com.jedrzejewski.slisp.interpreter.Scope;
+
 public class Num implements LispObject {
 
     private double value;
@@ -37,5 +39,10 @@ public class Num implements LispObject {
     public int hashCode() {
         long temp = Double.doubleToLongBits(value);
         return (int) (temp ^ (temp >>> 32));
+    }
+
+    @Override
+    public LispObject eval(Scope scope) {
+        return this;
     }
 }

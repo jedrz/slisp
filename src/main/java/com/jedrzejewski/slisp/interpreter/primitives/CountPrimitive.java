@@ -5,7 +5,7 @@ import com.jedrzejewski.slisp.lispobjects.Lst;
 import com.jedrzejewski.slisp.lispobjects.Num;
 import java.util.List;
 
-public class CountPrimitive implements Primitive {
+public class CountPrimitive extends Primitive {
 
     @Override
     public LispObject call(List<LispObject> args) {

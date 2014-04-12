@@ -3,28 +3,28 @@ package com.jedrzejewski.slisp.lispobjects;
 import com.jedrzejewski.slisp.interpreter.Scope;
 import java.util.List;
 
-public class Function implements LispObject {
+public class Function extends Callable {
 
-    private List<Sym> args;
+    private List<Sym> argNames;
     private LispObject body;
     private Scope scope;
 
-    public Function(List<Sym> args, LispObject body, Scope scope) {
-        this.args = args;
+    public Function(List<Sym> argNames, LispObject body, Scope scope) {
+        this.argNames = argNames;
         this.body = body;
         this.scope = scope;
     }
 
-    public Function(List<Sym> args, List<LispObject> bodyList, Scope scope) {
-        this(args, new Sym("") /* FIXME: okropne */, scope);
+    public Function(List<Sym> argNames, List<LispObject> bodyList, Scope scope) {
+        this(argNames, new Sym("") /* FIXME: okropne */, scope);
         Lst wrappedBody = new Lst();
         wrappedBody.add(new Sym("do"));
         wrappedBody.addAll(bodyList);
         body = wrappedBody;
     }
 
-    public List<Sym> getArgs() {
-        return args;
+    public List<Sym> getArgNames() {
+        return argNames;
     }
 
     public LispObject getBody() {
@@ -38,5 +38,14 @@ public class Function implements LispObject {
     @Override
     public String toString() {
         return "fn";
+    }
+
+    @Override
+    public LispObject call(List<LispObject> args, Scope scope) {
+        Scope wrapperScope = new Scope(getScope());
+        for (int i = 0; i < args.size(); ++i) {
+            wrapperScope.put(getArgNames().get(i), args.get(i).eval(scope));
+        }
+        return getBody().eval(wrapperScope);
     }
 }

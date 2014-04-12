@@ -5,7 +5,7 @@ import com.jedrzejewski.slisp.lispobjects.Lst;
 import com.jedrzejewski.slisp.lispobjects.Nil;
 import java.util.List;
 
-public class FirstPrimitive implements Primitive {
+public class FirstPrimitive extends Primitive {
 
     @Override
     public LispObject call(List<LispObject> args) {

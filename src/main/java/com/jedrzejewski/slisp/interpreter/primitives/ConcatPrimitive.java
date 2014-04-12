@@ -4,7 +4,7 @@ import com.jedrzejewski.slisp.lispobjects.LispObject;
 import com.jedrzejewski.slisp.lispobjects.Lst;
 import java.util.List;
 
-public class ConcatPrimitive implements Primitive {
+public class ConcatPrimitive extends Primitive {
 
     @Override
     public LispObject call(List<LispObject> args) {

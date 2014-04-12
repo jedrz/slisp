@@ -1,5 +1,7 @@
 package com.jedrzejewski.slisp.lispobjects;
 
+import com.jedrzejewski.slisp.interpreter.Scope;
+
 public class Sym implements LispObject {
 
     private String name;
@@ -32,5 +34,10 @@ public class Sym implements LispObject {
     @Override
     public int hashCode() {
         return name.hashCode();
+    }
+
+    @Override
+    public LispObject eval(Scope scope) {
+        return scope.find(this);
     }
 }

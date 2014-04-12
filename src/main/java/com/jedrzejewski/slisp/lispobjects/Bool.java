@@ -1,5 +1,7 @@
 package com.jedrzejewski.slisp.lispobjects;
 
+import com.jedrzejewski.slisp.interpreter.Scope;
+
 public class Bool implements LispObject {
 
     private boolean value;
@@ -49,5 +51,10 @@ public class Bool implements LispObject {
     @Override
     public int hashCode() {
         return (value ? 1 : 0);
+    }
+
+    @Override
+    public LispObject eval(Scope scope) {
+        return this;
     }
 }

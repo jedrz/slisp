@@ -1,15 +1,14 @@
 package com.jedrzejewski.slisp.interpreter.specialforms;
 
-import com.jedrzejewski.slisp.interpreter.Interpreter;
-import com.jedrzejewski.slisp.interpreter.primitives.Primitive;
+import com.jedrzejewski.slisp.interpreter.Scope;
 import com.jedrzejewski.slisp.lispobjects.LispObject;
 import java.util.List;
 
-public class EvalForm implements SpecialForm {
+public class EvalForm extends SpecialForm {
 
     @Override
-    public LispObject call(List<LispObject> args, Interpreter.Evaluator evaluator) {
+    public LispObject call(List<LispObject> args, Scope scope) {
         // TODO: only one arg.
-        return evaluator.eval(evaluator.eval(args.get(0))); // OMG
+        return args.get(0).eval(scope).eval(scope); // OMG
     }
 }
