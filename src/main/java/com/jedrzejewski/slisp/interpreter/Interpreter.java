@@ -13,6 +13,7 @@ import com.jedrzejewski.slisp.interpreter.primitives.LessEqualPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.LessPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.ListPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.MinusPrimitive;
+import com.jedrzejewski.slisp.interpreter.primitives.ModuloPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.MultiplyPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.RestPrimitive;
 import com.jedrzejewski.slisp.interpreter.specialforms.DefnForm;
@@ -50,6 +51,7 @@ public class Interpreter {
                 .put("-", new MinusPrimitive())
                 .put("*", new MultiplyPrimitive())
                 .put("/", new DividePrimitive())
+                .put("%", new ModuloPrimitive())
                 .put("=", new EqualPrimitive())
                 .put("<", new LessPrimitive())
                 .put("<=", new LessEqualPrimitive())
