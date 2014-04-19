@@ -49,4 +49,12 @@ public class BuiltinsTest {
                 TestUtils.evalString("(conj '(1 2) 3)")
         );
     }
+
+    @Test
+    public void testMap() {
+        Assert.assertEquals(
+                TestUtils.evalString("'(1 4 9 16)"),
+                TestUtils.evalString("(map (fn [n] (* n n)) '(1 2 3 4))")
+        );
+    }
 }
