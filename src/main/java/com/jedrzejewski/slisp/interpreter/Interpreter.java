@@ -6,6 +6,7 @@ import com.jedrzejewski.slisp.interpreter.primitives.ConcatPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.CountPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.DividePrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.EqualPrimitive;
+import com.jedrzejewski.slisp.interpreter.primitives.EqualsPrimitve;
 import com.jedrzejewski.slisp.interpreter.primitives.FirstPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.GreaterEqualPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.GreaterPrimitive;
@@ -65,6 +66,7 @@ public class Interpreter {
                 .put("rest", new RestPrimitive())
 
                 // Primitives for multiple types
+                .put("equals", new EqualsPrimitve())
                 .put("count", new CountPrimitive())
 
                 // Special forms
