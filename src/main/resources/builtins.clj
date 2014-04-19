@@ -19,5 +19,10 @@
       (cons (first lst) (filter f (rest lst)))
       (filter f (rest lst)))))
 
+(defn reduce [f lst acc]
+  (if (empty? lst)
+    acc
+    (reduce f (rest lst) (f acc (first lst)))))
+
 (defn zero? [n]
   (= n 0))

@@ -68,4 +68,15 @@ public class BuiltinsTest {
                                      + "(filter even? '(1 2 3 4 5 6 7 8)))")
         );
     }
+
+    @Test
+    public void testReduce() {
+        Assert.assertEquals(
+                new Num(15),
+                TestUtils.evalString("(reduce (fn [acc n]\n"
+                                     + "(+ acc (* n n)))\n"
+                                     + "'(1 2 3)\n"
+                                     + "1)")
+        );
+    }
 }
