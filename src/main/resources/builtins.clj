@@ -12,5 +12,12 @@
     '()
     (cons (f (first lst)) (map f (rest lst)))))
 
+(defn filter [f lst]
+  (if (empty? lst)
+    '()
+    (if (f (first lst))
+      (cons (first lst) (filter f (rest lst)))
+      (filter f (rest lst)))))
+
 (defn zero? [n]
   (= n 0))

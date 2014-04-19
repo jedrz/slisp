@@ -57,4 +57,15 @@ public class BuiltinsTest {
                 TestUtils.evalString("(map (fn [n] (* n n)) '(1 2 3 4))")
         );
     }
+
+    @Test
+    public void testFilter() {
+        Assert.assertEquals(
+                TestUtils.evalString("'(2 4 6 8)"),
+                TestUtils.evalString("(do"
+                                     + "(defn even? [n]"
+                                     + "(= (% n 2) 0))"
+                                     + "(filter even? '(1 2 3 4 5 6 7 8)))")
+        );
+    }
 }
