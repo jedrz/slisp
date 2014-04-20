@@ -24,5 +24,10 @@
     acc
     (reduce f (rest lst) (f acc (first lst)))))
 
+(defn not [arg]
+  (if arg
+    false
+    true))
+
 (defn zero? [n]
   (= n 0))

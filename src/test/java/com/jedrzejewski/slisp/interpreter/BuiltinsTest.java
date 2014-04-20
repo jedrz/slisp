@@ -79,4 +79,16 @@ public class BuiltinsTest {
                                      + "1)")
         );
     }
+
+    @Test
+    public void testNot() {
+        Assert.assertEquals(
+                new Bool(true),
+                TestUtils.evalString("(not nil)")
+        );
+        Assert.assertEquals(
+                new Bool(false),
+                TestUtils.evalString("(not 'symbol)")
+        );
+    }
 }
