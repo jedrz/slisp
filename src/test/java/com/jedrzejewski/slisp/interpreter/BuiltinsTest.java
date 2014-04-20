@@ -91,4 +91,22 @@ public class BuiltinsTest {
                 TestUtils.evalString("(not 'symbol)")
         );
     }
+
+    @Test
+    public void testAnd() {
+        Assert.assertEquals(
+                new Bool(false),
+                TestUtils.evalString("(and true false)")
+        );
+
+        Assert.assertEquals(
+                new Num(2),
+                TestUtils.evalString("(and 1 2)")
+        );
+
+        Assert.assertEquals(
+                new Num(1),
+                TestUtils.evalString("(and 1)")
+        );
+    }
 }

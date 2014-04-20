@@ -29,5 +29,12 @@
     false
     true))
 
+(defn and [arg & rst]
+  (if (empty? rst)
+    arg
+    (if arg
+      (apply and (first rst) (rest rst))
+      false)))
+
 (defn zero? [n]
   (= n 0))
