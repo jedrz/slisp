@@ -19,6 +19,7 @@ import com.jedrzejewski.slisp.interpreter.primitives.MinusPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.ModuloPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.MultiplyPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.RestPrimitive;
+import com.jedrzejewski.slisp.interpreter.primitives.SymbolPredicatePrimitive;
 import com.jedrzejewski.slisp.interpreter.specialforms.DefnForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.DoForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.FnForm;
@@ -69,6 +70,9 @@ public class Interpreter {
                 // Primitives for multiple types
                 .put("equals", new EqualsPrimitive())
                 .put("count", new CountPrimitive())
+
+                // Types predicates
+                .put("symbol?", new SymbolPredicatePrimitive())
 
                 // Misc
                 .put("eval", new EvalPrimitive())
