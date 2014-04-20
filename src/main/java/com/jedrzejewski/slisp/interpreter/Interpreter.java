@@ -14,6 +14,7 @@ import com.jedrzejewski.slisp.interpreter.primitives.GreaterEqualPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.GreaterPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.LessEqualPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.LessPrimitive;
+import com.jedrzejewski.slisp.interpreter.primitives.ListPredicatePrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.ListPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.MinusPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.ModuloPrimitive;
@@ -73,6 +74,7 @@ public class Interpreter {
 
                 // Types predicates
                 .put("symbol?", new SymbolPredicatePrimitive())
+                .put("list?", new ListPredicatePrimitive())
 
                 // Misc
                 .put("eval", new EvalPrimitive())
