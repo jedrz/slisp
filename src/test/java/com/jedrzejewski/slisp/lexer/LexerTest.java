@@ -1,5 +1,6 @@
 package com.jedrzejewski.slisp.lexer;
 
+import com.jedrzejewski.slisp.lexer.exceptions.DoubleDotException;
 import com.jedrzejewski.slisp.lexer.exceptions.LexerException;
 import com.jedrzejewski.slisp.lexer.exceptions.UnknownTokenException;
 import java.util.Arrays;
@@ -46,6 +47,36 @@ public class LexerTest {
                 Token.createQuoteToken(),
                 getFirstToken("'")
         );
+    }
+
+    @Test
+    public void testValidNumbers() throws Exception {
+        Assert.assertEquals(
+                Token.createNumberToken("1.1"),
+                getFirstToken("1.1")
+        );
+        Assert.assertEquals(
+                Token.createNumberToken(".1"),
+                getFirstToken(".1")
+        );
+        Assert.assertEquals(
+                Token.createNumberToken("1."),
+                getFirstToken("1.")
+        );
+        Assert.assertEquals(
+                Token.createNumberToken("00."),
+                getFirstToken("00.")
+        );
+    }
+
+    @Test(expected = UnknownTokenException.class)
+    public void testNonValidNumbers() throws Exception {
+        getFirstToken(".");
+    }
+
+    @Test(expected = DoubleDotException.class)
+    public void testDoubleDotInNumber() throws Exception {
+        getFirstToken("1.0.1");
     }
 
     @Test(expected = UnknownTokenException.class)

@@ -48,6 +48,26 @@ public class ParserTest {
         );
     }
 
+    @Test
+    public void testNumbers() {
+        Assert.assertEquals(
+                new Num(1.1),
+                TestUtils.parseString("1.1")
+        );
+        Assert.assertEquals(
+                new Num(0.1),
+                TestUtils.parseString(".1")
+        );
+        Assert.assertEquals(
+                new Num(1),
+                TestUtils.parseString("1.")
+        );
+        Assert.assertEquals(
+                new Num(0),
+                TestUtils.parseString("00.")
+        );
+    }
+
     @Test(expected = MissingCloseParenException.class)
     public void testMissingCloseParen() throws Exception {
         parseWithException("(");

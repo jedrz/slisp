@@ -1,5 +1,6 @@
 package com.jedrzejewski.slisp.lexer;
 
+import com.jedrzejewski.slisp.lexer.exceptions.DoubleDotException;
 import com.jedrzejewski.slisp.lexer.exceptions.LexerException;
 import com.jedrzejewski.slisp.lexer.exceptions.UnknownTokenException;
 import java.io.IOException;
@@ -68,17 +69,31 @@ public class Lexer {
                 || c == '=' || c == '>' || c == '<';
     }
 
-    private Token getNumber(int c) {
+    private Token getNumber(int c) throws LexerException {
+        boolean wasDot = false;
         String number = Character.toString((char) c);
-        while ((c = getNextCh()) != -1 && isNumberCh(c)) {
-            number += Character.toString((char) c);
+        while ((c = getNextCh()) != -1) {
+            if (c == '.' && wasDot) {
+                throw new DoubleDotException();
+            }
+            if (isNumberCh(c) || (!wasDot && c == '.')) {
+                number += Character.toString((char) c);
+                if (c == '.') {
+                    wasDot = true;
+                }
+            } else {
+                break;
+            }
         }
         ungetCh(c);
+        if (number.equals(".")) {
+            throw new UnknownTokenException();
+        }
         return Token.createNumberToken(number);
     }
 
     private boolean isNumberCh(int c) {
-        return Character.isDigit(c);
+        return Character.isDigit(c) || c == '.';
     }
 
     private int getNextCh() {
