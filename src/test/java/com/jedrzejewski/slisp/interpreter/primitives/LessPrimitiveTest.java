@@ -14,8 +14,9 @@ public class LessPrimitiveTest {
     public void testArgsLesser() {
         Assert.assertEquals(
                 new Bool(true),
-                lessPrimitive.call(
-                        Arrays.asList(new Num(1), new Num(2), new Num(3))
+                lessPrimitive.callWithEvaluatedArgs(
+                        Arrays.asList(new Num(1), new Num(2), new Num(3)),
+                        null
                 )
         );
     }
@@ -24,8 +25,9 @@ public class LessPrimitiveTest {
     public void testArgsNotLesser() {
         Assert.assertEquals(
                 new Bool(false),
-                lessPrimitive.call(
-                        Arrays.asList(new Num(2), new Num(1))
+                lessPrimitive.callWithEvaluatedArgs(
+                        Arrays.asList(new Num(2), new Num(1)),
+                        null
                 )
         );
     }

@@ -14,8 +14,8 @@ public class LessEqualPrimitiveTest {
     public void testArgsLesserEquals() {
         Assert.assertEquals(
                 new Bool(true),
-                lessEqualPrimitive.call(
-                        Arrays.asList(new Num(1), new Num(1), new Num(2))
+                lessEqualPrimitive.callWithEvaluatedArgs(
+                        Arrays.asList(new Num(1), new Num(1), new Num(2)), null
                 )
         );
     }

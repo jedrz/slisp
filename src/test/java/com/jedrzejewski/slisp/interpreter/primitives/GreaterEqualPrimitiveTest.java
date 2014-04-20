@@ -14,9 +14,9 @@ public class GreaterEqualPrimitiveTest {
     public void testArgsGreaterEqual() {
         Assert.assertEquals(
                 new Bool(true),
-                greaterEqualPrimitive.call(
-                        Arrays.asList(new Num(3), new Num(3), new Num(1)
-                ))
+                greaterEqualPrimitive.callWithEvaluatedArgs(
+                        Arrays.asList(new Num(3), new Num(3), new Num(1)), null
+                )
         );
     }
 }

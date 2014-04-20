@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public abstract class Primitive extends Callable {
 
-    public abstract LispObject call(List<LispObject> args);
+    public abstract LispObject callWithEvaluatedArgs(List<LispObject> args, Scope scope);
 
     @Override
     public LispObject call(List<LispObject> args, Scope scope) {
@@ -16,6 +16,6 @@ public abstract class Primitive extends Callable {
                 .stream()
                 .map(o -> o.eval(scope))
                 .collect(Collectors.toList());
-        return call(evaluatedArgs);
+        return callWithEvaluatedArgs(evaluatedArgs, scope);
     }
 }

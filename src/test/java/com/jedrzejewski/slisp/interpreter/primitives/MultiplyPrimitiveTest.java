@@ -17,7 +17,7 @@ public class MultiplyPrimitiveTest {
     public void testOneArg() throws Exception {
         Assert.assertEquals(
                 new Num(5),
-                pm.call(Arrays.asList(new Num(5)))
+                pm.callWithEvaluatedArgs(Arrays.asList(new Num(5)), null)
         );
     }
 
@@ -27,6 +27,6 @@ public class MultiplyPrimitiveTest {
                 .of(10, 3, -1)
                 .map(Num::new)
                 .collect(Collectors.toList());
-        Assert.assertEquals(new Num(-30), pm.call(numbers));
+        Assert.assertEquals(new Num(-30), pm.callWithEvaluatedArgs(numbers, null));
     }
 }

@@ -17,7 +17,7 @@ public class DividePrimitiveTest {
     public void testOneArg() throws Exception {
         Assert.assertEquals(
                 new Num(5),
-                pm.call(Arrays.asList(new Num(5)))
+                pm.callWithEvaluatedArgs(Arrays.asList(new Num(5)), null)
         );
     }
 
@@ -27,6 +27,6 @@ public class DividePrimitiveTest {
                 .of(10, 2, -1)
                 .map(Num::new)
                 .collect(Collectors.toList());
-        Assert.assertEquals(new Num(-5), pm.call(numbers));
+        Assert.assertEquals(new Num(-5), pm.callWithEvaluatedArgs(numbers, null));
     }
 }

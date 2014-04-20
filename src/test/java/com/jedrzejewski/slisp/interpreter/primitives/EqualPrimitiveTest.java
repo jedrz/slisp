@@ -14,13 +14,17 @@ public class EqualPrimitiveTest {
     public void testArgsEqual() {
         Assert.assertEquals(
                 new Bool(true),
-                equalPrimitive.call(Arrays.asList(new Num(1), new Num(1))));
+                equalPrimitive.callWithEvaluatedArgs(
+                        Arrays.asList(new Num(1), new Num(1)), null)
+        );
     }
 
     @Test
     public void testArgsNotEqual() {
         Assert.assertEquals(
                 new Bool(false),
-                equalPrimitive.call(Arrays.asList(new Num(1), new Num(2))));
+                equalPrimitive.callWithEvaluatedArgs(
+                        Arrays.asList(new Num(1), new Num(2)), null)
+        );
     }
 }

@@ -5,7 +5,7 @@ import com.jedrzejewski.slisp.lispobjects.Num;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class EvalFormTest {
+public class EvalPrimitiveTest {
 
     @Test
     public void testEval() {

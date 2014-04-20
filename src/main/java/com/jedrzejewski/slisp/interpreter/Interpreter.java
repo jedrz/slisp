@@ -7,6 +7,7 @@ import com.jedrzejewski.slisp.interpreter.primitives.CountPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.DividePrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.EqualPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.EqualsPrimitive;
+import com.jedrzejewski.slisp.interpreter.primitives.EvalPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.FirstPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.GreaterEqualPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.GreaterPrimitive;
@@ -19,7 +20,6 @@ import com.jedrzejewski.slisp.interpreter.primitives.MultiplyPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.RestPrimitive;
 import com.jedrzejewski.slisp.interpreter.specialforms.DefnForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.DoForm;
-import com.jedrzejewski.slisp.interpreter.specialforms.EvalForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.FnForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.IfForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.LetForm;
@@ -69,6 +69,9 @@ public class Interpreter {
                 .put("equals", new EqualsPrimitive())
                 .put("count", new CountPrimitive())
 
+                // Misc
+                .put("eval", new EvalPrimitive())
+
                 // Special forms
                 .put("set!", new SetForm())
                 .put("fn", new FnForm())
@@ -77,7 +80,6 @@ public class Interpreter {
                 .put("if", new IfForm())
                 .put("while", new WhileForm())
                 .put("let", new LetForm())
-                .put("eval", new EvalForm())
 
                 // Quotations
                 .put("quote", new QuoteForm())

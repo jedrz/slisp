@@ -1,5 +1,6 @@
 package com.jedrzejewski.slisp.interpreter.primitives;
 
+import com.jedrzejewski.slisp.interpreter.Scope;
 import com.jedrzejewski.slisp.lispobjects.LispObject;
 import com.jedrzejewski.slisp.lispobjects.Lst;
 import com.jedrzejewski.slisp.lispobjects.Nil;
@@ -8,7 +9,7 @@ import java.util.List;
 public class FirstPrimitive extends Primitive {
 
     @Override
-    public LispObject call(List<LispObject> args) {
+    public LispObject callWithEvaluatedArgs(List<LispObject> args, Scope scope) {
         if (args.size() == 1) {
             LispObject obj = args.get(0);
             if (obj instanceof Lst) {
