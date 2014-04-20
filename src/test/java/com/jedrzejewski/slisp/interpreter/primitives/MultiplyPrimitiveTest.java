@@ -9,14 +9,14 @@ import java.util.stream.Stream;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class PrimitiveMinusTest {
+public class MultiplyPrimitiveTest {
 
-    private MinusPrimitive pm = new MinusPrimitive();
+    private MultiplyPrimitive pm = new MultiplyPrimitive();
 
     @Test
     public void testOneArg() throws Exception {
         Assert.assertEquals(
-                new Num(-5),
+                new Num(5),
                 pm.call(Arrays.asList(new Num(5)))
         );
     }
@@ -27,6 +27,6 @@ public class PrimitiveMinusTest {
                 .of(10, 3, -1)
                 .map(Num::new)
                 .collect(Collectors.toList());
-        Assert.assertEquals(new Num(8), pm.call(numbers));
+        Assert.assertEquals(new Num(-30), pm.call(numbers));
     }
 }

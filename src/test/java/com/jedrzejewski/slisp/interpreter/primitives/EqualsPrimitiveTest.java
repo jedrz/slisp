@@ -5,7 +5,7 @@ import com.jedrzejewski.slisp.lispobjects.Bool;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class EqualsPrimitveTest {
+public class EqualsPrimitiveTest {
 
     @Test
     public void testTrue() throws Exception {
