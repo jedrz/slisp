@@ -43,8 +43,20 @@ public class Function extends Callable {
     @Override
     public LispObject call(List<LispObject> args, Scope scope) {
         Scope wrapperScope = new Scope(getScope());
-        for (int i = 0; i < args.size(); ++i) {
-            wrapperScope.put(getArgNames().get(i), args.get(i).eval(scope));
+        for (int i = 0; i < getArgNames().size(); ++i) {
+            Sym argName = getArgNames().get(i);
+            if (argName.getName().equals("&")) {
+                // TODO: there is no symbol after &?
+                argName = getArgNames().get(i + 1);
+                Lst restArgs = new Lst();
+                for (LispObject o : args.subList(i, args.size())) {
+                    restArgs.add(o.eval(scope));
+                }
+                wrapperScope.put(argName, restArgs);
+                break;
+            }
+            LispObject arg = args.get(i);
+            wrapperScope.put(argName, arg.eval(scope));
         }
         return getBody().eval(wrapperScope);
     }

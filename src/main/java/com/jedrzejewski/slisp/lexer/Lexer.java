@@ -63,7 +63,7 @@ public class Lexer {
 
     private boolean isSymbolCh(int c) {
         return Character.isLetterOrDigit(c)
-                || c == '?' || c == '!'
+                || c == '?' || c == '!' || c == '&'
                 || c == '+' || c == '-' || c == '*' || c == '/' || c == '%'
                 || c == '=' || c == '>' || c == '<';
     }
