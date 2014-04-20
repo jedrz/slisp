@@ -3,6 +3,7 @@ package com.jedrzejewski.slisp.interpreter;
 import com.jedrzejewski.slisp.BaseException;
 import com.jedrzejewski.slisp.interpreter.primitives.AddPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.ApplyPrimitive;
+import com.jedrzejewski.slisp.interpreter.primitives.CallablePredicatePrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.ConcatPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.CountPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.DividePrimitive;
@@ -77,6 +78,7 @@ public class Interpreter {
                 .put("symbol?", new SymbolPredicatePrimitive())
                 .put("list?", new ListPredicatePrimitive())
                 .put("number?", new NumberPredicatePrimitive())
+                .put("callable?", new CallablePredicatePrimitive())
 
                 // Misc
                 .put("eval", new EvalPrimitive())
