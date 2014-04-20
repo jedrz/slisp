@@ -36,5 +36,12 @@
       (apply and (first rst) (rest rst))
       false)))
 
+(defn or [arg & rst]
+  (if (empty? rst)
+    arg
+    (if arg
+      arg
+      (apply or (first rst) (rest rst)))))
+
 (defn zero? [n]
   (= n 0))

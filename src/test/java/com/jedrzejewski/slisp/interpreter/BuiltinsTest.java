@@ -109,4 +109,22 @@ public class BuiltinsTest {
                 TestUtils.evalString("(and 1)")
         );
     }
+
+    @Test
+    public void testOr() {
+        Assert.assertEquals(
+                new Num(1),
+                TestUtils.evalString("(or nil 1 false)")
+        );
+
+        Assert.assertEquals(
+                new Num(1),
+                TestUtils.evalString("(or 1)")
+        );
+
+        Assert.assertEquals(
+                new Bool(false),
+                TestUtils.evalString("(or false nil false)")
+        );
+    }
 }
