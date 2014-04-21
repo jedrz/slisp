@@ -170,8 +170,8 @@ Czyli ,,funkcje'', których wywołanie nie powoduje obliczania argumentów.
 \begin{description}
 \item[equals] porównuje podane argumenty.
 
-\item[and, or] zwraca odpowiednio iloczyn oraz sumę logiczną podanych
-  argumentów.
+\item[and, or, not] zwraca odpowiednio iloczyn, sumę oraz negację logiczną
+  podanych argumentów.
 
 \item[list?, symbol?, number?, string?, function?] sprawdza czy podany argument
   jest pewnego typu.
@@ -245,7 +245,7 @@ Czyli funkcje przyjmujące funkcje jako argumenty.
 \subsubsection{Operacje na~napisach}
 
 \begin{description}
-\item[str] zamienia podane argumenty na~napisy.
+\item[str] zamienia podane argumenty na~napis.
 
 \item[subs] zwraca podciąg o~podanym zakresie.
   \clj{subs}
@@ -254,7 +254,7 @@ Czyli funkcje przyjmujące funkcje jako argumenty.
 \subsubsection{Wejście-wyjście}
 
 \begin{description}
-\item[print] drukuje podane argumenty.
+\item[print, println] drukuje podane argumenty.
 \item[read] wczytuje linię i~ją~zwraca.
 \end{description}
 
