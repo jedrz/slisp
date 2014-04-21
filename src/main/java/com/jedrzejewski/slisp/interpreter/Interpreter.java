@@ -22,6 +22,7 @@ import com.jedrzejewski.slisp.interpreter.primitives.ModuloPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.MultiplyPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.NumberPredicatePrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.RestPrimitive;
+import com.jedrzejewski.slisp.interpreter.primitives.StrPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.StringPredicatePrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.SymbolPredicatePrimitive;
 import com.jedrzejewski.slisp.interpreter.specialforms.DefnForm;
@@ -70,6 +71,9 @@ public class Interpreter {
                 .put("concat", new ConcatPrimitive())
                 .put("first", new FirstPrimitive())
                 .put("rest", new RestPrimitive())
+
+                // String primitives
+                .put("str", new StrPrimitive())
 
                 // Primitives for multiple types
                 .put("equals", new EqualsPrimitive())
