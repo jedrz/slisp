@@ -3,6 +3,7 @@ package com.jedrzejewski.slisp.interpreter;
 import com.jedrzejewski.slisp.TestUtils;
 import com.jedrzejewski.slisp.lispobjects.Bool;
 import com.jedrzejewski.slisp.lispobjects.Num;
+import com.jedrzejewski.slisp.lispobjects.Str;
 import java.util.Arrays;
 import org.junit.Assert;
 import org.junit.Test;
@@ -125,6 +126,14 @@ public class BuiltinsTest {
         Assert.assertEquals(
                 new Bool(false),
                 TestUtils.evalString("(or false nil false)")
+        );
+    }
+
+    @Test
+    public void testCharAt() {
+        Assert.assertEquals(
+                new Str("a"),
+                TestUtils.evalString("(char-at \"cba\" 2)")
         );
     }
 }

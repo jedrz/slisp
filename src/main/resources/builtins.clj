@@ -45,3 +45,6 @@
 
 (defn zero? [n]
   (= n 0))
+
+(defn char-at [s pos]
+  (subs s pos (+ pos 1)))
