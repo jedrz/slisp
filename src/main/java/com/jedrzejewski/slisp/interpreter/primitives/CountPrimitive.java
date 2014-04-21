@@ -4,6 +4,7 @@ import com.jedrzejewski.slisp.interpreter.Scope;
 import com.jedrzejewski.slisp.lispobjects.LispObject;
 import com.jedrzejewski.slisp.lispobjects.Lst;
 import com.jedrzejewski.slisp.lispobjects.Num;
+import com.jedrzejewski.slisp.lispobjects.Str;
 import java.util.List;
 
 public class CountPrimitive extends Primitive {
@@ -15,7 +16,12 @@ public class CountPrimitive extends Primitive {
             if (obj instanceof Lst) {
                 Lst lst = (Lst) obj;
                 return new Num(lst.size());
-            } // TODO: add string handler.
+            } else if (obj instanceof Str) {
+                Str str = (Str) obj;
+                return new Num(str.getString().length());
+            } else {
+                // TODO: invalid type.
+            }
         }
         // TODO: throw an exception when more than one arg are passed.
         return new Num(-1);

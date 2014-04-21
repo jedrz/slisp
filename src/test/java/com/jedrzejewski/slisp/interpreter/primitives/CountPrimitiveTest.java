@@ -23,5 +23,11 @@ public class CountPrimitiveTest {
         );
     }
 
-    // TODO: test str length.
+    @Test
+    public void testStrLength() {
+        Assert.assertEquals(
+                new Num(2),
+                TestUtils.evalString("(count \"ab\")")
+        );
+    }
 }
