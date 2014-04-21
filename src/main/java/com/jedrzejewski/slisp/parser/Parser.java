@@ -6,6 +6,7 @@ import com.jedrzejewski.slisp.lexer.Token;
 import com.jedrzejewski.slisp.lispobjects.LispObject;
 import com.jedrzejewski.slisp.lispobjects.Lst;
 import com.jedrzejewski.slisp.lispobjects.Num;
+import com.jedrzejewski.slisp.lispobjects.Str;
 import com.jedrzejewski.slisp.lispobjects.Sym;
 import com.jedrzejewski.slisp.lispobjects.Vec;
 import com.jedrzejewski.slisp.parser.exceptions.MissingCloseBracketException;
@@ -30,6 +31,7 @@ public class Parser {
         tokenTypeMethodMap.put(Token.Type.CLOSE_BRACKET, this::parseCloseBracket);
         tokenTypeMethodMap.put(Token.Type.SYMBOL, this::parseSymbol);
         tokenTypeMethodMap.put(Token.Type.NUMBER, this::parseNumber);
+        tokenTypeMethodMap.put(Token.Type.STRING, this::parseString);
         tokenTypeMethodMap.put(Token.Type.QUOTE, this::parseQuote);
     }
 
@@ -103,6 +105,10 @@ public class Parser {
 
     private LispObject parseNumber(Token token) {
         return new Num(token.getString());
+    }
+
+    private LispObject parseString(Token token) {
+        return new Str(token.getString());
     }
 
     private interface TokenParser {

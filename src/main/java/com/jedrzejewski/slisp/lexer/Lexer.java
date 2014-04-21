@@ -2,6 +2,7 @@ package com.jedrzejewski.slisp.lexer;
 
 import com.jedrzejewski.slisp.lexer.exceptions.DoubleDotException;
 import com.jedrzejewski.slisp.lexer.exceptions.LexerException;
+import com.jedrzejewski.slisp.lexer.exceptions.StringEndCharacterNotFound;
 import com.jedrzejewski.slisp.lexer.exceptions.UnknownTokenException;
 import java.io.IOException;
 import java.io.Reader;
@@ -37,6 +38,10 @@ public class Lexer {
                 return Token.createCloseBracketToken();
             case '\'':
                 return Token.createQuoteToken();
+        }
+
+        if (isStringCh(c)) {
+            return getString(c);
         }
 
         if (isNumberCh(c)) {
@@ -94,6 +99,30 @@ public class Lexer {
 
     private boolean isNumberCh(int c) {
         return Character.isDigit(c) || c == '.';
+    }
+
+    private Token getString(int c) throws LexerException {
+        String str = "";
+        while ((c = getNextCh()) != -1) {
+            if (c == '"') { // Closing double quote
+                return Token.createStringToken(str);
+            }
+            if (c == '\\') { // Maybe escape "
+                int nextC;
+                if ((nextC = getNextCh()) == '"') {
+                    str += "\"";
+                } else {
+                    ungetCh(nextC);
+                }
+            } else {
+                str += Character.toString((char) c);
+            }
+        }
+        throw new StringEndCharacterNotFound();
+    }
+
+    private boolean isStringCh(int c) {
+        return c == '"';
     }
 
     private int getNextCh() {

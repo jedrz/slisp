@@ -5,6 +5,7 @@ import com.jedrzejewski.slisp.TestUtils;
 import com.jedrzejewski.slisp.lexer.Lexer;
 import com.jedrzejewski.slisp.lispobjects.Lst;
 import com.jedrzejewski.slisp.lispobjects.Num;
+import com.jedrzejewski.slisp.lispobjects.Str;
 import com.jedrzejewski.slisp.lispobjects.Sym;
 import com.jedrzejewski.slisp.lispobjects.Vec;
 import com.jedrzejewski.slisp.parser.exceptions.MissingCloseBracketException;
@@ -65,6 +66,14 @@ public class ParserTest {
         Assert.assertEquals(
                 new Num(0),
                 TestUtils.parseString("00.")
+        );
+    }
+
+    @Test
+    public void testStr() {
+        Assert.assertEquals(
+                new Str("str"),
+                TestUtils.parseString("\"str\"")
         );
     }
 

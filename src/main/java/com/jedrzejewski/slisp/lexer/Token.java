@@ -10,6 +10,7 @@ public class Token {
         QUOTE,
         SYMBOL,
         NUMBER,
+        STRING,
     }
 
     private Type type;
@@ -56,6 +57,10 @@ public class Token {
         return new Token(Type.NUMBER, number);
     }
 
+    public static Token createStringToken(String str) {
+        return new Token(Type.STRING, str);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -74,5 +79,13 @@ public class Token {
         int result = type.hashCode();
         result = 31 * result + string.hashCode();
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Token{" +
+               "type=" + type +
+               ", string='" + string + '\'' +
+               '}';
     }
 }

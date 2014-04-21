@@ -2,6 +2,7 @@ package com.jedrzejewski.slisp.lexer;
 
 import com.jedrzejewski.slisp.lexer.exceptions.DoubleDotException;
 import com.jedrzejewski.slisp.lexer.exceptions.LexerException;
+import com.jedrzejewski.slisp.lexer.exceptions.StringEndCharacterNotFound;
 import com.jedrzejewski.slisp.lexer.exceptions.UnknownTokenException;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -77,6 +78,19 @@ public class LexerTest {
     @Test(expected = DoubleDotException.class)
     public void testDoubleDotInNumber() throws Exception {
         getFirstToken("1.0.1");
+    }
+
+    @Test
+    public void testString() throws Exception {
+        Assert.assertEquals(
+                Token.createStringToken("escape \" char\t"),
+                getFirstToken("\"escape \\\" char\t\"")
+        );
+    }
+
+    @Test(expected = StringEndCharacterNotFound.class)
+    public void testNotEndedString() throws Exception {
+        getFirstToken("\"not ended...");
     }
 
     @Test(expected = UnknownTokenException.class)
