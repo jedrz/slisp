@@ -24,6 +24,7 @@ import com.jedrzejewski.slisp.interpreter.primitives.NumberPredicatePrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.RestPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.StrPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.StringPredicatePrimitive;
+import com.jedrzejewski.slisp.interpreter.primitives.SubsPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.SymbolPredicatePrimitive;
 import com.jedrzejewski.slisp.interpreter.specialforms.DefnForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.DoForm;
@@ -74,6 +75,7 @@ public class Interpreter {
 
                 // String primitives
                 .put("str", new StrPrimitive())
+                .put("subs", new SubsPrimitive())
 
                 // Primitives for multiple types
                 .put("equals", new EqualsPrimitive())
