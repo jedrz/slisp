@@ -2,7 +2,7 @@ package com.jedrzejewski.slisp.lexer;
 
 import com.jedrzejewski.slisp.lexer.exceptions.DoubleDotException;
 import com.jedrzejewski.slisp.lexer.exceptions.LexerException;
-import com.jedrzejewski.slisp.lexer.exceptions.StringEndCharacterNotFound;
+import com.jedrzejewski.slisp.lexer.exceptions.StringEndingCharacterNotFoundException;
 import com.jedrzejewski.slisp.lexer.exceptions.UnknownTokenException;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -88,7 +88,7 @@ public class LexerTest {
         );
     }
 
-    @Test(expected = StringEndCharacterNotFound.class)
+    @Test(expected = StringEndingCharacterNotFoundException.class)
     public void testNotEndedString() throws Exception {
         getFirstToken("\"not ended...");
     }

@@ -2,7 +2,7 @@ package com.jedrzejewski.slisp.lexer;
 
 import com.jedrzejewski.slisp.lexer.exceptions.DoubleDotException;
 import com.jedrzejewski.slisp.lexer.exceptions.LexerException;
-import com.jedrzejewski.slisp.lexer.exceptions.StringEndCharacterNotFound;
+import com.jedrzejewski.slisp.lexer.exceptions.StringEndingCharacterNotFoundException;
 import com.jedrzejewski.slisp.lexer.exceptions.UnknownTokenException;
 import java.io.IOException;
 import java.io.Reader;
@@ -118,7 +118,7 @@ public class Lexer {
                 str += Character.toString((char) c);
             }
         }
-        throw new StringEndCharacterNotFound();
+        throw new StringEndingCharacterNotFoundException();
     }
 
     private boolean isStringCh(int c) {
