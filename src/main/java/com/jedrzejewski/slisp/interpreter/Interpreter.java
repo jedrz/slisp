@@ -22,6 +22,7 @@ import com.jedrzejewski.slisp.interpreter.primitives.ModuloPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.MultiplyPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.NumberPredicatePrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.RestPrimitive;
+import com.jedrzejewski.slisp.interpreter.primitives.StringPredicatePrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.SymbolPredicatePrimitive;
 import com.jedrzejewski.slisp.interpreter.specialforms.DefnForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.DoForm;
@@ -78,6 +79,7 @@ public class Interpreter {
                 .put("symbol?", new SymbolPredicatePrimitive())
                 .put("list?", new ListPredicatePrimitive())
                 .put("number?", new NumberPredicatePrimitive())
+                .put("string?", new StringPredicatePrimitive())
                 .put("callable?", new CallablePredicatePrimitive())
 
                 // Misc
