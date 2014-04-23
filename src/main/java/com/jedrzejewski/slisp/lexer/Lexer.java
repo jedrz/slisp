@@ -2,6 +2,7 @@ package com.jedrzejewski.slisp.lexer;
 
 import com.jedrzejewski.slisp.lexer.exceptions.DoubleDotException;
 import com.jedrzejewski.slisp.lexer.exceptions.LexerException;
+import com.jedrzejewski.slisp.lexer.exceptions.MissingEscapeCharacterException;
 import com.jedrzejewski.slisp.lexer.exceptions.StringEndingCharacterNotFoundException;
 import com.jedrzejewski.slisp.lexer.exceptions.UnknownTokenException;
 import java.io.IOException;
@@ -107,12 +108,28 @@ public class Lexer {
             if (c == '"') { // Closing double quote
                 return Token.createStringToken(str);
             }
-            if (c == '\\') { // Maybe escape "
-                int nextC;
-                if ((nextC = getNextCh()) == '"') {
-                    str += "\"";
-                } else {
-                    ungetCh(nextC);
+            if (c == '\\') { // Escape next character.
+                int nextC = getNextCh();
+                // We have to escape every character manually since printing
+                // \n str actually means to print \\n string.
+                switch (nextC) {
+                    case 't':
+                        str += '\t';
+                        break;
+                    case 'n':
+                        str += '\n';
+                        break;
+                    case 'r':
+                        str += '\r';
+                        break;
+                    case '\\':
+                        str += '\\';
+                        break;
+                    case '"':
+                        str += "\"";
+                        break;
+                    default:
+                        throw new MissingEscapeCharacterException();
                 }
             } else {
                 str += Character.toString((char) c);

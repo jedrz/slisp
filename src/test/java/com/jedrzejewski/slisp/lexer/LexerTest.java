@@ -2,6 +2,7 @@ package com.jedrzejewski.slisp.lexer;
 
 import com.jedrzejewski.slisp.lexer.exceptions.DoubleDotException;
 import com.jedrzejewski.slisp.lexer.exceptions.LexerException;
+import com.jedrzejewski.slisp.lexer.exceptions.MissingEscapeCharacterException;
 import com.jedrzejewski.slisp.lexer.exceptions.StringEndingCharacterNotFoundException;
 import com.jedrzejewski.slisp.lexer.exceptions.UnknownTokenException;
 import java.util.Arrays;
@@ -84,13 +85,34 @@ public class LexerTest {
     public void testString() throws Exception {
         Assert.assertEquals(
                 Token.createStringToken("escape \" char\t"),
-                getFirstToken("\"escape \\\" char\t\"")
+                getFirstToken("\"escape \\\" char\\t\"")
+        );
+    }
+
+    @Test
+    public void testInternalStringofString() throws Exception {
+        Assert.assertEquals(
+                "a\nb",
+                getFirstToken("\"a\nb\"").getString()
+        );
+        Assert.assertEquals(
+                "a\nb",
+                getFirstToken("\"a\\nb\"").getString()
+        );
+        Assert.assertEquals(
+                "a\\b",
+                getFirstToken("\"a\\\\b\"").getString()
         );
     }
 
     @Test(expected = StringEndingCharacterNotFoundException.class)
     public void testNotEndedString() throws Exception {
         getFirstToken("\"not ended...");
+    }
+
+    @Test(expected = MissingEscapeCharacterException.class)
+    public void testMissingEscapeCharacter() throws Exception {
+        getFirstToken("\"s\\s\"");
     }
 
     @Test(expected = UnknownTokenException.class)
