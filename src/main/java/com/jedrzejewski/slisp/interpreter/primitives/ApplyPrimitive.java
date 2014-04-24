@@ -24,19 +24,15 @@ public class ApplyPrimitive extends Primitive {
                 flattenedArgs.add(arg);
             }
         }
-        // We need to quote any list in flattened args to avoid evaluation.
+        // We need to quote all args before calling since they will be evaluated again.
         // See second test of apply primitive.
         List<LispObject> quotedAndFlattenedArgs = flattenedArgs
                 .stream()
                 .map(arg -> {
-                    if (arg instanceof Lst) {
-                        Lst quoted = new Lst();
-                        quoted.add(new Sym("quote"));
-                        quoted.add(arg);
-                        return quoted;
-                    } else {
-                        return arg;
-                    }
+                    Lst lst = new Lst();
+                    lst.add(new Sym("quote"));
+                    lst.add(arg);
+                    return lst;
                 })
                 .collect(Collectors.toList());
         return fn.call(quotedAndFlattenedArgs, scope);
