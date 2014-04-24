@@ -28,6 +28,11 @@ public class Lexer {
 
         int c = getNextCh();
 
+        if (isCommentCh(c)) {
+            ignoreComments();
+            c = getNextCh();
+        }
+
         switch (c) {
             case '(':
                 return Token.createOpenParenToken();
@@ -140,6 +145,16 @@ public class Lexer {
 
     private boolean isStringCh(int c) {
         return c == '"';
+    }
+
+    private boolean isCommentCh(int c) {
+        return c == ';';
+    }
+
+    private void ignoreComments() {
+        int c;
+        while ((c = getNextCh()) != -1 && c != '\n') {
+        }
     }
 
     private int getNextCh() {

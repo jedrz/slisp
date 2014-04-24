@@ -120,6 +120,14 @@ public class LexerTest {
         getFirstToken("`");
     }
 
+    @Test
+    public void testComments() throws Exception {
+        Assert.assertEquals(
+                Token.createSymbolToken("symbol"),
+                getFirstToken(";; a comment\nsymbol")
+        );
+    }
+
     private Token getFirstToken(String in) throws LexerException {
         Lexer lexer = new Lexer(in);
         return lexer.getNextToken();
