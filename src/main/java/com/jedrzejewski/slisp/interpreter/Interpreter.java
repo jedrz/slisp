@@ -30,6 +30,7 @@ import com.jedrzejewski.slisp.interpreter.primitives.StrPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.StringPredicatePrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.SubsPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.SymbolPredicatePrimitive;
+import com.jedrzejewski.slisp.interpreter.specialforms.DefmacroForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.DefnForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.DoForm;
 import com.jedrzejewski.slisp.interpreter.specialforms.FnForm;
@@ -105,6 +106,7 @@ public class Interpreter {
                 .put("set!", new SetForm())
                 .put("fn", new FnForm())
                 .put("defn", new DefnForm())
+                .put("defmacro", new DefmacroForm())
                 .put("do", new DoForm())
                 .put("if", new IfForm())
                 .put("while", new WhileForm())
