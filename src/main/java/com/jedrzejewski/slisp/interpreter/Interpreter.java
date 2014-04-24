@@ -17,6 +17,7 @@ import com.jedrzejewski.slisp.interpreter.primitives.LessEqualPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.LessPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.ListPredicatePrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.ListPrimitive;
+import com.jedrzejewski.slisp.interpreter.primitives.LoadPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.MinusPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.ModuloPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.MultiplyPrimitive;
@@ -97,6 +98,7 @@ public class Interpreter {
                 // Print, read
                 .put("print", new PrintPrimitive())
                 .put("read", new ReadPrimitive())
+                .put("load", new LoadPrimitive())
 
                 // Special forms
                 .put("set!", new SetForm())
