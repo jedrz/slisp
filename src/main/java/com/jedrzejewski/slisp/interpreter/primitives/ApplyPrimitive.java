@@ -4,7 +4,9 @@ import com.jedrzejewski.slisp.interpreter.Scope;
 import com.jedrzejewski.slisp.lispobjects.Callable;
 import com.jedrzejewski.slisp.lispobjects.LispObject;
 import com.jedrzejewski.slisp.lispobjects.Lst;
+import com.jedrzejewski.slisp.lispobjects.Sym;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ApplyPrimitive extends Primitive {
 
@@ -20,6 +22,21 @@ public class ApplyPrimitive extends Primitive {
                 flattenedArgs.add(arg);
             }
         }
-        return fn.call(flattenedArgs, scope);
+        // We need to quote any list in flattened args to avoid evaluation.
+        // See second test of apply primitive.
+        List<LispObject> quotedAndFlattenedArgs = flattenedArgs
+                .stream()
+                .map(arg -> {
+                    if (arg instanceof Lst) {
+                        Lst quoted = new Lst();
+                        quoted.add(new Sym("quote"));
+                        quoted.add(arg);
+                        return quoted;
+                    } else {
+                        return arg;
+                    }
+                })
+                .collect(Collectors.toList());
+        return fn.call(quotedAndFlattenedArgs, scope);
     }
 }

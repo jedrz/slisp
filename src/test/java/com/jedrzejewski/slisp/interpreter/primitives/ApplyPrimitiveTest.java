@@ -14,4 +14,12 @@ public class ApplyPrimitiveTest {
                 TestUtils.evalString("(apply + 1 2 '(3 4))")
         );
     }
+
+    @Test
+    public void testApplyingListOfLists() throws Exception {
+        Assert.assertEquals(
+                new Num(1),
+                TestUtils.evalString("(apply first '((1 2)))")
+        );
+    }
 }
