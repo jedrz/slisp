@@ -49,5 +49,5 @@
 (defn char-at [s pos]
   (subs s pos (+ pos 1)))
 
-(defn println [& args]
-  (apply print args "\n"))
+(defmacro println [args]
+  (list 'apply 'print args "\n"))
