@@ -8,7 +8,7 @@ import org.junit.Test;
 public class IfFormTest {
 
     @Test
-    public void testTrue() {
+    public void testTrue() throws Exception {
         Assert.assertEquals(
                 new Num(1),
                 TestUtils.evalString("(if (= 1 1) 1 2)")
@@ -16,7 +16,7 @@ public class IfFormTest {
     }
 
     @Test
-    public void testFalse() {
+    public void testFalse() throws Exception {
         Assert.assertEquals(
                 new Num(2),
                 TestUtils.evalString("(if (= 1 2) 1 2)")

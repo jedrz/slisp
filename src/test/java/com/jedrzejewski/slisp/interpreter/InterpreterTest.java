@@ -3,8 +3,9 @@ package com.jedrzejewski.slisp.interpreter;
 import com.jedrzejewski.slisp.TestUtils;
 import com.jedrzejewski.slisp.lispobjects.Bool;
 import com.jedrzejewski.slisp.lispobjects.Num;
-import static org.junit.Assert.assertEquals;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class InterpreterTest {
 
@@ -17,7 +18,7 @@ public class InterpreterTest {
     }
 
     @Test
-    public void testTrueSymbol() {
+    public void testTrueSymbol() throws Exception {
         assertEquals(
                 new Bool(true),
                 TestUtils.evalString("(if true true false)")
@@ -25,7 +26,7 @@ public class InterpreterTest {
     }
 
     @Test
-    public void testFalseSymbol() {
+    public void testFalseSymbol() throws Exception {
         assertEquals(
                 new Bool(false),
                 TestUtils.evalString("(if false true false)")

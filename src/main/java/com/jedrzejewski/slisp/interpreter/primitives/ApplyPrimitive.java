@@ -1,6 +1,7 @@
 package com.jedrzejewski.slisp.interpreter.primitives;
 
 import com.jedrzejewski.slisp.interpreter.Scope;
+import com.jedrzejewski.slisp.interpreter.exceptions.InterpreterException;
 import com.jedrzejewski.slisp.lispobjects.Callable;
 import com.jedrzejewski.slisp.lispobjects.LispObject;
 import com.jedrzejewski.slisp.lispobjects.Lst;
@@ -11,7 +12,8 @@ import java.util.stream.Collectors;
 public class ApplyPrimitive extends Primitive {
 
     @Override
-    public LispObject callWithEvaluatedArgs(List<LispObject> args, Scope scope) {
+    public LispObject callWithEvaluatedArgs(List<LispObject> args, Scope scope)
+            throws InterpreterException {
         Callable fn = (Callable) args.get(0);
         Lst flattenedArgs = new Lst();
         for (LispObject arg : args.subList(1, args.size())) {

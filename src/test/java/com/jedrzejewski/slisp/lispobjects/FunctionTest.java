@@ -10,7 +10,7 @@ import org.junit.Test;
 public class FunctionTest {
 
     @Test
-    public void testAmpersandSymbolInArgNames() {
+    public void testAmpersandSymbolInArgNames() throws Exception {
         Interpreter interpreter = new Interpreter();
         TestUtils.evalString(
                 "(set! f (fn [a & r]"
@@ -29,7 +29,7 @@ public class FunctionTest {
     }
 
     @Test
-    public void testToString() {
+    public void testToString() throws Exception {
         Assert.assertEquals(
                 "fn",
                 new Function(new LinkedList<>(), new Nil(), new Scope()).toString()

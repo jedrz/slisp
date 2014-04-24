@@ -8,7 +8,7 @@ import org.junit.Test;
 public class CountPrimitiveTest {
 
     @Test
-    public void testNonEmptyListLength() {
+    public void testNonEmptyListLength() throws Exception {
         Assert.assertEquals(
                 new Num(2),
                 TestUtils.evalString("(count (list 1 2))")
@@ -16,7 +16,7 @@ public class CountPrimitiveTest {
     }
 
     @Test
-    public void testEmptyListLength() {
+    public void testEmptyListLength() throws Exception {
         Assert.assertEquals(
                 new Num(0),
                 TestUtils.evalString("(count (list))")
@@ -24,7 +24,7 @@ public class CountPrimitiveTest {
     }
 
     @Test
-    public void testStrLength() {
+    public void testStrLength() throws Exception {
         Assert.assertEquals(
                 new Num(2),
                 TestUtils.evalString("(count \"ab\")")

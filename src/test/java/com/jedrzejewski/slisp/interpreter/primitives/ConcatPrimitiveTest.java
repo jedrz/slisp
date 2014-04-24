@@ -10,7 +10,7 @@ import org.junit.Test;
 public class ConcatPrimitiveTest {
 
     @Test
-    public void concatNoLists() {
+    public void concatNoLists() throws Exception {
         Assert.assertEquals(
                 new Lst(),
                 TestUtils.evalString("(concat)")
@@ -18,7 +18,7 @@ public class ConcatPrimitiveTest {
     }
 
     @Test
-    public void concatOneList() {
+    public void concatOneList() throws Exception {
         Assert.assertEquals(
                 Arrays.asList(new Num(1)),
                 TestUtils.evalString("(concat '(1))")
@@ -26,7 +26,7 @@ public class ConcatPrimitiveTest {
     }
 
     @Test
-    public void concatMultipleLists() {
+    public void concatMultipleLists() throws Exception {
         Assert.assertEquals(
                 Arrays.asList(new Num(1), new Num(2), new Num(3)),
                 TestUtils.evalString("(concat '(1) (list 2 3))")

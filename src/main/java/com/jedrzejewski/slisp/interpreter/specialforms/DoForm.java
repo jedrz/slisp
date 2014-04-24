@@ -1,13 +1,14 @@
 package com.jedrzejewski.slisp.interpreter.specialforms;
 
 import com.jedrzejewski.slisp.interpreter.Scope;
+import com.jedrzejewski.slisp.interpreter.exceptions.InterpreterException;
 import com.jedrzejewski.slisp.lispobjects.LispObject;
 import java.util.List;
 
 public class DoForm extends SpecialForm {
 
     @Override
-    public LispObject call(List<LispObject> args, Scope scope) {
+    public LispObject call(List<LispObject> args, Scope scope) throws InterpreterException {
         for (LispObject arg : args.subList(0, args.size() - 1)) {
             arg.eval(scope);
         }

@@ -11,7 +11,7 @@ public class LessEqualPrimitiveTest {
     private LessEqualPrimitive lessEqualPrimitive = new LessEqualPrimitive();
 
     @Test
-    public void testArgsLesserEquals() {
+    public void testArgsLesserEquals() throws Exception {
         Assert.assertEquals(
                 new Bool(true),
                 lessEqualPrimitive.callWithEvaluatedArgs(

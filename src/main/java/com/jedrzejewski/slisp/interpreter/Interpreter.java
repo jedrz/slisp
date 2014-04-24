@@ -1,6 +1,7 @@
 package com.jedrzejewski.slisp.interpreter;
 
 import com.jedrzejewski.slisp.BaseException;
+import com.jedrzejewski.slisp.interpreter.exceptions.InterpreterException;
 import com.jedrzejewski.slisp.interpreter.primitives.AddPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.ApplyPrimitive;
 import com.jedrzejewski.slisp.interpreter.primitives.CallablePredicatePrimitive;
@@ -134,7 +135,7 @@ public class Interpreter {
         }
     }
 
-    public LispObject eval(LispObject code) {
+    public LispObject eval(LispObject code) throws InterpreterException {
         return code.eval(globalScope);
     }
 }

@@ -9,7 +9,7 @@ import org.junit.Test;
 public class WhileFormTest {
 
     @Test
-    public void testWhile() {
+    public void testWhile() throws Exception {
         Interpreter interpreter = new Interpreter();
         TestUtils.evalString("(set! a 10)", interpreter);
         TestUtils.evalString("(set! b 15)", interpreter);

@@ -8,7 +8,7 @@ import org.junit.Test;
 public class StrPrimitiveTest {
 
     @Test
-    public void testMultipleTypes() {
+    public void testMultipleTypes() throws Exception {
         Assert.assertEquals(
                 new Str("(1.0 \"s\")a()str"),
                 TestUtils.evalString("(str '(1 \"s\") 'a '() \"str\")")

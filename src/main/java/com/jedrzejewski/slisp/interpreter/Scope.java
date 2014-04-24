@@ -1,5 +1,6 @@
 package com.jedrzejewski.slisp.interpreter;
 
+import com.jedrzejewski.slisp.interpreter.exceptions.SymbolUndefinedException;
 import com.jedrzejewski.slisp.lispobjects.LispObject;
 import com.jedrzejewski.slisp.lispobjects.Sym;
 import java.util.HashMap;
@@ -19,16 +20,17 @@ public class Scope {
         this(null);
     }
 
-    public LispObject find(Sym sym) {
+    public LispObject find(Sym sym) throws SymbolUndefinedException {
         if (symbolTable.containsKey(sym)) {
             return symbolTable.get(sym);
+        } else if (outerScope == null) {
+            throw new SymbolUndefinedException(sym.getName());
         } else {
-            // TODO: throw exception if there is no sym in table
             return outerScope.find(sym);
         }
     }
 
-    public LispObject find(String name) {
+    public LispObject find(String name) throws SymbolUndefinedException {
         return find(new Sym(name));
     }
 

@@ -1,6 +1,7 @@
 package com.jedrzejewski.slisp.lispobjects;
 
 import com.jedrzejewski.slisp.interpreter.Scope;
+import com.jedrzejewski.slisp.interpreter.exceptions.InterpreterException;
 import java.util.List;
 
 public class Function extends Callable {
@@ -41,7 +42,7 @@ public class Function extends Callable {
     }
 
     @Override
-    public LispObject call(List<LispObject> args, Scope scope) {
+    public LispObject call(List<LispObject> args, Scope scope) throws InterpreterException {
         Scope wrapperScope = new Scope(getScope());
         for (int i = 0; i < getArgNames().size(); ++i) {
             Sym argName = getArgNames().get(i);

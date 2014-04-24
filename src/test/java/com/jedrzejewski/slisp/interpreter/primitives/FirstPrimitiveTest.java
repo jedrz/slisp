@@ -9,7 +9,7 @@ import org.junit.Test;
 public class FirstPrimitiveTest {
 
     @Test
-    public void testNonEmptyList() {
+    public void testNonEmptyList() throws Exception {
         Assert.assertEquals(
                 new Num(1),
                 TestUtils.evalString("(first (list 1 2))")
@@ -17,7 +17,7 @@ public class FirstPrimitiveTest {
     }
 
     @Test
-    public void testEmptyList() {
+    public void testEmptyList() throws Exception {
         Assert.assertEquals(
                 new Nil(),
                 TestUtils.evalString("(first (list))")

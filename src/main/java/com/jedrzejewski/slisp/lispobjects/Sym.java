@@ -1,6 +1,7 @@
 package com.jedrzejewski.slisp.lispobjects;
 
 import com.jedrzejewski.slisp.interpreter.Scope;
+import com.jedrzejewski.slisp.interpreter.exceptions.InterpreterException;
 
 public class Sym implements LispObject {
 
@@ -37,7 +38,7 @@ public class Sym implements LispObject {
     }
 
     @Override
-    public LispObject eval(Scope scope) {
+    public LispObject eval(Scope scope) throws InterpreterException {
         return scope.find(this);
     }
 }

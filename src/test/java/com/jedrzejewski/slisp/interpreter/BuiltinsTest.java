@@ -11,7 +11,7 @@ import org.junit.Test;
 public class BuiltinsTest {
 
     @Test
-    public void testEmpty() {
+    public void testEmpty() throws Exception {
         Assert.assertEquals(
                 new Bool(true),
                 TestUtils.evalString("(empty? (list))")
@@ -24,7 +24,7 @@ public class BuiltinsTest {
     }
 
     @Test
-    public void testZero() {
+    public void testZero() throws Exception {
         Assert.assertEquals(
                 new Bool(true),
                 TestUtils.evalString("(zero? 0)")
@@ -36,7 +36,7 @@ public class BuiltinsTest {
     }
 
     @Test
-    public void testCons() {
+    public void testCons() throws Exception {
         Assert.assertEquals(
                 Arrays.asList(new Num(1), new Num(2), new Num(3)),
                 TestUtils.evalString("(cons 1 '(2 3))")
@@ -44,7 +44,7 @@ public class BuiltinsTest {
     }
 
     @Test
-    public void testConj() {
+    public void testConj() throws Exception {
         Assert.assertEquals(
                 Arrays.asList(new Num(1), new Num(2), new Num(3)),
                 TestUtils.evalString("(conj '(1 2) 3)")
@@ -52,7 +52,7 @@ public class BuiltinsTest {
     }
 
     @Test
-    public void testMap() {
+    public void testMap() throws Exception {
         Assert.assertEquals(
                 TestUtils.evalString("'(1 4 9 16)"),
                 TestUtils.evalString("(map (fn [n] (* n n)) '(1 2 3 4))")
@@ -60,7 +60,7 @@ public class BuiltinsTest {
     }
 
     @Test
-    public void testFilter() {
+    public void testFilter() throws Exception {
         Assert.assertEquals(
                 TestUtils.evalString("'(2 4 6 8)"),
                 TestUtils.evalString("(do"
@@ -71,7 +71,7 @@ public class BuiltinsTest {
     }
 
     @Test
-    public void testReduce() {
+    public void testReduce() throws Exception {
         Assert.assertEquals(
                 new Num(15),
                 TestUtils.evalString("(reduce (fn [acc n]\n"
@@ -82,7 +82,7 @@ public class BuiltinsTest {
     }
 
     @Test
-    public void testNot() {
+    public void testNot() throws Exception {
         Assert.assertEquals(
                 new Bool(true),
                 TestUtils.evalString("(not nil)")
@@ -94,7 +94,7 @@ public class BuiltinsTest {
     }
 
     @Test
-    public void testAnd() {
+    public void testAnd() throws Exception {
         Assert.assertEquals(
                 new Bool(false),
                 TestUtils.evalString("(and true false)")
@@ -112,7 +112,7 @@ public class BuiltinsTest {
     }
 
     @Test
-    public void testOr() {
+    public void testOr() throws Exception {
         Assert.assertEquals(
                 new Num(1),
                 TestUtils.evalString("(or nil 1 false)")
@@ -130,7 +130,7 @@ public class BuiltinsTest {
     }
 
     @Test
-    public void testCharAt() {
+    public void testCharAt() throws Exception {
         Assert.assertEquals(
                 new Str("a"),
                 TestUtils.evalString("(char-at \"cba\" 2)")

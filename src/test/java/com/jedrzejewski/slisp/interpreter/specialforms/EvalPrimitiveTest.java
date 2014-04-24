@@ -8,7 +8,7 @@ import org.junit.Test;
 public class EvalPrimitiveTest {
 
     @Test
-    public void testEval() {
+    public void testEval() throws Exception {
         Assert.assertEquals(
                 new Num(17),
                 TestUtils.evalString("(eval '(let [a 10] (+ 3 4 a)))")

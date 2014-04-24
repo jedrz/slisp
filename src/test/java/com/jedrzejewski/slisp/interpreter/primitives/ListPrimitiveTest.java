@@ -10,7 +10,7 @@ import org.junit.Test;
 public class ListPrimitiveTest {
 
     @Test
-    public void testCreatingList() {
+    public void testCreatingList() throws Exception {
         Assert.assertEquals(
                 Arrays.asList(new Num("1"), new Bool(true), new Bool(false)),
                 TestUtils.evalString(

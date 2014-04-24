@@ -11,7 +11,7 @@ public class GreaterPrimitiveTest {
     private GreaterPrimitive greaterPrimitive = new GreaterPrimitive();
 
     @Test
-    public void testArgsGreater() {
+    public void testArgsGreater() throws Exception {
         Assert.assertEquals(
                 new Bool(true),
                 greaterPrimitive.callWithEvaluatedArgs(
@@ -22,7 +22,7 @@ public class GreaterPrimitiveTest {
     }
 
     @Test
-    public void testArgsNotGreater() {
+    public void testArgsNotGreater() throws Exception {
         Assert.assertEquals(
                 new Bool(false),
                 greaterPrimitive.callWithEvaluatedArgs(

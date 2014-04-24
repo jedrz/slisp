@@ -11,7 +11,7 @@ public class EqualPrimitiveTest {
     private EqualPrimitive equalPrimitive = new EqualPrimitive();
 
     @Test
-    public void testArgsEqual() {
+    public void testArgsEqual() throws Exception {
         Assert.assertEquals(
                 new Bool(true),
                 equalPrimitive.callWithEvaluatedArgs(
@@ -20,7 +20,7 @@ public class EqualPrimitiveTest {
     }
 
     @Test
-    public void testArgsNotEqual() {
+    public void testArgsNotEqual() throws Exception {
         Assert.assertEquals(
                 new Bool(false),
                 equalPrimitive.callWithEvaluatedArgs(

@@ -10,7 +10,7 @@ import org.junit.Test;
 public class RestPrimitiveTest {
 
     @Test
-    public void testNonEmptyList() {
+    public void testNonEmptyList() throws Exception {
         Assert.assertEquals(
                 Arrays.asList(new Num(2)),
                 TestUtils.evalString("(rest (list 1 2))")
@@ -18,7 +18,7 @@ public class RestPrimitiveTest {
     }
 
     @Test
-    public void testOneElementList() {
+    public void testOneElementList() throws Exception {
         Assert.assertEquals(
                 new Lst(),
                 TestUtils.evalString("(rest (list 1))")
@@ -26,7 +26,7 @@ public class RestPrimitiveTest {
     }
 
     @Test
-    public void testEmptyList() {
+    public void testEmptyList() throws Exception {
         Assert.assertEquals(
                 new Lst(),
                 TestUtils.evalString("(rest (list))")

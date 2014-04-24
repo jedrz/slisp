@@ -1,6 +1,7 @@
 package com.jedrzejewski.slisp.interpreter.specialforms;
 
 import com.jedrzejewski.slisp.interpreter.Scope;
+import com.jedrzejewski.slisp.interpreter.exceptions.InterpreterException;
 import com.jedrzejewski.slisp.lispobjects.Bool;
 import com.jedrzejewski.slisp.lispobjects.LispObject;
 import com.jedrzejewski.slisp.lispobjects.Lst;
@@ -10,7 +11,7 @@ import java.util.List;
 public class IfForm extends SpecialForm {
 
     @Override
-    public LispObject call(List<LispObject> args, Scope scope) {
+    public LispObject call(List<LispObject> args, Scope scope) throws InterpreterException {
         // TODO: make sure 3 or more args are passed.
         Bool condition = new Bool(args.get(0).eval(scope));
         if (condition.isTrue()) {

@@ -1,6 +1,7 @@
 package com.jedrzejewski.slisp.interpreter.specialforms;
 
 import com.jedrzejewski.slisp.interpreter.Scope;
+import com.jedrzejewski.slisp.interpreter.exceptions.InterpreterException;
 import com.jedrzejewski.slisp.lispobjects.LispObject;
 import com.jedrzejewski.slisp.lispobjects.Lst;
 import com.jedrzejewski.slisp.lispobjects.Sym;
@@ -11,7 +12,7 @@ import java.util.List;
 public class LetForm extends SpecialForm {
 
     @Override
-    public LispObject call(List<LispObject> args, Scope scope) {
+    public LispObject call(List<LispObject> args, Scope scope) throws InterpreterException {
         if (args.get(0) instanceof Vec) {
             Vec bindings = (Vec) args.get(0);
             Scope letScope = bindSymbols(bindings, scope);
@@ -25,7 +26,7 @@ public class LetForm extends SpecialForm {
         return null;
     }
 
-    private Scope bindSymbols(Vec bindings, Scope scope) {
+    private Scope bindSymbols(Vec bindings, Scope scope) throws InterpreterException {
         Scope letScope = new Scope(scope);
         if (bindings.size() % 2 == 0) {
             Iterator<LispObject> it = bindings.iterator();

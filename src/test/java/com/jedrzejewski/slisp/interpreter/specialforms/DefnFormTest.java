@@ -9,7 +9,7 @@ import org.junit.Test;
 public class DefnFormTest {
 
     @Test
-    public void testRecursiveFn() {
+    public void testRecursiveFn() throws Exception {
         Interpreter interpreter = new Interpreter();
         TestUtils.evalString(
                 "(defn factorial [n]\n" +
@@ -25,7 +25,7 @@ public class DefnFormTest {
     }
 
     @Test
-    public void testNonRecursiveFn() {
+    public void testNonRecursiveFn() throws Exception {
         Interpreter interpreter = new Interpreter();
         TestUtils.evalString(
                 "(defn sum [a b]\n" +
@@ -39,7 +39,7 @@ public class DefnFormTest {
     }
 
     @Test
-    public void testLexicalBinding() {
+    public void testLexicalBinding() throws Exception {
         Interpreter interpreter = new Interpreter();
         TestUtils.evalString(
                 "(defn make-adder [init]\n" +

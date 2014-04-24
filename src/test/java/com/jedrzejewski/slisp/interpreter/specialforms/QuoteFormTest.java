@@ -10,7 +10,7 @@ import org.junit.Test;
 public class QuoteFormTest {
 
     @Test
-    public void testQuote() {
+    public void testQuote() throws Exception {
         Assert.assertEquals(
                 Arrays.asList(new Num(1), new Sym("a")),
                 TestUtils.evalString("'(1 a)")

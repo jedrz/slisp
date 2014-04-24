@@ -8,7 +8,7 @@ import org.junit.Test;
 public class LetFormTest {
 
     @Test
-    public void testLet() {
+    public void testLet() throws Exception {
         Assert.assertEquals(
                 new Num(2),
                 TestUtils.evalString(
