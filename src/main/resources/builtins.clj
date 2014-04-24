@@ -43,6 +43,9 @@
       arg
       (apply or (first rst) (rest rst)))))
 
+(defmacro when [cond & body]
+  (list 'if cond (cons 'do body) nil))
+
 (defn zero? [n]
   (= n 0))
 

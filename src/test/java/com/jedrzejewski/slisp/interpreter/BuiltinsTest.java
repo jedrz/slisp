@@ -2,6 +2,7 @@ package com.jedrzejewski.slisp.interpreter;
 
 import com.jedrzejewski.slisp.TestUtils;
 import com.jedrzejewski.slisp.lispobjects.Bool;
+import com.jedrzejewski.slisp.lispobjects.Nil;
 import com.jedrzejewski.slisp.lispobjects.Num;
 import com.jedrzejewski.slisp.lispobjects.Str;
 import java.util.Arrays;
@@ -126,6 +127,18 @@ public class BuiltinsTest {
         Assert.assertEquals(
                 new Bool(false),
                 TestUtils.evalString("(or false nil false)")
+        );
+    }
+
+    @Test
+    public void testWhen() throws Exception {
+        Assert.assertEquals(
+                new Num(1),
+                TestUtils.evalString("(when (+ 1 2) 'side-effect 1)")
+        );
+        Assert.assertEquals(
+                new Nil(),
+                TestUtils.evalString("(when (= 1 0) 'side-effect 1)")
         );
     }
 
