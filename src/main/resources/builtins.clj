@@ -59,9 +59,11 @@
   (if (empty? lst)
     '()
     (let [pivot (first lst)
-          lower (filter (fn [n] (comp n pivot))
+          lower (filter (fn [n]
+                          (comp n pivot))
                         (rest lst))
-          not-lower (filter (fn [n] (not (comp n pivot)))
+          not-lower (filter (fn [n]
+                              (not (comp n pivot)))
                             (rest lst))]
       (concat (sort comp lower)
               (list pivot)
