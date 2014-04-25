@@ -54,3 +54,15 @@
 
 (defmacro println [args]
   (list 'apply 'print args "\n"))
+
+(defn sort [comp lst]
+  (if (empty? lst)
+    '()
+    (let [pivot (first lst)
+          lower (filter (fn [n] (comp n pivot))
+                        (rest lst))
+          not-lower (filter (fn [n] (not (comp n pivot)))
+                            (rest lst))]
+      (concat (sort comp lower)
+              (list pivot)
+              (sort comp not-lower)))))

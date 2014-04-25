@@ -6,6 +6,8 @@ import com.jedrzejewski.slisp.lispobjects.Nil;
 import com.jedrzejewski.slisp.lispobjects.Num;
 import com.jedrzejewski.slisp.lispobjects.Str;
 import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -147,6 +149,14 @@ public class BuiltinsTest {
         Assert.assertEquals(
                 new Str("a"),
                 TestUtils.evalString("(char-at \"cba\" 2)")
+        );
+    }
+
+    @Test
+    public void testSort() throws Exception {
+        Assert.assertEquals(
+                Stream.of(20, 10, 7, 3, 1, 1).map(Num::new).collect(Collectors.toList()),
+                TestUtils.evalString("(sort > '(1 3 10 1 20 7))")
         );
     }
 }
