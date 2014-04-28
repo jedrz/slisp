@@ -155,6 +155,14 @@ public class Lexer {
         int c;
         while ((c = getNextCh()) != -1 && c != '\n') {
         }
+        if (c == '\n') {
+            c = getNextCh();
+            if (isCommentCh(c)) {
+                ignoreComments();
+            } else {
+                ungetCh(c);
+            }
+        }
     }
 
     private int getNextCh() {

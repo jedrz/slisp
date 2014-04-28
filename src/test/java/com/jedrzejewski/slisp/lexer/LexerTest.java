@@ -128,6 +128,14 @@ public class LexerTest {
         );
     }
 
+    @Test
+    public void testMultilineComments() throws Exception {
+        Assert.assertEquals(
+                null,
+                getFirstToken("; first comment\n;next comment")
+        );
+    }
+
     private Token getFirstToken(String in) throws LexerException {
         Lexer lexer = new Lexer(in);
         return lexer.getNextToken();
