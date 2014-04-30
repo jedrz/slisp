@@ -27,14 +27,7 @@ public abstract class BaseException extends Exception {
     @Override
     public String getMessage() {
         if (super.getMessage() == null) {
-            String className = getClass().getSimpleName();
-            if (className == null) {
-                return "anonymous class";
-            }
-            className = className.replaceAll("([A-Z])", " $1").toLowerCase();
-            List<String> words = Arrays.asList(className.split(" "));
-            String message = String.join(" ", words.subList(0, words.size() - 1));
-            return message.trim();
+            return buildMessage(getClass());
         } else {
             return super.getMessage();
         }
@@ -48,4 +41,14 @@ public abstract class BaseException extends Exception {
         }
     }
 
+    public static String buildMessage(Class<?> classObj) {
+        String className = classObj.getSimpleName();
+        if (className == null) {
+            return "anonymous class";
+        }
+        className = className.replaceAll("([A-Z])", " $1").toLowerCase();
+        List<String> words = Arrays.asList(className.split(" "));
+        String message = String.join(" ", words.subList(0, words.size() - 1));
+        return message.trim();
+    }
 }

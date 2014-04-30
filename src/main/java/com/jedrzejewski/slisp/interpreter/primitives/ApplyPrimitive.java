@@ -2,6 +2,7 @@ package com.jedrzejewski.slisp.interpreter.primitives;
 
 import com.jedrzejewski.slisp.interpreter.Scope;
 import com.jedrzejewski.slisp.interpreter.exceptions.InterpreterException;
+import com.jedrzejewski.slisp.interpreter.exceptions.WrongNumberOfArgsException;
 import com.jedrzejewski.slisp.lispobjects.Callable;
 import com.jedrzejewski.slisp.lispobjects.LispObject;
 import com.jedrzejewski.slisp.lispobjects.Lst;
@@ -14,6 +15,8 @@ public class ApplyPrimitive extends Primitive {
     @Override
     public LispObject callWithEvaluatedArgs(List<LispObject> args, Scope scope)
             throws InterpreterException {
+        validate(args);
+
         Callable fn = (Callable) args.get(0);
         Lst flattenedArgs = new Lst();
         for (LispObject arg : args.subList(1, args.size())) {
@@ -36,5 +39,11 @@ public class ApplyPrimitive extends Primitive {
                 })
                 .collect(Collectors.toList());
         return fn.call(quotedAndFlattenedArgs, scope);
+    }
+
+    public void validate(List<LispObject> args) throws InterpreterException {
+        if (args.size() <= 1) {
+            throw WrongNumberOfArgsException.atLeast(2).is(args.size());
+        }
     }
 }

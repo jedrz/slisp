@@ -1,6 +1,8 @@
 package com.jedrzejewski.slisp.interpreter.primitives;
 
 import com.jedrzejewski.slisp.interpreter.Scope;
+import com.jedrzejewski.slisp.interpreter.exceptions.InterpreterException;
+import com.jedrzejewski.slisp.interpreter.exceptions.WrongNumberOfArgsException;
 import com.jedrzejewski.slisp.lispobjects.LispObject;
 import com.jedrzejewski.slisp.lispobjects.Nil;
 import com.jedrzejewski.slisp.lispobjects.Str;
@@ -15,11 +17,20 @@ public class ReadPrimitive extends Primitive {
             new InputStreamReader(System.in));
 
     @Override
-    public LispObject callWithEvaluatedArgs(List<LispObject> args, Scope scope) {
+    public LispObject callWithEvaluatedArgs(List<LispObject> args, Scope scope)
+            throws InterpreterException {
+        validate(args);
+
         try {
             return new Str(bufferedReader.readLine());
         } catch (IOException e) {
             return new Nil();
+        }
+    }
+
+    public void validate(List<LispObject> args) throws InterpreterException {
+        if (args.size() != 0) {
+            throw WrongNumberOfArgsException.exactly(0).is(args.size());
         }
     }
 }
