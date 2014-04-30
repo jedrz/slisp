@@ -133,6 +133,7 @@ public class Interpreter {
                 eval(code);
             }
         } catch (BaseException e) {
+            System.out.println(e.getFullMessage());
             throw new RuntimeException("Built-in functions are broken!");
         }
     }

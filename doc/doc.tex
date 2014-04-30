@@ -55,7 +55,7 @@ string: "?.*"
 number: [-+]?[0-9]*\.?[0-9]+
 
 symbol_form: symbol form
-set!: '(' 'set!' symbol_form+ ')'
+set!: '(' 'set!' symbol_form ')'
 fn: '(' 'fn' '[' symbol* ']' form+ ')'
 defn: '(' 'defn' symbol '[' symbol* ']' form+ ')'
 def: '(' 'def' symbol form ')'

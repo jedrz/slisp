@@ -1,6 +1,7 @@
 package com.jedrzejewski.slisp.interpreter.specialforms;
 
 import com.jedrzejewski.slisp.interpreter.Scope;
+import com.jedrzejewski.slisp.interpreter.exceptions.InterpreterException;
 import com.jedrzejewski.slisp.lispobjects.LispObject;
 import com.jedrzejewski.slisp.lispobjects.Macro;
 import com.jedrzejewski.slisp.lispobjects.Sym;
@@ -8,23 +9,20 @@ import com.jedrzejewski.slisp.lispobjects.Vec;
 import java.util.LinkedList;
 import java.util.List;
 
-public class DefmacroForm extends SpecialForm {
+public class DefmacroForm extends DefnForm {
+
+    // FIXME: macro shouldn't extend a function form.
 
     @Override
-    public LispObject call(List<LispObject> args, Scope scope) {
+    public LispObject call(List<LispObject> args, Scope scope)
+            throws InterpreterException {
+        validate(args);
+
         // Obsługa parametrów.
         List<Sym> argList = new LinkedList<>();
-        if (args.get(1) instanceof Vec) {
-            Vec argVec = (Vec) args.get(1);
-            for (LispObject arg : argVec) {
-                if (arg instanceof Sym) {
-                    argList.add((Sym) arg);
-                } else {
-                    // TODO: syntax error
-                }
-            }
-        } else {
-            // TODO: Syntax Error
+        Vec argVec = (Vec) args.get(1);
+        for (LispObject arg : argVec) {
+            argList.add((Sym) arg);
         }
 
         Sym macroName = (Sym) args.get(0);

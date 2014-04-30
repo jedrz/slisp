@@ -64,7 +64,6 @@ public class Function extends Callable {
         for (int i = 0; i < getArgNames().size(); ++i) {
             Sym argName = getArgNames().get(i);
             if (argName.getName().equals("&")) {
-                // TODO: there is no symbol after &?
                 argName = getArgNames().get(i + 1);
                 Lst restArgs = new Lst();
                 for (LispObject o : args.subList(i, args.size())) {
