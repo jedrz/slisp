@@ -2,6 +2,7 @@ package com.jedrzejewski.slisp.interpreter.primitives;
 
 import com.jedrzejewski.slisp.interpreter.ArgsValidator;
 import com.jedrzejewski.slisp.interpreter.Scope;
+import com.jedrzejewski.slisp.interpreter.exceptions.ArgShouldBeCallableException;
 import com.jedrzejewski.slisp.interpreter.exceptions.InterpreterException;
 import com.jedrzejewski.slisp.interpreter.exceptions.WrongNumberOfArgsException;
 import com.jedrzejewski.slisp.lispobjects.Callable;
@@ -48,5 +49,8 @@ public class ApplyPrimitive extends Primitive {
         validator.shouldSize(size -> size >= 2)
                  .ifNotThenThrow(WrongNumberOfArgsException.atLeast(2)
                                                            .is(args.size()));
+
+        validator.shouldAt(0, arg -> arg instanceof Callable)
+                 .ifNotThenThrow(ArgShouldBeCallableException.class);
     }
 }

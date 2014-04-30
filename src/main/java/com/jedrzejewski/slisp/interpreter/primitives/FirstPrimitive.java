@@ -2,6 +2,7 @@ package com.jedrzejewski.slisp.interpreter.primitives;
 
 import com.jedrzejewski.slisp.interpreter.ArgsValidator;
 import com.jedrzejewski.slisp.interpreter.Scope;
+import com.jedrzejewski.slisp.interpreter.exceptions.ArgShouldBeListException;
 import com.jedrzejewski.slisp.interpreter.exceptions.InterpreterException;
 import com.jedrzejewski.slisp.interpreter.exceptions.WrongNumberOfArgsException;
 import com.jedrzejewski.slisp.lispobjects.LispObject;
@@ -17,17 +18,12 @@ public class FirstPrimitive extends Primitive {
         validate(args);
 
         LispObject obj = args.get(0);
-        if (obj instanceof Lst) {
-            Lst lst = (Lst) obj;
-            if (lst.isEmpty()) {
-                return new Nil();
-            } else {
-                return lst.get(0);
-            }
+        Lst lst = (Lst) obj;
+        if (lst.isEmpty()) {
+            return new Nil();
         } else {
-            // TODO: wrong type.
+            return lst.get(0);
         }
-        return new Nil();
     }
 
     public void validate(List<LispObject> args) throws InterpreterException {
@@ -36,5 +32,8 @@ public class FirstPrimitive extends Primitive {
         validator.shouldSize(size -> size == 1)
                  .ifNotThenThrow(WrongNumberOfArgsException.exactly(1)
                                                            .is(args.size()));
+
+        validator.eachShould(arg -> arg instanceof Lst)
+                 .ifNotThenThrow(ArgShouldBeListException.class);
     }
 }

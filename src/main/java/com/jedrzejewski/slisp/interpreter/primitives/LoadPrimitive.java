@@ -2,6 +2,7 @@ package com.jedrzejewski.slisp.interpreter.primitives;
 
 import com.jedrzejewski.slisp.interpreter.ArgsValidator;
 import com.jedrzejewski.slisp.interpreter.Scope;
+import com.jedrzejewski.slisp.interpreter.exceptions.ArgShouldBeStringException;
 import com.jedrzejewski.slisp.interpreter.exceptions.InterpreterException;
 import com.jedrzejewski.slisp.interpreter.exceptions.WrongNumberOfArgsException;
 import com.jedrzejewski.slisp.lexer.Lexer;
@@ -19,7 +20,6 @@ public class LoadPrimitive extends Primitive {
             throws InterpreterException {
         validate(args);
 
-        // TODO: check type.
         Str arg = (Str) args.get(0);
         String path = arg.getString();
         try {
@@ -39,5 +39,8 @@ public class LoadPrimitive extends Primitive {
         validator.shouldSize(size -> size == 1)
                  .ifNotThenThrow(WrongNumberOfArgsException.exactly(1)
                                                            .is(args.size()));
+
+        validator.eachShould(arg -> arg instanceof Str)
+                 .ifNotThenThrow(ArgShouldBeStringException.class);
     }
 }

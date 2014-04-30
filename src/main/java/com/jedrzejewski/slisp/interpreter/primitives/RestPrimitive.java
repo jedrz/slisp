@@ -2,6 +2,7 @@ package com.jedrzejewski.slisp.interpreter.primitives;
 
 import com.jedrzejewski.slisp.interpreter.ArgsValidator;
 import com.jedrzejewski.slisp.interpreter.Scope;
+import com.jedrzejewski.slisp.interpreter.exceptions.ArgShouldBeListException;
 import com.jedrzejewski.slisp.interpreter.exceptions.InterpreterException;
 import com.jedrzejewski.slisp.interpreter.exceptions.WrongNumberOfArgsException;
 import com.jedrzejewski.slisp.lispobjects.LispObject;
@@ -38,5 +39,8 @@ public class RestPrimitive extends Primitive {
         validator.shouldSize(size -> size == 1)
                  .ifNotThenThrow(WrongNumberOfArgsException.exactly(1)
                                                            .is(args.size()));
+
+        validator.eachShould(arg -> arg instanceof Lst)
+                 .ifNotThenThrow(ArgShouldBeListException.class);
     }
 }
