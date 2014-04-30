@@ -1,6 +1,7 @@
 package com.jedrzejewski.slisp.lispobjects;
 
 import com.jedrzejewski.slisp.interpreter.Scope;
+import com.jedrzejewski.slisp.interpreter.exceptions.ExactFunctionException;
 import com.jedrzejewski.slisp.interpreter.exceptions.InterpreterException;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,6 +23,12 @@ public class Lst extends LinkedList<LispObject> implements LispObject {
         LispObject first = get(0);
         List<LispObject> rest = subList(1, size());
         Callable callable = (Callable) first.eval(scope);
-        return callable.call(rest, scope);
+        try {
+            return callable.call(rest, scope);
+        } catch (ExactFunctionException e) {
+            // Inject function name in which exception was raised.
+            e.setFuncName(first.toString());
+            throw e;
+        }
     }
 }
