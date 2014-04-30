@@ -1,6 +1,6 @@
 package com.jedrzejewski.slisp.interpreter.primitives;
 
-import com.jedrzejewski.slisp.interpreter.exceptions.ArgsShouldBeNumsException;
+import com.jedrzejewski.slisp.interpreter.exceptions.ArgShouldBeNum;
 import com.jedrzejewski.slisp.interpreter.exceptions.InterpreterException;
 import com.jedrzejewski.slisp.interpreter.exceptions.WrongNumberOfArgsException;
 import com.jedrzejewski.slisp.lispobjects.LispObject;
@@ -21,7 +21,7 @@ public abstract class MathOperationPrimitive extends Primitive {
                 nums.add((Num) o);
             }
         } catch (ClassCastException e) {
-            throw new ArgsShouldBeNumsException();
+            throw new ArgShouldBeNum();
         }
         return nums.stream().mapToDouble(n -> n.getValue());
     }
