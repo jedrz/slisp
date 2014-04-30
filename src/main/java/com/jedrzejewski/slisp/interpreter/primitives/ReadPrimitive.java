@@ -1,5 +1,6 @@
 package com.jedrzejewski.slisp.interpreter.primitives;
 
+import com.jedrzejewski.slisp.interpreter.ArgsValidator;
 import com.jedrzejewski.slisp.interpreter.Scope;
 import com.jedrzejewski.slisp.interpreter.exceptions.InterpreterException;
 import com.jedrzejewski.slisp.interpreter.exceptions.WrongNumberOfArgsException;
@@ -29,8 +30,10 @@ public class ReadPrimitive extends Primitive {
     }
 
     public void validate(List<LispObject> args) throws InterpreterException {
-        if (args.size() != 0) {
-            throw WrongNumberOfArgsException.exactly(0).is(args.size());
-        }
+        ArgsValidator validator = new ArgsValidator(args);
+
+        validator.shouldSize(size -> size == 0)
+                 .ifNotThenThrow(WrongNumberOfArgsException.exactly(0)
+                                                           .is(args.size()));
     }
 }

@@ -1,6 +1,6 @@
 package com.jedrzejewski.slisp.interpreter.primitives;
 
-import com.jedrzejewski.slisp.interpreter.exceptions.ArgShouldBeNum;
+import com.jedrzejewski.slisp.interpreter.ArgsValidator;
 import com.jedrzejewski.slisp.interpreter.exceptions.InterpreterException;
 import com.jedrzejewski.slisp.interpreter.exceptions.WrongNumberOfArgsException;
 import com.jedrzejewski.slisp.lispobjects.LispObject;
@@ -16,19 +16,17 @@ public abstract class MathOperationPrimitive extends Primitive {
         validate(args);
 
         List<Num> nums = new LinkedList<>();
-        try {
-            for (LispObject o : args) {
-                nums.add((Num) o);
-            }
-        } catch (ClassCastException e) {
-            throw new ArgShouldBeNum();
+        for (LispObject o : args) {
+            nums.add((Num) o);
         }
         return nums.stream().mapToDouble(n -> n.getValue());
     }
 
     public void validate(List<LispObject> args) throws InterpreterException {
-        if (args.size() < 1) {
-            throw WrongNumberOfArgsException.atLeast(1).is(args.size());
-        }
+        ArgsValidator validator = new ArgsValidator(args);
+
+        validator.shouldSize(size -> size >= 1)
+                 .ifNotThenThrow(WrongNumberOfArgsException.atLeast(1)
+                                                           .is(args.size()));
     }
 }
