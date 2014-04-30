@@ -1,6 +1,7 @@
 package com.jedrzejewski.slisp.interpreter.primitives;
 
 import com.jedrzejewski.slisp.interpreter.ArgsValidator;
+import com.jedrzejewski.slisp.interpreter.exceptions.ArgShouldBeNumException;
 import com.jedrzejewski.slisp.interpreter.exceptions.InterpreterException;
 import com.jedrzejewski.slisp.interpreter.exceptions.WrongNumberOfArgsException;
 import com.jedrzejewski.slisp.lispobjects.LispObject;
@@ -33,7 +34,8 @@ public abstract class NumPairTester extends Primitive {
                  .ifNotThenThrow(WrongNumberOfArgsException.atLeast(2)
                                                            .is(args.size()));
 
-        // TODO: check types.
+        validator.eachShould(arg -> arg instanceof Num)
+                 .ifNotThenThrow(ArgShouldBeNumException.class);
     }
 
     public interface DoublePairPredicate {
