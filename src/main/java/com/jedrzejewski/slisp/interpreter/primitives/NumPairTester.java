@@ -4,9 +4,9 @@ import com.jedrzejewski.slisp.lispobjects.LispObject;
 import com.jedrzejewski.slisp.lispobjects.Num;
 import java.util.List;
 
-public class NumsTester {
+public abstract class NumPairTester extends Primitive {
 
-    public static boolean test(List<LispObject> args, DoublePairPredicate predicate) {
+    public boolean testSubsequentPairs(List<LispObject> args, DoublePairPredicate predicate) {
         double prevValue = ((Num) args.get(0)).getValue();
         for (LispObject arg : args.subList(1, args.size())) {
             double curValue = ((Num) arg).getValue();

@@ -5,11 +5,11 @@ import com.jedrzejewski.slisp.lispobjects.Bool;
 import com.jedrzejewski.slisp.lispobjects.LispObject;
 import java.util.List;
 
-public class LessPrimitive extends Primitive {
+public class LessPrimitive extends NumPairTester {
 
     @Override
     public LispObject callWithEvaluatedArgs(List<LispObject> args, Scope scope) {
-        boolean result = NumsTester.test(
+        boolean result = testSubsequentPairs(
                 args,
                 (a, b) -> a < b
         );
