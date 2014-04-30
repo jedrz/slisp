@@ -42,7 +42,24 @@ public class Function extends Callable {
     }
 
     @Override
-    public LispObject call(List<LispObject> args, Scope scope) throws InterpreterException {
+    public LispObject call(List<LispObject> args, Scope scope)
+            throws InterpreterException {
+        Scope wrapperScope = buildScopeWithArgsAndEval(args, scope);
+        return getBody().eval(wrapperScope);
+    }
+
+    public Scope buildScopeWithArgsAndEval(List<LispObject> args, Scope scope)
+            throws InterpreterException {
+        return buildScopeWithArgs(args, scope, true);
+    }
+
+    public Scope buildScopeWithArgsDontEval(List<LispObject> args, Scope scope)
+            throws InterpreterException {
+        return buildScopeWithArgs(args, scope, false);
+    }
+
+    protected Scope buildScopeWithArgs(List<LispObject> args, Scope scope, boolean eval)
+        throws InterpreterException {
         Scope wrapperScope = new Scope(getScope());
         for (int i = 0; i < getArgNames().size(); ++i) {
             Sym argName = getArgNames().get(i);
@@ -51,7 +68,13 @@ public class Function extends Callable {
                 argName = getArgNames().get(i + 1);
                 Lst restArgs = new Lst();
                 for (LispObject o : args.subList(i, args.size())) {
-                    restArgs.add(o.eval(scope));
+                    LispObject result;
+                    if (eval) {
+                        result = o.eval(scope);
+                    } else {
+                        result = o;
+                    }
+                    restArgs.add(result);
                 }
                 wrapperScope.put(argName, restArgs);
                 break;
@@ -59,6 +82,6 @@ public class Function extends Callable {
             LispObject arg = args.get(i);
             wrapperScope.put(argName, arg.eval(scope));
         }
-        return getBody().eval(wrapperScope);
+        return wrapperScope;
     }
 }

@@ -14,31 +14,11 @@ public class Macro extends Function {
         super(argNames, bodyList, scope);
     }
 
-    protected LispObject expand(List<LispObject> args, Scope scope)
-            throws InterpreterException{
-        Scope wrapperScope = new Scope(getScope());
-        for (int i = 0; i < getArgNames().size(); ++i) {
-            Sym argName = getArgNames().get(i);
-            if (argName.getName().equals("&")) {
-                // TODO: there is no symbol after &?
-                argName = getArgNames().get(i + 1);
-                Lst restArgs = new Lst();
-                for (LispObject o : args.subList(i, args.size())) {
-                    restArgs.add(o);
-                }
-                wrapperScope.put(argName, restArgs);
-                break;
-            }
-            LispObject arg = args.get(i);
-            wrapperScope.put(argName, arg);
-        }
-        return getBody().eval(wrapperScope);
-    }
-
     @Override
     public LispObject call(List<LispObject> args, Scope scope)
             throws InterpreterException {
-        LispObject expanded = expand(args, scope);
+        Scope wrapperScope = buildScopeWithArgsDontEval(args, scope);
+        LispObject expanded = getBody().eval(wrapperScope);
         return expanded.eval(scope);
     }
 }
