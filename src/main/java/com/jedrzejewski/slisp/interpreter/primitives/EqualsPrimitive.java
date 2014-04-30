@@ -26,8 +26,8 @@ public class EqualsPrimitive extends Primitive {
     }
 
     public void validate(List<LispObject> args) throws InterpreterException {
-        if (args.size() <= 1) {
-            throw WrongNumberOfArgsException.atLeast(1).is(args.size());
+        if (args.size() < 2) {
+            throw WrongNumberOfArgsException.atLeast(2).is(args.size());
         }
     }
 }
