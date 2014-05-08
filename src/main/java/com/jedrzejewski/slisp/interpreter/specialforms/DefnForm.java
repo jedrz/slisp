@@ -26,16 +26,18 @@ public class DefnForm extends SpecialForm {
     // because calling call super call method results in calling DefnForm
     // validate method!.
     @Override
-    public void validate(List<LispObject> args) throws InterpreterException {
-        ArgsValidator validator = new ArgsValidator(args);
-
+    public void validate(ArgsValidator validator) throws InterpreterException {
         validator.shouldSize(size -> size >= 3)
-                 .ifNotThenThrow(WrongNumberOfArgsException.atLeast(3)
-                                                           .is(args.size()));
+                 .ifNotThenThrow(
+                         WrongNumberOfArgsException.atLeast(3)
+                                                   .is(validator.getArgsSize()));
 
         validator.shouldAt(0, arg -> arg instanceof Sym)
                  .ifNotThenThrow(ArgShouldBeSymbolException.class);
 
-        fnForm.validate(args.subList(1, args.size()));
+        fnForm.validate(new ArgsValidator(
+                validator.getArgs()
+                         .subList(1, validator.getArgsSize()))
+        );
     }
 }

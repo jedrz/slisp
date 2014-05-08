@@ -13,6 +13,14 @@ public class ArgsValidator {
         this.args = args;
     }
 
+    public List<LispObject> getArgs() {
+        return args;
+    }
+
+    public int getArgsSize() {
+        return getArgs().size();
+    }
+
     public Thrower eachShould(ArgPredicate p) {
         return new Thrower(args.stream().allMatch(p));
     }

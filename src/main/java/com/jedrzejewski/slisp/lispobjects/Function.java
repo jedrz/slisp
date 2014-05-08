@@ -1,5 +1,6 @@
 package com.jedrzejewski.slisp.lispobjects;
 
+import com.jedrzejewski.slisp.interpreter.ArgsValidator;
 import com.jedrzejewski.slisp.interpreter.Scope;
 import com.jedrzejewski.slisp.interpreter.exceptions.InterpreterException;
 import java.util.List;
@@ -49,7 +50,7 @@ public class Function extends Callable {
     }
 
     @Override
-    public void validate(List<LispObject> args) {
+    public void validate(ArgsValidator validator) {
     }
 
     public Scope buildScopeWithArgsAndEval(List<LispObject> args, Scope scope)

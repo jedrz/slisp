@@ -14,15 +14,13 @@ public class NumberPredicatePrimitive extends Primitive {
     @Override
     public LispObject callWithEvaluatedArgs(List<LispObject> args, Scope scope)
             throws InterpreterException {
-        validate(args);
         return new Bool(args.get(0) instanceof Num);
     }
 
-    public void validate(List<LispObject> args) throws InterpreterException {
-        ArgsValidator validator = new ArgsValidator(args);
-
+    public void validate(ArgsValidator validator) throws InterpreterException {
         validator.shouldSize(size -> size == 1)
-                 .ifNotThenThrow(WrongNumberOfArgsException.exactly(1)
-                                                           .is(args.size()));
+                 .ifNotThenThrow(
+                         WrongNumberOfArgsException.exactly(1)
+                                                   .is(validator.getArgsSize()));
     }
 }

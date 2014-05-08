@@ -1,5 +1,6 @@
 package com.jedrzejewski.slisp.interpreter.primitives;
 
+import com.jedrzejewski.slisp.interpreter.ArgsValidator;
 import com.jedrzejewski.slisp.interpreter.Scope;
 import com.jedrzejewski.slisp.lispobjects.LispObject;
 import com.jedrzejewski.slisp.lispobjects.Lst;
@@ -15,6 +16,6 @@ public class ListPrimitive extends Primitive {
     }
 
     @Override
-    public void validate(List<LispObject> args) {
+    public void validate(ArgsValidator validator) {
     }
 }

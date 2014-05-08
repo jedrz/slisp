@@ -27,11 +27,10 @@ public class IfForm extends SpecialForm {
     }
 
     @Override
-    public void validate(List<LispObject> args) throws InterpreterException {
-        ArgsValidator validator = new ArgsValidator(args);
-
+    public void validate(ArgsValidator validator) throws InterpreterException {
         validator.shouldSize(size -> size == 3)
-                 .ifNotThenThrow(WrongNumberOfArgsException.exactly(3)
-                                                           .is(args.size()));
+                 .ifNotThenThrow(
+                         WrongNumberOfArgsException.exactly(3)
+                                                   .is(validator.getArgsSize()));
     }
 }

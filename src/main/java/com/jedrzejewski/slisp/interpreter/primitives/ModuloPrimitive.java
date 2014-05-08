@@ -20,12 +20,11 @@ public class ModuloPrimitive extends Primitive {
     }
 
     @Override
-    public void validate(List<LispObject> args) throws InterpreterException {
-        ArgsValidator validator = new ArgsValidator(args);
-
+    public void validate(ArgsValidator validator) throws InterpreterException {
         validator.shouldSize(size -> size == 2)
-                 .ifNotThenThrow(WrongNumberOfArgsException.exactly(2)
-                                                           .is(args.size()));
+                 .ifNotThenThrow(
+                         WrongNumberOfArgsException.exactly(2)
+                                                   .is(validator.getArgsSize()));
 
         validator.eachShould(arg -> arg instanceof Num)
                  .ifNotThenThrow(ArgShouldBeNumException.class);

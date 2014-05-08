@@ -19,9 +19,7 @@ public class ConcatPrimitive extends Primitive {
     }
 
     @Override
-    public void validate(List<LispObject> args) throws InterpreterException {
-        ArgsValidator validator = new ArgsValidator(args);
-
+    public void validate(ArgsValidator validator) throws InterpreterException {
         validator.eachShould(arg -> arg instanceof Lst)
                  .ifNotThenThrow(ArgShouldBeListException.class);
     }

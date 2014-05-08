@@ -1,5 +1,6 @@
 package com.jedrzejewski.slisp.lispobjects;
 
+import com.jedrzejewski.slisp.interpreter.ArgsValidator;
 import com.jedrzejewski.slisp.interpreter.Scope;
 import com.jedrzejewski.slisp.interpreter.exceptions.ExactFunctionException;
 import com.jedrzejewski.slisp.interpreter.exceptions.InterpreterException;
@@ -24,7 +25,7 @@ public class Lst extends LinkedList<LispObject> implements LispObject {
         List<LispObject> rest = subList(1, size());
         Callable callable = (Callable) first.eval(scope);
         try {
-            callable.validate(rest);
+            callable.validate(new ArgsValidator(rest), scope);
             return callable.call(rest, scope);
         } catch (ExactFunctionException e) {
             // Inject function name in which exception was raised.

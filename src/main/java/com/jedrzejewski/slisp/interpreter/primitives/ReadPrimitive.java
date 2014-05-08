@@ -28,11 +28,10 @@ public class ReadPrimitive extends Primitive {
     }
 
     @Override
-    public void validate(List<LispObject> args) throws InterpreterException {
-        ArgsValidator validator = new ArgsValidator(args);
-
+    public void validate(ArgsValidator validator) throws InterpreterException {
         validator.shouldSize(size -> size == 0)
-                 .ifNotThenThrow(WrongNumberOfArgsException.exactly(0)
-                                                           .is(args.size()));
+                 .ifNotThenThrow(
+                         WrongNumberOfArgsException.exactly(0)
+                                                   .is(validator.getArgsSize()));
     }
 }

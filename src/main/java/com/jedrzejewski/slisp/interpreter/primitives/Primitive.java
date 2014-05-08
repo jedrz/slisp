@@ -1,5 +1,6 @@
 package com.jedrzejewski.slisp.interpreter.primitives;
 
+import com.jedrzejewski.slisp.interpreter.ArgsValidator;
 import com.jedrzejewski.slisp.interpreter.Scope;
 import com.jedrzejewski.slisp.interpreter.exceptions.InterpreterException;
 import com.jedrzejewski.slisp.lispobjects.Callable;
@@ -13,11 +14,23 @@ public abstract class Primitive extends Callable {
             throws InterpreterException;
 
     @Override
-    public LispObject call(List<LispObject> args, Scope scope) throws InterpreterException {
+    public LispObject call(List<LispObject> args, Scope scope)
+            throws InterpreterException {
         List<LispObject> evaluatedArgs = new LinkedList<>();
         for (LispObject o : args) {
             evaluatedArgs.add(o.eval(scope));
         }
         return callWithEvaluatedArgs(evaluatedArgs, scope);
+    }
+
+    @Override
+    public void validate(ArgsValidator validator, Scope scope)
+            throws InterpreterException {
+        // FIXME: double evaluation.
+        List<LispObject> evaluatedArgs = new LinkedList<>();
+        for (LispObject o : validator.getArgs()) {
+            evaluatedArgs.add(o.eval(scope));
+        }
+        validate(new ArgsValidator(evaluatedArgs));
     }
 }

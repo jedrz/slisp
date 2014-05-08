@@ -28,12 +28,11 @@ public class SubsPrimitive extends Primitive {
     }
 
     @Override
-    public void validate(List<LispObject> args) throws InterpreterException {
-        ArgsValidator validator = new ArgsValidator(args);
-
+    public void validate(ArgsValidator validator) throws InterpreterException {
         validator.shouldSize(size -> size == 3)
-                 .ifNotThenThrow(WrongNumberOfArgsException.exactly(3)
-                                                           .is(args.size()));
+                 .ifNotThenThrow(
+                         WrongNumberOfArgsException.exactly(3)
+                                                   .is(validator.getArgsSize()));
 
         validator.shouldAt(0, arg -> arg instanceof Str)
                  .ifNotThenThrow(ArgShouldBeStringException.class);

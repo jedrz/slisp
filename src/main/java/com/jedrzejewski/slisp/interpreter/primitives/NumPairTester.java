@@ -13,8 +13,6 @@ public abstract class NumPairTester extends Primitive {
     public boolean testSubsequentPairs(List<LispObject> args,
                                        DoublePairPredicate predicate)
             throws InterpreterException {
-        validate(args);
-
         double prevValue = ((Num) args.get(0)).getValue();
         for (LispObject arg : args.subList(1, args.size())) {
             double curValue = ((Num) arg).getValue();
@@ -27,12 +25,11 @@ public abstract class NumPairTester extends Primitive {
         return true;
     }
 
-    public void validate(List<LispObject> args) throws InterpreterException {
-        ArgsValidator validator = new ArgsValidator(args);
-
+    public void validate(ArgsValidator validator) throws InterpreterException {
         validator.shouldSize(size -> size >= 2)
-                 .ifNotThenThrow(WrongNumberOfArgsException.atLeast(2)
-                                                           .is(args.size()));
+                 .ifNotThenThrow(
+                         WrongNumberOfArgsException.atLeast(2)
+                                                   .is(validator.getArgsSize()));
 
         validator.eachShould(arg -> arg instanceof Num)
                  .ifNotThenThrow(ArgShouldBeNumException.class);

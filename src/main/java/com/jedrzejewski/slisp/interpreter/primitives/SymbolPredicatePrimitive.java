@@ -18,11 +18,10 @@ public class SymbolPredicatePrimitive extends Primitive {
     }
 
     @Override
-    public void validate(List<LispObject> args) throws InterpreterException {
-        ArgsValidator validator = new ArgsValidator(args);
-
+    public void validate(ArgsValidator validator) throws InterpreterException {
         validator.shouldSize(size -> size == 1)
-                 .ifNotThenThrow(WrongNumberOfArgsException.exactly(1)
-                                                           .is(args.size()));
+                 .ifNotThenThrow(
+                         WrongNumberOfArgsException.exactly(1)
+                                                   .is(validator.getArgsSize()));
     }
 }
