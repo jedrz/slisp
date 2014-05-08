@@ -34,7 +34,10 @@ public class Lst extends LinkedList<LispObject> implements LispObject {
             return callable.call(rest, scope);
         } catch (ExactFunctionException e) {
             // Inject function name in which exception was raised.
-            e.setFuncName(first.toString());
+            // Before injecting name check if wasn't injected deeper.
+            if (e.getFuncName() == null && !first.toString().equals("do")) {
+                e.setFuncName(first.toString());
+            }
             throw e;
         }
     }

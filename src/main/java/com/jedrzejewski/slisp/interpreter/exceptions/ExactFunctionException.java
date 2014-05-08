@@ -12,6 +12,10 @@ public abstract class ExactFunctionException extends InterpreterException {
         super(message);
     }
 
+    public String getFuncName() {
+        return funcName;
+    }
+
     public void setFuncName(String funcName) {
         this.funcName = funcName;
     }
