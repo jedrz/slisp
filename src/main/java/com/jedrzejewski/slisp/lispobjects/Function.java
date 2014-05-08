@@ -3,6 +3,7 @@ package com.jedrzejewski.slisp.lispobjects;
 import com.jedrzejewski.slisp.interpreter.ArgsValidator;
 import com.jedrzejewski.slisp.interpreter.Scope;
 import com.jedrzejewski.slisp.interpreter.exceptions.InterpreterException;
+import com.jedrzejewski.slisp.interpreter.exceptions.WrongNumberOfArgsException;
 import java.util.List;
 
 public class Function extends Callable {
@@ -50,7 +51,22 @@ public class Function extends Callable {
     }
 
     @Override
-    public void validate(ArgsValidator validator) {
+    public void validate(ArgsValidator validator) throws InterpreterException {
+        // Arg names list contains & symbol.
+        if (getArgNames().contains(new Sym("&"))) {
+            validator.shouldSize(size -> size >= getArgNames().size() - 2)
+                     .ifNotThenThrow(
+                             WrongNumberOfArgsException.atLeast(getArgNames().size() - 2)
+                                                       .is(validator.getArgsSize())
+                     );
+        } else {
+            // No & symbol.
+            validator.shouldSize(size -> size == getArgNames().size())
+                     .ifNotThenThrow(
+                             WrongNumberOfArgsException.exactly(getArgNames().size())
+                                                       .is(validator.getArgsSize())
+                     );
+        }
     }
 
     public Scope buildScopeWithArgsAndEval(List<LispObject> args, Scope scope)

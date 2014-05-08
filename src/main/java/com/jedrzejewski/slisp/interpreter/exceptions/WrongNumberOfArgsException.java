@@ -25,7 +25,7 @@ public class WrongNumberOfArgsException extends ExactFunctionException {
 
         public static WrongNumberOfArgsBuilder exactly(int should) {
             WrongNumberOfArgsBuilder builder = new WrongNumberOfArgsBuilder();
-            builder.atLeast = should;
+            builder.exactly = should;
             return builder;
         }
 
