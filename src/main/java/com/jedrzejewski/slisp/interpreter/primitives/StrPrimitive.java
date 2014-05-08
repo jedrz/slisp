@@ -13,8 +13,6 @@ public class StrPrimitive extends Primitive {
     @Override
     public LispObject callWithEvaluatedArgs(List<LispObject> args, Scope scope)
             throws InterpreterException {
-        validate(args);
-
         String joinResult = args.stream()
                                 .map(arg -> {
                                     if (arg instanceof Str) {
@@ -29,6 +27,7 @@ public class StrPrimitive extends Primitive {
         return new Str(joinResult);
     }
 
+    @Override
     public void validate(List<LispObject> args) throws InterpreterException {
         ArgsValidator validator = new ArgsValidator(args);
 

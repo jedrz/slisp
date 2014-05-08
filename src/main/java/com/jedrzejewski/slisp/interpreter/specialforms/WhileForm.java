@@ -13,8 +13,6 @@ public class WhileForm extends SpecialForm {
     @Override
     public LispObject call(List<LispObject> args, Scope scope)
             throws InterpreterException {
-        validate(args);
-
         LispObject condition = args.get(0);
         List<LispObject> body = args.subList(1, args.size());
         while (new Bool(condition.eval(scope)).isTrue()) {
@@ -25,6 +23,7 @@ public class WhileForm extends SpecialForm {
         return new Bool(false); // FIXME: change return value?
     }
 
+    @Override
     public void validate(List<LispObject> args) throws InterpreterException {
         ArgsValidator validator = new ArgsValidator(args);
 

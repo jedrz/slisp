@@ -15,8 +15,6 @@ public class RestPrimitive extends Primitive {
     @Override
     public LispObject callWithEvaluatedArgs(List<LispObject> args, Scope scope)
             throws InterpreterException {
-        validate(args);
-
         LispObject obj = args.get(0);
         if (obj instanceof Lst) {
             Lst lst = (Lst) obj;
@@ -33,6 +31,7 @@ public class RestPrimitive extends Primitive {
         return new Nil(); // TODO: return other value?
     }
 
+    @Override
     public void validate(List<LispObject> args) throws InterpreterException {
         ArgsValidator validator = new ArgsValidator(args);
 

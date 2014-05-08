@@ -48,6 +48,10 @@ public class Function extends Callable {
         return getBody().eval(wrapperScope);
     }
 
+    @Override
+    public void validate(List<LispObject> args) {
+    }
+
     public Scope buildScopeWithArgsAndEval(List<LispObject> args, Scope scope)
             throws InterpreterException {
         return buildScopeWithArgs(args, scope, true);

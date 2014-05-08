@@ -13,13 +13,12 @@ public class ConcatPrimitive extends Primitive {
     @Override
     public LispObject callWithEvaluatedArgs(List<LispObject> args, Scope scope)
             throws InterpreterException {
-        validate(args);
-
         Lst concatResult = new Lst();
         args.forEach(lst -> concatResult.addAll((Lst) lst));
         return concatResult;
     }
 
+    @Override
     public void validate(List<LispObject> args) throws InterpreterException {
         ArgsValidator validator = new ArgsValidator(args);
 

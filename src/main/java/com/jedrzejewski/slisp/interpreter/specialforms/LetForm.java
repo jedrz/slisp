@@ -19,8 +19,6 @@ public class LetForm extends SpecialForm {
     @Override
     public LispObject call(List<LispObject> args, Scope scope)
             throws InterpreterException {
-        validate(args);
-
         Vec bindings = (Vec) args.get(0);
         Scope letScope = bindSymbols(bindings, scope);
         Lst doForm = new Lst();
@@ -44,6 +42,7 @@ public class LetForm extends SpecialForm {
         return letScope;
     }
 
+    @Override
     public void validate(List<LispObject> args) throws InterpreterException {
         ArgsValidator validator = new ArgsValidator(args);
 

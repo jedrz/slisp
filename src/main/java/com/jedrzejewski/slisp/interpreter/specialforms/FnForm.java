@@ -20,8 +20,6 @@ public class FnForm extends SpecialForm {
     @Override
     public LispObject call(List<LispObject> args, Scope scope)
             throws InterpreterException {
-        validate(args);
-
         // Obsługa parametrów.
         List<Sym> argList = new LinkedList<>();
         Vec argVec = (Vec) args.get(0);
@@ -34,6 +32,7 @@ public class FnForm extends SpecialForm {
         return new Function(argList, body, scope);
     }
 
+    @Override
     public void validate(List<LispObject> args) throws InterpreterException {
         ArgsValidator validator = new ArgsValidator(args);
 

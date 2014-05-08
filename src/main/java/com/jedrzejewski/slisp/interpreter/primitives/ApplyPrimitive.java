@@ -17,8 +17,6 @@ public class ApplyPrimitive extends Primitive {
     @Override
     public LispObject callWithEvaluatedArgs(List<LispObject> args, Scope scope)
             throws InterpreterException {
-        validate(args);
-
         Callable fn = (Callable) args.get(0);
         Lst flattenedArgs = new Lst();
         for (LispObject arg : args.subList(1, args.size())) {
@@ -43,6 +41,7 @@ public class ApplyPrimitive extends Primitive {
         return fn.call(quotedAndFlattenedArgs, scope);
     }
 
+    @Override
     public void validate(List<LispObject> args) throws InterpreterException {
         ArgsValidator validator = new ArgsValidator(args);
 

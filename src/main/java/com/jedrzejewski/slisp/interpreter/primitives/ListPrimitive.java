@@ -13,4 +13,8 @@ public class ListPrimitive extends Primitive {
         lst.addAll(args);
         return lst;
     }
+
+    @Override
+    public void validate(List<LispObject> args) {
+    }
 }

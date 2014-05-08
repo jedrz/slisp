@@ -16,8 +16,6 @@ public class CountPrimitive extends Primitive {
     @Override
     public LispObject callWithEvaluatedArgs(List<LispObject> args, Scope scope)
             throws InterpreterException {
-        validate(args);
-
         LispObject obj = args.get(0);
         if (obj instanceof Lst) {
             Lst lst = (Lst) obj;
@@ -29,6 +27,7 @@ public class CountPrimitive extends Primitive {
         return new Num(-1);
     }
 
+    @Override
     public void validate(List<LispObject> args) throws InterpreterException {
         ArgsValidator validator = new ArgsValidator(args);
 

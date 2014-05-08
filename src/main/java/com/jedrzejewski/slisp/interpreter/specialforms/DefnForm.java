@@ -17,8 +17,6 @@ public class DefnForm extends SpecialForm {
     @Override
     public LispObject call(List<LispObject> args, Scope scope)
             throws InterpreterException {
-        validate(args);
-
         Sym fnName = (Sym) args.get(0);
         scope.put(fnName, fnForm.call(args.subList(1, args.size()), scope));
         return fnName;
@@ -27,6 +25,7 @@ public class DefnForm extends SpecialForm {
     // We need to call above fnForm validate method, and can't extend FnForm
     // because calling call super call method results in calling DefnForm
     // validate method!.
+    @Override
     public void validate(List<LispObject> args) throws InterpreterException {
         ArgsValidator validator = new ArgsValidator(args);
 

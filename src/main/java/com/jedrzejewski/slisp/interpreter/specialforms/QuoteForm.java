@@ -12,10 +12,10 @@ public class QuoteForm extends SpecialForm {
     @Override
     public LispObject call(List<LispObject> args, Scope scope)
             throws InterpreterException {
-        validate(args);
         return args.get(0);
     }
 
+    @Override
     public void validate(List<LispObject> args) throws InterpreterException {
         ArgsValidator validator = new ArgsValidator(args);
 

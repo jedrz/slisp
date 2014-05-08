@@ -20,8 +20,6 @@ public class ReadPrimitive extends Primitive {
     @Override
     public LispObject callWithEvaluatedArgs(List<LispObject> args, Scope scope)
             throws InterpreterException {
-        validate(args);
-
         try {
             return new Str(bufferedReader.readLine());
         } catch (IOException e) {
@@ -29,6 +27,7 @@ public class ReadPrimitive extends Primitive {
         }
     }
 
+    @Override
     public void validate(List<LispObject> args) throws InterpreterException {
         ArgsValidator validator = new ArgsValidator(args);
 

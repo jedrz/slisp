@@ -14,8 +14,6 @@ public abstract class MathOperationPrimitive extends Primitive {
 
     public DoubleStream convertToDoubleStream(List<LispObject> args)
             throws InterpreterException {
-        validate(args);
-
         List<Num> nums = new LinkedList<>();
         for (LispObject o : args) {
             nums.add((Num) o);
@@ -23,6 +21,7 @@ public abstract class MathOperationPrimitive extends Primitive {
         return nums.stream().mapToDouble(n -> n.getValue());
     }
 
+    @Override
     public void validate(List<LispObject> args) throws InterpreterException {
         ArgsValidator validator = new ArgsValidator(args);
 

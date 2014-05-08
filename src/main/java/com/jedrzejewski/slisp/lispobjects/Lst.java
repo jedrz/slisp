@@ -24,6 +24,7 @@ public class Lst extends LinkedList<LispObject> implements LispObject {
         List<LispObject> rest = subList(1, size());
         Callable callable = (Callable) first.eval(scope);
         try {
+            callable.validate(rest);
             return callable.call(rest, scope);
         } catch (ExactFunctionException e) {
             // Inject function name in which exception was raised.

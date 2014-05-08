@@ -13,8 +13,6 @@ public class EqualsPrimitive extends Primitive {
     @Override
     public LispObject callWithEvaluatedArgs(List<LispObject> args, Scope scope)
             throws InterpreterException {
-        validate(args);
-
         LispObject prev = args.get(0);
         for (LispObject arg : args.subList(1, args.size())) {
             if (!prev.equals(arg)) {
@@ -26,6 +24,7 @@ public class EqualsPrimitive extends Primitive {
         return new Bool(true);
     }
 
+    @Override
     public void validate(List<LispObject> args) throws InterpreterException {
         ArgsValidator validator = new ArgsValidator(args);
 

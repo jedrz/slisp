@@ -14,8 +14,6 @@ public class SetForm extends SpecialForm {
     @Override
     public LispObject call(List<LispObject> args, Scope scope)
             throws InterpreterException {
-        validate(args);
-
         Sym sym = (Sym) args.get(0);
         LispObject form = args.get(1);
         LispObject value = form.eval(scope);
@@ -23,6 +21,7 @@ public class SetForm extends SpecialForm {
         return sym;
     }
 
+    @Override
     public void validate(List<LispObject> args) throws InterpreterException {
         ArgsValidator validator = new ArgsValidator(args);
 

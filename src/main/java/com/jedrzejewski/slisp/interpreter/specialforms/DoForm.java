@@ -12,14 +12,13 @@ public class DoForm extends SpecialForm {
     @Override
     public LispObject call(List<LispObject> args, Scope scope)
             throws InterpreterException {
-        validate(args);
-
         for (LispObject arg : args.subList(0, args.size() - 1)) {
             arg.eval(scope);
         }
         return args.get(args.size() - 1).eval(scope);
     }
 
+    @Override
     public void validate(List<LispObject> args) throws InterpreterException {
         ArgsValidator validator = new ArgsValidator(args);
 

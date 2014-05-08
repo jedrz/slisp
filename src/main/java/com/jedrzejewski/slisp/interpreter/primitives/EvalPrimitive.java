@@ -15,6 +15,7 @@ public class EvalPrimitive extends Primitive {
         return args.get(0).eval(scope);
     }
 
+    @Override
     public void validate(List<LispObject> args) throws InterpreterException {
         ArgsValidator validator = new ArgsValidator(args);
 

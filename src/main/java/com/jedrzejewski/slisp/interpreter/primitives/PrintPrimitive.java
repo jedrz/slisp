@@ -22,4 +22,8 @@ public class PrintPrimitive extends Primitive {
         });
         return new Nil();
     }
+
+    @Override
+    public void validate(List<LispObject> args) {
+    }
 }

@@ -16,8 +16,6 @@ public class SubsPrimitive extends Primitive {
     @Override
     public LispObject callWithEvaluatedArgs(List<LispObject> args, Scope scope)
             throws InterpreterException {
-        validate(args);
-
         Str str = (Str) args.get(0);
         Num start = (Num) args.get(1);
         Num end = (Num) args.get(2);
@@ -29,6 +27,7 @@ public class SubsPrimitive extends Primitive {
                           ));
     }
 
+    @Override
     public void validate(List<LispObject> args) throws InterpreterException {
         ArgsValidator validator = new ArgsValidator(args);
 

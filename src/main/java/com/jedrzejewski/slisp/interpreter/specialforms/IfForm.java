@@ -15,8 +15,6 @@ public class IfForm extends SpecialForm {
     @Override
     public LispObject call(List<LispObject> args, Scope scope)
             throws InterpreterException {
-        validate(args);
-
         Bool condition = new Bool(args.get(0).eval(scope));
         if (condition.isTrue()) {
             return args.get(1).eval(scope);
@@ -28,6 +26,7 @@ public class IfForm extends SpecialForm {
         }
     }
 
+    @Override
     public void validate(List<LispObject> args) throws InterpreterException {
         ArgsValidator validator = new ArgsValidator(args);
 

@@ -16,8 +16,6 @@ public class DefmacroForm extends DefnForm {
     @Override
     public LispObject call(List<LispObject> args, Scope scope)
             throws InterpreterException {
-        validate(args);
-
         // Obsługa parametrów.
         List<Sym> argList = new LinkedList<>();
         Vec argVec = (Vec) args.get(1);

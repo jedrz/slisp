@@ -15,8 +15,6 @@ public class FirstPrimitive extends Primitive {
     @Override
     public LispObject callWithEvaluatedArgs(List<LispObject> args, Scope scope)
             throws InterpreterException{
-        validate(args);
-
         LispObject obj = args.get(0);
         Lst lst = (Lst) obj;
         if (lst.isEmpty()) {
@@ -26,6 +24,7 @@ public class FirstPrimitive extends Primitive {
         }
     }
 
+    @Override
     public void validate(List<LispObject> args) throws InterpreterException {
         ArgsValidator validator = new ArgsValidator(args);
 

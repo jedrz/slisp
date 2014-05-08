@@ -14,13 +14,12 @@ public class ModuloPrimitive extends Primitive {
     @Override
     public LispObject callWithEvaluatedArgs(List<LispObject> args, Scope scope)
             throws InterpreterException {
-        validate(args);
-
         Num num = (Num) args.get(0);
         Num div = (Num) args.get(1);
         return new Num(num.getValue() % div.getValue());
     }
 
+    @Override
     public void validate(List<LispObject> args) throws InterpreterException {
         ArgsValidator validator = new ArgsValidator(args);
 

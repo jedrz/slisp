@@ -18,8 +18,6 @@ public class LoadPrimitive extends Primitive {
     @Override
     public LispObject callWithEvaluatedArgs(List<LispObject> args, Scope scope)
             throws InterpreterException {
-        validate(args);
-
         Str arg = (Str) args.get(0);
         String path = arg.getString();
         try {
@@ -33,6 +31,7 @@ public class LoadPrimitive extends Primitive {
         }
     }
 
+    @Override
     public void validate(List<LispObject> args) throws InterpreterException {
         ArgsValidator validator = new ArgsValidator(args);
 
