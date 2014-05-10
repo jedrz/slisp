@@ -22,4 +22,12 @@ public class IfFormTest {
                 TestUtils.evalString("(if (= 1 2) 1 2)")
         );
     }
+
+    @Test
+    public void testMultipleFormElse() throws Exception {
+        Assert.assertEquals(
+                new Num(2),
+                TestUtils.evalString("(if false 0 1 2)")
+        );
+    }
 }

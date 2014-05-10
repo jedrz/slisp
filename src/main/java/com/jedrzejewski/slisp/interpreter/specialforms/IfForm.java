@@ -36,9 +36,9 @@ public class IfForm extends SpecialForm {
 
     @Override
     public void validate(ArgsValidator validator) throws InterpreterException {
-        validator.shouldSize(size -> size == 3)
+        validator.shouldSize(size -> size >= 3)
                  .ifNotThenThrow(
-                         WrongNumberOfArgsException.exactly(3)
+                         WrongNumberOfArgsException.atLeast(3)
                                                    .is(validator.getArgsSize()));
     }
 }
