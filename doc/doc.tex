@@ -482,39 +482,39 @@ im~wartości przekazane w~wywołaniu. Następnie jest wywoływana funkcja
 Wywołanie funkcji:
 \impl{evalFunction}
 
-\subsection{Diagram klas typów w~języku}
-
-\begin{mpost}[use,mpsettings={input metauml;}]
-Interface.LispObject("LispObject")();
-ClassName.Bool("Bool");
-ClassName.Function("Function");
-ClassName.Lst("Lst");
-ClassName.Nil("Nil");
-ClassName.Num("Num");
-ClassName.Primitive("Primitive");
-ClassName.SpecialForm("SpecialForm");
-ClassName.Str("Str");
-ClassName.Sym("Sym");
-ClassName.Vec("Vec");
-
-topToBottom(50)(LispObject, Vec);
-leftToRight(7)(Bool, Sym, Num, Str, Lst, Vec, Function, Primitive, SpecialForm);
-topToBottom(50)(Bool, Nil);
-
-drawObjects(LispObject, Bool, Sym, Num, Str, Lst, Vec, Function, Primitive,
-SpecialForm, Nil);
-
-link(realization)(Bool.n -- LispObject.s);
-link(realization)(Function.n -- LispObject.s);
-link(realization)(Lst.n -- LispObject.s);
-link(realization)(Num.n -- LispObject.s);
-link(realization)(Primitive.n -- LispObject.s);
-link(realization)(SpecialForm.n -- LispObject.s);
-link(realization)(Str.n -- LispObject.s);
-link(realization)(Sym.n -- LispObject.s);
-link(realization)(Vec.n -- LispObject.s);
-
-link(inheritance)(Nil.n -- Bool.s);
-\end{mpost}
+%\subsection{Diagram klas typów w~języku}
+%
+%\begin{mpost}[use,mpsettings={input metauml;}]
+%Interface.LispObject("LispObject")();
+%ClassName.Bool("Bool");
+%ClassName.Function("Function");
+%ClassName.Lst("Lst");
+%ClassName.Nil("Nil");
+%ClassName.Num("Num");
+%ClassName.Primitive("Primitive");
+%ClassName.SpecialForm("SpecialForm");
+%ClassName.Str("Str");
+%ClassName.Sym("Sym");
+%ClassName.Vec("Vec");
+%
+%topToBottom(50)(LispObject, Vec);
+%leftToRight(7)(Bool, Sym, Num, Str, Lst, Vec, Function, Primitive, SpecialForm);
+%topToBottom(50)(Bool, Nil);
+%
+%drawObjects(LispObject, Bool, Sym, Num, Str, Lst, Vec, Function, Primitive,
+%SpecialForm, Nil);
+%
+%link(realization)(Bool.n -- LispObject.s);
+%link(realization)(Function.n -- LispObject.s);
+%link(realization)(Lst.n -- LispObject.s);
+%link(realization)(Num.n -- LispObject.s);
+%link(realization)(Primitive.n -- LispObject.s);
+%link(realization)(SpecialForm.n -- LispObject.s);
+%link(realization)(Str.n -- LispObject.s);
+%link(realization)(Sym.n -- LispObject.s);
+%link(realization)(Vec.n -- LispObject.s);
+%
+%link(inheritance)(Nil.n -- Bool.s);
+%\end{mpost}
 
 \end{document}
