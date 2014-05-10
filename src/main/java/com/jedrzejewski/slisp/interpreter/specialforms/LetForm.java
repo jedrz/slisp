@@ -71,6 +71,7 @@ public class LetForm extends SpecialForm {
             Iterator<LispObject> it = bindings.iterator();
             while (it.hasNext()) {
                 LispObject varName = it.next();
+                LispObject form = it.next();
                 if (!(varName instanceof Sym)) {
                     return false;
                 }
