@@ -421,46 +421,59 @@ Interfejs:
 Drzewo uzyskane w~wyniku działania analizatora składniowego jest przeglądane pod
 kątem poprawności użytych funkcji przed obliczaniem wyrażenia.
 
-\subsection{Metoda eval}
+\subsection{Metoda eval interpretera}
 
-Metoda eval działa rekurencyjnie i~zwraca wynik ewaluacji podanego wyrażenia.
-Kiedy otrzyma:
-\begin{description}
-\item[liczbę] zwraca liczbę,
-\item[napis] zwraca napis,
-\item[symbol] odszukuje w~bieżącym zakresie symbol i~zwraca jego wartość,
-\item[lista] wtedy należy obliczyć pierwszy element (rekurencyjnie wywołać
-  \verb+eval+ dla pierwszego elementu). Jeśli obliczony element jest funkcją
-  lub prymitywem wtedy należy obliczyć argumenty i~wywołać funkcję. Jeśli zaś
-  ten element jest specjalną formą, należy ją~wywołać z~nieobliczonymi
-  argumentami.
-\end{description}
+Metoda \verb+eval+ interpretera wykonuje podane drzewo (obiekt
+\verb+LispObject+) wywołując na~nim metodę \verb+eval+ w~ramach globalnego
+zakresu.
 
 Szkielet interpretera:
 \impl{Interpreter}
+
+\subsection{Klasy implementujące metodę eval}
+
+Wywołanie metody \verb+eval+ na~obiektach typu \verb+Num+, \verb+Str+,
+\verb+Bool+, \verb+Nil+ zwraca sam obiekt.
+
+\subsubsection{Obliczenie symbolu}
+
+Obliczenie symbolu polega na~zwrócenia wartości, które jest do~niego
+podczepiona w~podanym zakresie, lub jeśli takowa nie istnieje poinformowaniu,
+że~symbol jest niezdefiniowany.
+
+\subsubsection{Obliczenie listy}
+
+Obliczenie listy, tak jak wcześniej zostało opisane, polega na~obliczeniu
+pierwszego elementu, który powinien implementować interfejs \verb+Callable+
+(metodę \verb+call+, która dla podanej listy argumentów oraz zakresu powinna
+zwrócić wynik wywołania). Reszta elementów listy to~argumenty, które zostają
+przekazane podczas wywołania \verb+call+. Argumenty \textbf{nie są} obliczane.
+
+Przed wywołaniem \verb+call+, następuje sprawdzenie argumentów (ich liczby,
+typów, itd.).
+
+Szkielet klasy \verb+Lst+:
+\impl{Lst}
+
+\subsection{Klasy implementujące interfejs Callable}
+
+Klasy, które implementują metodę interfejs \verb+Callable+,
+to~\verb+Primitive+, \verb+SpecialForm+, \verb+Function+ oraz \verb+Macro+.
 
 \subsubsection{Wywołanie prymitywu}
 
 Interfejs prymitywu (wbudowanej funkcji):
 \impl{Primitive}
-
-Wywołanie prymitywu:
-\impl{evalPrimitive}
+Przekazane argumenty przed właściwym wykonaniem są~obliczane.
 
 Przykładowa implementacja:
-\impl{MultiplyPrimitive}
+\impl{ConcatPrimitive}
 
 \subsubsection{Wywołanie specjalnej formy}
 
 Interfejs specjalnej formy (wbudowanej funkcji, do~której przekazywane
-argumenty nie są~obliczane):
-\impl{SpecialForm}
-Jako, że~argumenty nie są~obliczane przed wywołaniem metody \verb+call+, należy
-dać możliwość ich ewentualnego obliczenia, stąd interpreter oraz bieżący zakres
-obliczania formy są~przekazywane jako argumenty.
-
-Wywołanie:
-\impl{evalSpecialForm}
+argumenty nie są~obliczane) to~po~prostu rozszerzenie interfejsu
+\verb+Callable+.
 
 Przykładowa implementacja formy \verb+if+:
 \impl{IfForm}
@@ -480,11 +493,21 @@ Szkielet klasy \verb+Function+:
 Wywołanie zdefiniowanej przez użytkownika funkcji wymaga stworzenia nowego
 zakresu, którego zakresem nadrzędnym będzie zakres funkcji rozszerzony
 o~symbole, czyli nazwy argumentów w~definicji funkcji oraz odpowiadające
-im~wartości przekazane w~wywołaniu. Następnie jest wywoływana funkcja
-\verb+eval+ w~celu obliczenia ciała funkcji w~otoczeniu podanego zakresu.
+im~wartości przekazane w~wywołaniu. Następnie jest wywoływana metoda
+\verb+eval+ na~rzecz ciała funkcji w~celu obliczenia ciała funkcji w~otoczeniu
+wcześniej zbudowanego zakresu.
 
-Wywołanie funkcji:
-\impl{evalFunction}
+\subsubsection{Wywołanie makra}
+
+Makro zdefiniowane za~pomocą wywołania \verb+defmacro+ powinno zwracać kod
+do~wykonania. Argumenty podczas rozwijania makra \textbf{nie są} obliczane.
+
+Szkielet klasy \verb+Macro+:
+\impl{Macro}
+
+Mechanizm makr został zrealizowany w prymitywny sposób. Wykonanie wywołania
+makra polega na rozwinięciu makra, a następnie wykonaniu wyniku tego
+rozwinięcia.
 
 %\subsection{Diagram klas typów w~języku}
 %
