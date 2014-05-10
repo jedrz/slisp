@@ -391,8 +391,12 @@ Interfejs analizatora składniowego:
 \section{Interpreter}
 
 Interpreter powinien przyjmować wyrażenie do~ewaluacji w~postaci drzewa
-będącego wynikiem działania analizator składniowego. Najważniejszym jego
-elementem będzie metoda \verb+eval+, która zwraca wynik ewaluacji formy.
+będącego wynikiem działania analizator składniowego i~zwracać wynik jego
+wykonania w~ramach globalnego zakresu.
+
+W~konstruktorze interpretera najpierw ładowane są~do~tablicy symboli
+(globalnego zakresu) napisane w~Javie prymitywy i~funkcje specjalne,
+a~następnie funkcje napisane już w~implementowanym języku.
 
 \subsection{Zakres}
 
