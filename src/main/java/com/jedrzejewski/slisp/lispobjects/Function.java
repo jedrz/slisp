@@ -8,8 +8,11 @@ import java.util.List;
 
 public class Function extends Callable {
 
+    /** Argument names */
     private List<Sym> argNames;
+    /** The body of the function. */
     private LispObject body;
+    /** The scope at which function was defined. */
     private Scope scope;
 
     public Function(List<Sym> argNames, LispObject body, Scope scope) {
@@ -43,6 +46,14 @@ public class Function extends Callable {
         return "fn";
     }
 
+    /**
+     * Evaluates the function body with scope consisting of evaluated
+     * arguments bound to the function arguments.
+     * @param args unevaluated args
+     * @param scope current scope
+     * @return the result of function call
+     * @throws InterpreterException
+     */
     @Override
     public LispObject call(List<LispObject> args, Scope scope)
             throws InterpreterException {
@@ -79,6 +90,18 @@ public class Function extends Callable {
         return buildScopeWithArgs(args, scope, false);
     }
 
+    /**
+     * Binds arguments to scope extended by the function scope.
+     * Arguments are evaluated using passed scope or
+     * no if <code>eval</code> is <code>false</code>.
+     * To the arg name after ampersand the rest of arguments are passed
+     * as list.
+     * @param args list of arguments
+     * @param scope the scope to use when evaluating arguments
+     * @param eval <code>true</code> if args should be evaluated
+     * @return scope with binded args
+     * @throws InterpreterException
+     */
     protected Scope buildScopeWithArgs(List<LispObject> args, Scope scope, boolean eval)
         throws InterpreterException {
         Scope wrapperScope = new Scope(getScope());
