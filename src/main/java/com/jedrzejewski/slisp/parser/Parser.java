@@ -35,6 +35,11 @@ public class Parser {
         tokenTypeMethodMap.put(Token.Type.QUOTE, this::parseQuote);
     }
 
+    /**
+     * Returns AST as a result of parsing tokens produced by lexer.
+     * @return AST
+     * @throws BaseException if parsing error is encountered
+     */
     public LispObject parse() throws BaseException {
         Token token = lexer.getNextToken();
         if (token == null) {
@@ -44,6 +49,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses given token
+     * @param token token object
+     * @return result of parsing the token
+     * @throws BaseException
+     */
     private LispObject parseToken(Token token) throws BaseException {
         if (token == null) {
             throw new UnexpectedEOFException();
@@ -56,6 +67,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses quote token. Returns a list of where the first element
+     * is quote symbol and the second the result of parsing the next token.
+     * @param token quote token
+     * @return result of parsing the token
+     * @throws BaseException
+     */
     private LispObject parseQuote(Token token) throws BaseException {
         Lst quote = new Lst();
         quote.add(new Sym("quote"));
@@ -63,6 +81,12 @@ public class Parser {
         return quote;
     }
 
+    /**
+     * Parses open paren until closing paren.
+     * @param token open paren token
+     * @return result of parsing the token
+     * @throws BaseException
+     */
     private LispObject parseOpenParen(Token token) throws BaseException {
         Lst lst = new Lst();
         while (true) {
@@ -77,10 +101,18 @@ public class Parser {
         }
     }
 
+    /**
+     * Parsing close paren means not needed close paren.
+     * @param token close paren token
+     * @throws BaseException
+     */
     private LispObject parseCloseParen(Token token) throws BaseException {
         throw new UnexpectedCloseParenException();
     }
 
+    /**
+     * Works the same as parsing open paren.
+     */
     private LispObject parseOpenBracket(Token token) throws BaseException {
         Vec vec = new Vec();
         while (true) {
@@ -95,6 +127,9 @@ public class Parser {
         }
     }
 
+    /**
+     * The same as parsing close paren.
+     */
     private LispObject parseCloseBracket(Token token) throws BaseException {
         throw new UnexpectedCloseBracketException();
     }
