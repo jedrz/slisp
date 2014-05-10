@@ -20,6 +20,13 @@ public class Scope {
         this(null);
     }
 
+    /**
+     * Looks for the value of the given symbol in the symbol table
+     * or parent scope if symbol is not found.
+     * @param sym symbol for which the binded value should be found
+     * @return the value of the symbol
+     * @throws SymbolUndefinedException if symbol is undefined
+     */
     public LispObject find(Sym sym) throws SymbolUndefinedException {
         if (symbolTable.containsKey(sym)) {
             return symbolTable.get(sym);
@@ -34,6 +41,13 @@ public class Scope {
         return find(new Sym(name));
     }
 
+    /**
+     * Put pair - symbol and value in scope possibly overriding
+     * existing value of the symbol.
+     * @param sym symbol
+     * @param object the value of the symbol
+     * @return scope with given pair
+     */
     public Scope put(Sym sym, LispObject object) {
         symbolTable.put(sym, object);
         return this;

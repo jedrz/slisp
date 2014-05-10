@@ -51,6 +51,9 @@ public class Interpreter {
 
     private Scope globalScope;
 
+    /**
+     * Adds java primitives and built ins to the global scope.
+     */
     public Interpreter() {
         setUpGlobalScope();
         loadBuiltins();
@@ -138,6 +141,12 @@ public class Interpreter {
         }
     }
 
+    /**
+     * Evaluates parsed AST using the global scope.
+     * @param code code tree to evaluate
+     * @return the result of evaluation
+     * @throws InterpreterException
+     */
     public LispObject eval(LispObject code) throws InterpreterException {
         return code.eval(globalScope);
     }
