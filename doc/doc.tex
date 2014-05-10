@@ -368,20 +368,20 @@ powstanie drzewo:
 
 \resizebox{\linewidth}{!}{
 \begin{forest}
-[LIST [defn]
-      [fact]
+[LIST [SYM [defn]]
+      [SYM [fact]]
       [VEC [n]]
-      [LIST [if]
-            [LIST [{$<=$}]
-                  [n]
-                  [1]]
-            [1]
-            [LIST [*]
-                  [n]
-                  [LIST [fact]
-                        [LIST [-]
-                              [n]
-                              [1]]]]]]
+      [LIST [SYM [if]]
+            [LIST [SYM [{$<=$}]]
+                  [SYM [n]]
+                  [NUM [1]]]
+            [NUM [1]]
+            [LIST [SYM [*]]
+                  [SYM [n]]
+                  [LIST [SYM [fact]]
+                        [LIST [SYM [-]]
+                              [SYM [n]]
+                              [NUM [1]]]]]]]
 \end{forest}
 }
 
