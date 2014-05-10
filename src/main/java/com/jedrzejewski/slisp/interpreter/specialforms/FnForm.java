@@ -17,6 +17,13 @@ import java.util.List;
 
 public class FnForm extends SpecialForm {
 
+    /**
+     * Returns a function basen on given args.
+     * @param args unevaluated args
+     * @param scope current scope
+     * @return a function
+     * @throws InterpreterException
+     */
     @Override
     public LispObject call(List<LispObject> args, Scope scope)
             throws InterpreterException {
@@ -27,8 +34,8 @@ public class FnForm extends SpecialForm {
             argList.add((Sym) arg);
         }
 
-        List<LispObject> body = args.subList(1, args.size());
         // Ciało funkcji.
+        List<LispObject> body = args.subList(1, args.size());
         return new Function(argList, body, scope);
     }
 

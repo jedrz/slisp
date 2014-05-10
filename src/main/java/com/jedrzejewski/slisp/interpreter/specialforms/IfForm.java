@@ -12,6 +12,14 @@ import java.util.List;
 
 public class IfForm extends SpecialForm {
 
+    /**
+     * Evaluates the first argument. If the result is true, then evaluates and
+     * returns the second one. Otherwise evalutes the rest ones from the third
+     * and returns the result of evaluating the last form.
+     * @param args unevaluated args
+     * @param scope current scope
+     * @throws InterpreterException
+     */
     @Override
     public LispObject call(List<LispObject> args, Scope scope)
             throws InterpreterException {

@@ -16,6 +16,14 @@ import java.util.List;
 
 public class LetForm extends SpecialForm {
 
+    /**
+     * Bind symbol to evaluated values in the first argument (a vector).
+     * Then evaluates the body with binded symbols.
+     * @param args unevaluated args
+     * @param scope current scope
+     * @return the result of the last form evaluation
+     * @throws InterpreterException
+     */
     @Override
     public LispObject call(List<LispObject> args, Scope scope)
             throws InterpreterException {
@@ -63,7 +71,6 @@ public class LetForm extends SpecialForm {
             Iterator<LispObject> it = bindings.iterator();
             while (it.hasNext()) {
                 LispObject varName = it.next();
-                LispObject form = it.next();
                 if (!(varName instanceof Sym)) {
                     return false;
                 }

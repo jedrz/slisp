@@ -10,6 +10,13 @@ import java.util.List;
 
 public class WhileForm extends SpecialForm {
 
+    /**
+     * Repeatably evalutes the body (args from the second) until the condition
+     * evalutes to true (the first argument).
+     * @param args unevaluated args
+     * @param scope current scope
+     * @throws InterpreterException
+     */
     @Override
     public LispObject call(List<LispObject> args, Scope scope)
             throws InterpreterException {

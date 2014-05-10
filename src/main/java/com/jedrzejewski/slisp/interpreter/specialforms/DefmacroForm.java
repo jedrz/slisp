@@ -13,6 +13,13 @@ public class DefmacroForm extends DefnForm {
 
     // FIXME: macro shouldn't extend a function form.
 
+    /**
+     * Similar to defn create a macro.
+     * @param args unevaluated args
+     * @param scope current scope
+     * @return the macro name
+     * @throws InterpreterException
+     */
     @Override
     public LispObject call(List<LispObject> args, Scope scope)
             throws InterpreterException {

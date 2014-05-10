@@ -14,6 +14,13 @@ public class DefnForm extends SpecialForm {
     // FIXME: ugly.
     protected FnForm fnForm = new FnForm();
 
+    /**
+     * Creates a function and bind it to the given symbol.
+     * @param args unevaluated args
+     * @param scope current scope
+     * @return the function name
+     * @throws InterpreterException
+     */
     @Override
     public LispObject call(List<LispObject> args, Scope scope)
             throws InterpreterException {
