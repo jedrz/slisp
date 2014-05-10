@@ -23,6 +23,11 @@ public class Lexer {
         this(new StringReader(in));
     }
 
+    /**
+     * Returns the next token from input.
+     * @return token object
+     * @throws LexerException if unknown token is encountered
+     */
     public Token getNextToken() throws LexerException {
         skipWhitespace();
 
