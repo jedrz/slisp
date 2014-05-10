@@ -14,7 +14,9 @@ public class ConcatPrimitive extends Primitive {
     public LispObject callWithEvaluatedArgs(List<LispObject> args, Scope scope)
             throws InterpreterException {
         Lst concatResult = new Lst();
-        args.forEach(lst -> concatResult.addAll((Lst) lst));
+        for (LispObject lst : args) {
+            concatResult.addAll((Lst) lst);
+        }
         return concatResult;
     }
 
