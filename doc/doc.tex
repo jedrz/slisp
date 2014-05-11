@@ -138,9 +138,6 @@ Czyli ,,funkcje'', których wywołanie nie powoduje obliczania argumentów.
 \item[set!] przypisanie.
   \clj{set!}
 
-\item[def] definicja zmiennej.
-  \clj{def}
-
 \item[defn] definicja funkcji. Użycie \verb+&+ oznacza, że~pozostałe argumenty
   zostaną przekazane jako lista.
   \clj{defn}
@@ -158,7 +155,7 @@ Czyli ,,funkcje'', których wywołanie nie powoduje obliczania argumentów.
   oblicza się jako prawda lub \verb+nil+ w~przeciwnym wypadku.
   \clj{when}
 
-\item[while] wykonuje wyrażenia od~drugiego do~ostatniego o~ile zachodzi
+\item[while] wykonuje wyrażenia od~drugiego do~ostatniego dopóki zachodzi
   warunek podany jako pierwszy argument.
   \clj{while}
 
@@ -211,7 +208,7 @@ Czyli funkcje przyjmujące funkcje jako argumenty.
 
 \begin{description}
 \item[+ - * / \%] podstawowe funkcje matematyczne przyjmujące dowolną ilość
-  argumentów.
+  argumentów (za~wyjątkiem \%).
 
 \item[$> \ >= \ = \ <= \ <$] predykaty porównujące podane liczby (możliwie
   więcej niż 2).
