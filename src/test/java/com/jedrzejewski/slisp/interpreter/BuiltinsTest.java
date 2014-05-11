@@ -55,6 +55,19 @@ public class BuiltinsTest {
     }
 
     @Test
+    public void testNth() throws Exception {
+        Assert.assertEquals(
+                new Num(2),
+                TestUtils.evalString("(nth '(1 2 3) 1)")
+        );
+
+        Assert.assertEquals(
+                new Nil(),
+                TestUtils.evalString("(nth '(1 2) 2)")
+        );
+    }
+
+    @Test
     public void testMap() throws Exception {
         Assert.assertEquals(
                 TestUtils.evalString("'(1 4 9 16)"),

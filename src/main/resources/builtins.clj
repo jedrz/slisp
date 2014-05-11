@@ -7,6 +7,13 @@
 (defn conj [lst element]
   (concat lst (list element)))
 
+(defn nth [lst index]
+  (if (empty? lst)
+    nil
+    (if (> index 0)
+      (nth (rest lst) (- index 1))
+      (first lst))))
+
 (defn map [f lst]
   (if (empty? lst)
     '()
