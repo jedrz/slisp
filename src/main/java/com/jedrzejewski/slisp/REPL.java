@@ -27,8 +27,10 @@ public class REPL {
                 Lexer lexer = new Lexer(input);
                 Parser parser = new Parser(lexer);
                 LispObject lispObject = parser.parse();
-                LispObject result = interpreter.eval(lispObject);
-                System.out.println(result);
+                if (lispObject != null) {
+                    LispObject result = interpreter.eval(lispObject);
+                    System.out.println(result);
+                }
             } catch (BaseException e) {
                 System.out.println(e.getFullMessage());
             }
