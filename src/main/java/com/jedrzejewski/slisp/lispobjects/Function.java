@@ -123,7 +123,8 @@ public class Function extends Callable {
                 break;
             }
             LispObject arg = args.get(i);
-            wrapperScope.put(argName, arg.eval(scope));
+            LispObject value = eval ? arg.eval(scope) : arg;
+            wrapperScope.put(argName, value);
         }
         return wrapperScope;
     }
