@@ -12,5 +12,7 @@ public class Interpreter {
                 // itd.
     }
 
-    public LispObject eval(LispObject code);
+    public LispObject eval(LispObject code) throws InterpreterException {
+        return code.eval(globalScope);
+    }
 }

@@ -427,10 +427,13 @@ zakresu.
 Szkielet interpretera:
 \impl{Interpreter}
 
-\subsection{Klasy implementujące metodę eval}
+\subsection{Klasy implementujące interfejs LispObject}
 
-Wywołanie metody \verb+eval+ na~obiektach typu \verb+Num+, \verb+Str+,
-\verb+Bool+, \verb+Nil+ zwraca sam obiekt.
+Klasy implementujące interfejs \verb+LispObject+ (czyli metodę \verb+eval+) to
+\verb+Num+, \verb+Str+, \verb+Bool+, \verb+Nil+, na~rzecz których wywowałanie
+\verb+eval+ zwraca sam obiekt.
+
+W~inny sposób zachowują się metody \verb+eval+ symbolu i~listy.
 
 \subsubsection{Obliczenie symbolu}
 
@@ -454,8 +457,9 @@ Szkielet klasy \verb+Lst+:
 
 \subsection{Klasy implementujące interfejs Callable}
 
-Klasy, które implementują metodę interfejs \verb+Callable+,
-to~\verb+Primitive+, \verb+SpecialForm+, \verb+Function+ oraz \verb+Macro+.
+Klasy, które implementują interfejs \verb+Callable+ (metodę \verb+call+
+i~\verb+validate+), to~\verb+Primitive+, \verb+SpecialForm+, \verb+Function+
+oraz \verb+Macro+.
 
 \subsubsection{Wywołanie prymitywu}
 
