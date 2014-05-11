@@ -413,11 +413,6 @@ niezdefiniowany.
 Interfejs:
 \impl{Scope}
 
-\subsection{Sprawdzenie poprawności użycia funkcji}
-
-Drzewo uzyskane w~wyniku działania analizatora składniowego jest przeglądane pod
-kątem poprawności użytych funkcji przed obliczaniem wyrażenia.
-
 \subsection{Metoda eval interpretera}
 
 Metoda \verb+eval+ interpretera wykonuje podane drzewo (obiekt
@@ -509,6 +504,13 @@ Szkielet klasy \verb+Macro+:
 Mechanizm makr został zrealizowany w~prymitywny sposób. Wykonanie wywołania
 makra polega na~rozwinięciu makra, a~następnie wykonaniu wyniku tego
 rozwinięcia.
+
+\subsection{Sprawdzenie poprawności użycia funkcji}
+
+Przed właściwym wywołaniem funkcji, najpierw wołana jest metoda
+\verb+validate+, która sprawdza poprawność przekazanych argumentów (liczbę
+przekazanych argumentów, ich typy, itd.).
+
 
 %\subsection{Diagram klas typów w~języku}
 %
