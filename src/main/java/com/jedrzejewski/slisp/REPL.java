@@ -33,6 +33,8 @@ public class REPL {
                 }
             } catch (BaseException e) {
                 System.out.println(e.getFullMessage());
+            } catch (Throwable e) {
+                System.out.println("Unhandled error");
             }
         }
     }
