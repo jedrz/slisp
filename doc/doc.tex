@@ -43,28 +43,27 @@ dialektów LISP-a~w~języku Java 8.
 
 \subsection{Gramatyka języka}
 
-\begin{minted}{antlr}
-program: form*
-form: atom | list | vector | quote_form
-quote_form: '\'' form
-list: '(' form* ')'
-vector: '[' form* ']'
-atom: symbol | string | number
-symbol: [a-zA-z0-9+-*/<>=]+
-string: "?.*"
-number: [-+]?[0-9]*\.?[0-9]+
+\begin{verbatim}
+program = { form }
+form = atom | list | vector | quote_form
+quote_form = ' form
+list = '(' { form } ')'
+vector = '[' { form } ']'
+atom = symbol | string | number
+symbol = [a-zA-Z+-*/<>=%]+
+string = "?.*"
+number = [0-9]*\.?[0-9]+
 
-symbol_form: symbol form
-set!: '(' 'set!' symbol_form ')'
-fn: '(' 'fn' '[' symbol* ']' form+ ')'
-defn: '(' 'defn' symbol '[' symbol* ']' form+ ')'
-def: '(' 'def' symbol form ')'
-if: '(' 'if' form form form* ')'
-while: '(' 'while' form form* ')'
-do: '(' 'do' form+ ')'
-let: '(' 'let' '[' symbol_form+ ']' form+ ')'
-\end{minted}
-%prec_form: ('\'' | '`' | '~' | '@' | '~@') form|
+symbol_form = symbol form
+set! = '(' 'set!' { symbol_form } ')'
+fn = '(' 'fn' '[' { symbol } ']' form { form } ')'
+defn = '(' 'defn' symbol '[' { symbol } ']' form { form } ')'
+if = '(' 'if' form form form { form } ')'
+while = '(' 'while' form { form } ')'
+do = '(' 'do' form { form } ')'
+let = '(' 'let' '[' { symbol_form } ']' form { form } ')'
+\end{verbatim}
+%prec_form = ('\'' | '`' | '~' | '@' | '~@') form|
 
 \subsection{Ewaluacja form}
 
