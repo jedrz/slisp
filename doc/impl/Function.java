@@ -18,7 +18,7 @@ public class Function implements LispObject {
         Scope wrapperScope = new Scope(getScope());
         for (int i = 0; i < getArgNames().size(); ++i) {
             Sym argName = getArgNames().get(i);
-            // Obsługa &
+            // Obsługa wielu argumentów...
             LispObject arg = args.get(i);
             wrapperScope.put(argName, arg.eval(scope));
         }
