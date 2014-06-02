@@ -24,7 +24,10 @@ public class LoadPrimitive extends Primitive {
             FileReader fileReader = new FileReader(path);
             Lexer lexer = new Lexer(fileReader);
             Parser parser = new Parser(lexer);
-            parser.parse().eval(scope);
+            LispObject code;
+            while ((code = parser.parse()) != null) {
+                code.eval(scope);
+            }
             return new Bool(true);
         } catch (Exception e) {
             return new Bool(false);
