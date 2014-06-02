@@ -86,8 +86,8 @@ public class Lexer {
     }
 
     private Token getNumber(int c) throws LexerException {
-        boolean wasDot = false;
         String number = Character.toString((char) c);
+        boolean wasDot = (c == '.');
         while ((c = getNextCh()) != -1) {
             if (c == '.' && wasDot) {
                 throw new DoubleDotException();
